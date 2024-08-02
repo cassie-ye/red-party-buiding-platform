@@ -1,0 +1,20 @@
+@font-face {
+    font-family: "cute";
+    src: url("/public/font/cute2.ttf");
+}
+@font-face {
+    font-family: "normal";
+    src: url("/public/font/normal.ttf");
+}
+@font-face {
+    font-family: "simple";
+    src: url("/public/font/simple.ttf");
+}
+@font-face {
+    font-family: "kai";
+    src: url("/public/font/kai.ttf");
+}
+@font-face {
+    font-family: "kai2";
+    src: url("/public/font/kai2.ttf");
+}

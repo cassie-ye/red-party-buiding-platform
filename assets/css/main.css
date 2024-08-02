@@ -1,0 +1,64 @@
+html,
+body,
+#app {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+div {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html.dark {
+    background: #121212;
+}
+
+.main1 {
+    width: 80rem;
+    margin: auto;
+}
+
+@media screen and (max-width: 50rem) {
+    .main1 {
+        width: 100%;
+        margin: auto;
+        /* background-color: red; */
+    }
+}
+
+ul,
+ol {
+    padding: 0;
+    margin: 0;
+    list-style: none; /* 清除默认的列表样式 */
+}
+
+li {
+    margin: 0;
+    padding: 0;
+}
+
+.sh {
+    text-shadow: 0.25rem 0 0.75rem #FC0386;
+}
+
+.bg {
+    background-color: rgba(255, 255, 255, 0.4);
+}
+
+.box-shadow {
+    box-shadow:
+        0 2px 4px rgba(0, 0, 0, 0.12),
+        0 0 6px rgba(0, 0, 0, 0.04);
+}
+
+.hoverBox{
+    -moz-transition: all 0.4s ease;
+    -webkit-transition: all 0.4s ease;
+    -o-transition: all 0.4s ease;
+    /* transition: all 0.3s ease-in; */
+    transition: all 0.4s ease;
+}
