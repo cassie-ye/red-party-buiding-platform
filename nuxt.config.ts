@@ -17,6 +17,8 @@ export default defineNuxtConfig({
         '@nuxtjs/color-mode',
         '@vite-pwa/nuxt',
         // '@nuxt/eslint',
+        '@vant/nuxt',
+        "@nuxt/icon"
     ],
 
     experimental: {
@@ -56,7 +58,7 @@ export default defineNuxtConfig({
                 { rel: 'icon', href: '/favicon.ico', sizes: 'any' },
                 { rel: 'icon', type: 'image/svg+xml', href: '/nuxt.svg' },
                 { rel: 'apple-touch-icon', href: '/apple-touch-icon.png' },
-                { rel: "stylesheet", href: "//at.alicdn.com/t/c/font_4612236_unaixdem5hm.css" },
+                { rel: "stylesheet", href: "//at.alicdn.com/t/c/font_4641437_6har54dyk1l.css" },
                 { rel: "stylesheet", href: "https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" },
             ],
             meta: [
@@ -68,17 +70,17 @@ export default defineNuxtConfig({
                 { name: 'theme-color', media: '(prefers-color-scheme: dark)', content: '#222222' },
             ],
             style: [
-                `
-                html {
-                  font-size: 20px;
-                }
+                //   `
+                //   html {
+                //     font-size: 20px;
+                //   }
 
-                @media (max-width: 1700px) {
-                  html {
-                    font-size: 16px;
-                  }
-                }
-                `
+                //   @media (max-width: 1700px) {
+                //     html {
+                //       font-size: 16px;
+                //     }
+                //   }
+                //   `
             ],
         },
         pageTransition: {
@@ -94,7 +96,7 @@ export default defineNuxtConfig({
     pwa,
 
     devtools: {
-        enabled: true,
+        enabled: false,
     },
 
     features: {
@@ -116,4 +118,5 @@ export default defineNuxtConfig({
         ]
     },
 
+    compatibilityDate: '2024-08-02',
 })

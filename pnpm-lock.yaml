@@ -32,6 +32,9 @@ devDependencies:
   '@unocss/nuxt':
     specifier: ^0.60.0
     version: 0.60.4(postcss@8.4.39)(rollup@2.79.1)(vite@5.3.4)(webpack@5.93.0)
+  '@vant/nuxt':
+    specifier: ^1.0.5
+    version: 1.0.5(rollup@2.79.1)(vant@4.9.3)
   '@vite-pwa/nuxt':
     specifier: ^0.7.0
     version: 0.7.0(rollup@2.79.1)(vite@5.3.4)(workbox-build@7.1.1)(workbox-window@7.1.0)
@@ -4219,6 +4222,33 @@ packages:
       - rollup
     dev: true
 
+  /@vant/nuxt@1.0.5(rollup@2.79.1)(vant@4.9.3):
+    resolution: {integrity: sha512-lGEB9m0IcMasPX8u/f5pRzaCrwn2Z79Rkiv/WuQ3xnxoees8LIPd5f7nIynqlANmhySWuer2IN9w6w/+tlxIoA==}
+    peerDependencies:
+      vant: '>=4'
+    dependencies:
+      '@nuxt/kit': 3.12.4(magicast@0.3.4)(rollup@2.79.1)
+      magic-string: 0.29.0
+      unplugin: 1.11.0
+      vant: 4.9.3(vue@3.4.33)
+    transitivePeerDependencies:
+      - magicast
+      - rollup
+      - supports-color
+    dev: true
+
+  /@vant/popperjs@1.3.0:
+    resolution: {integrity: sha512-hB+czUG+aHtjhaEmCJDuXOep0YTZjdlRR+4MSmIFnkCQIxJaXLQdSsR90XWvAI2yvKUI7TCGqR8pQg2RtvkMHw==}
+    dev: true
+
+  /@vant/use@1.6.0(vue@3.4.33):
+    resolution: {integrity: sha512-PHHxeAASgiOpSmMjceweIrv2AxDZIkWXyaczksMoWvKV2YAYEhoizRuk/xFnKF+emUIi46TsQ+rvlm/t2BBCfA==}
+    peerDependencies:
+      vue: ^3.0.0
+    dependencies:
+      vue: 3.4.33(typescript@5.5.3)
+    dev: true
+
   /@vercel/nft@0.26.5:
     resolution: {integrity: sha512-NHxohEqad6Ra/r4lGknO52uc/GrWILXAMs1BB4401GTqww0fw1bAqzpG1XHuDO+dprg4GvsD9ZLLSsdo78p9hQ==}
     engines: {node: '>=16'}
@@ -7870,6 +7900,13 @@ packages:
       sourcemap-codec: 1.4.8
     dev: true
 
+  /magic-string@0.29.0:
+    resolution: {integrity: sha512-WcfidHrDjMY+eLjlU+8OvwREqHwpgCeKVBUpQ3OhYYuvfaYCUgcbuBzappNzZvg/v8onU3oQj+BYpkOJe9Iw4Q==}
+    engines: {node: '>=12'}
+    dependencies:
+      '@jridgewell/sourcemap-codec': 1.5.0
+    dev: true
+
   /magic-string@0.30.10:
     resolution: {integrity: sha512-iIRwTIf0QKV3UAnYK4PU8uiEc4SRh5jX0mwpIwETPpHdhVM4f53RSwS/vXvN1JhGX+Cs7B8qIq3d6AH49O5fAQ==}
     dependencies:
@@ -10571,6 +10608,17 @@ packages:
     dependencies:
       spdx-correct: 3.2.0
       spdx-expression-parse: 3.0.1
+    dev: true
+
+  /vant@4.9.3(vue@3.4.33):
+    resolution: {integrity: sha512-Z5DPgmB2w1TvzWmEjpw0kiBPSR09JgcTILQJObB603MaSB3+E2aBpeXTneJexIHoZskFxCdZfbMsxCSTEqssTw==}
+    peerDependencies:
+      vue: ^3.0.0
+    dependencies:
+      '@vant/popperjs': 1.3.0
+      '@vant/use': 1.6.0(vue@3.4.33)
+      '@vue/shared': 3.4.33
+      vue: 3.4.33(typescript@5.5.3)
     dev: true
 
   /vite-hot-client@0.2.3(vite@5.3.4):
