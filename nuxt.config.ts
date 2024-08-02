@@ -31,7 +31,8 @@ export default defineNuxtConfig({
 
     css: [
         '@unocss/reset/tailwind.css',
-        '/assets/css/main.css'
+        '/assets/css/main.css',
+        '/assets/css/font.css',
     ],
 
     colorMode: {
@@ -58,7 +59,7 @@ export default defineNuxtConfig({
                 { rel: 'icon', href: '/favicon.ico', sizes: 'any' },
                 { rel: 'icon', type: 'image/svg+xml', href: '/nuxt.svg' },
                 { rel: 'apple-touch-icon', href: '/apple-touch-icon.png' },
-                { rel: "stylesheet", href: "//at.alicdn.com/t/c/font_4641437_6har54dyk1l.css" },
+                { rel: "stylesheet", href: "//at.alicdn.com/t/c/font_4641437_pyp6iasz2j.css" },
                 { rel: "stylesheet", href: "https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" },
             ],
             meta: [
@@ -66,21 +67,22 @@ export default defineNuxtConfig({
                 { name: 'viewport', content: 'width=device-width, initial-scale=1' },
                 { name: 'description', content: appDescription },
                 { name: 'apple-mobile-web-app-status-bar-style', content: 'black-translucent' },
-                { name: 'theme-color', media: '(prefers-color-scheme: light)', content: 'white' },
+                { name: 'theme-color', media: '(prefers-color-scheme: light)', content: '#fff' },
                 { name: 'theme-color', media: '(prefers-color-scheme: dark)', content: '#222222' },
             ],
             style: [
-                //   `
-                //   html {
-                //     font-size: 20px;
-                //   }
+                `
+                  html {
+                    font-size: 20px;
+                    background:#f1f1f1
+                  }
 
-                //   @media (max-width: 1700px) {
-                //     html {
-                //       font-size: 16px;
-                //     }
-                //   }
-                //   `
+                  @media (max-width: 1700px) {
+                    html {
+                      font-size: 16px;
+                    }
+                  }
+                  `
             ],
         },
         pageTransition: {
