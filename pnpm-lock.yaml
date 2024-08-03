@@ -4,6 +4,14 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+dependencies:
+  '@vant/area-data':
+    specifier: ^1.5.1
+    version: 1.5.1
+  js-pinyin:
+    specifier: ^0.2.7
+    version: 0.2.7
+
 devDependencies:
   '@antfu/eslint-config':
     specifier: ^2.17.0
@@ -4222,6 +4230,10 @@ packages:
       - rollup
     dev: true
 
+  /@vant/area-data@1.5.1:
+    resolution: {integrity: sha512-gR5TPEzTbxN1cTK1aDhCoyikSCLX7DAacxyXoKyI4SAsYYTZrDl/nLgQFIm9vLsvWzlPIda8xV8/U3x7M9k6ww==}
+    dev: false
+
   /@vant/nuxt@1.0.5(rollup@2.79.1)(vant@4.9.3):
     resolution: {integrity: sha512-lGEB9m0IcMasPX8u/f5pRzaCrwn2Z79Rkiv/WuQ3xnxoees8LIPd5f7nIynqlANmhySWuer2IN9w6w/+tlxIoA==}
     peerDependencies:
@@ -7622,6 +7634,10 @@ packages:
     resolution: {integrity: sha512-2yTgeWTWzMWkHu6Jp9NKgePDaYHbntiwvYuuJLbbN9vl7DC9DvXKOB2BC3ZZ92D3cvV/aflH0osDfwpHepQ53w==}
     hasBin: true
     dev: true
+
+  /js-pinyin@0.2.7:
+    resolution: {integrity: sha512-Dbm7qJDwlC2MRHRXQo7GrVrL5w975tEOX6sfc0M8Z3oL9VhR4uUqgkwaETMqh4bAJ14w4zVs3tXsi9pDxWUmNg==}
+    dev: false
 
   /js-tokens@4.0.0:
     resolution: {integrity: sha512-RdJUflcE3cUzKiMqQgsCu06FPu9UdIJO0beYbPhHN4k6apgJtifcoCtT9bcxOpYBtpD2kCM6Sbzg4CausW/PKQ==}

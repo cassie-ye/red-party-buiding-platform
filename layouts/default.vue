@@ -1,6 +1,6 @@
 <template>
-  <main>
-    <slot/>
-    <Footer />
-  </main>
+    <main>
+        <router-view />
+        <Footer v-if="!$route.meta.hideFooter" />
+    </main>
 </template>

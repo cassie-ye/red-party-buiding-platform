@@ -11,6 +11,7 @@ useHead({
     <NuxtLayout>
         <NuxtPage />
     </NuxtLayout>
+    <Footer v-if="!$route.meta.hideFooter" />
 </template>
 
 <style>
