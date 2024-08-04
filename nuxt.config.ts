@@ -100,7 +100,7 @@ export default defineNuxtConfig({
     devtools: {
         enabled: false,
     },
-
+    ssr: false,
     features: {
         // For UnoCSS
         inlineStyles: false,
@@ -112,13 +112,13 @@ export default defineNuxtConfig({
     //     },
     // },
 
-    components: {
-        dirs: [
-            '~/components/public',
-            '~/components/home',
-            '~/components',
-        ]
-    },
+    // components: {
+    //     dirs: [
+    //         '~/components/public',
+    //         '~/components/home',
+    //         '~/components',
+    //     ]
+    // },
 
     compatibilityDate: '2024-08-02',
 })

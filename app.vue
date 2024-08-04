@@ -27,4 +27,17 @@ html.dark {
     background: #222;
     color: white;
 }
+
+/*
+    页面跳转的动画
+*/
+/* .fade-enter-active,
+.fade-leave-active {
+  transition: all 0.2s;
+}
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+  filter: blur(1rem);
+} */
 </style>

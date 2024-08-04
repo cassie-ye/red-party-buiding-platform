@@ -19,3 +19,9 @@
         </van-tabbar-item>
     </van-tabbar>
 </template>
+
+<style scoped>
+.van-tabbar__placeholder {
+    height: 0px!important;
+}
+</style>
