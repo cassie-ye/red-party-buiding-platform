@@ -36,6 +36,8 @@
   },
   "dependencies": {
     "@vant/area-data": "^1.5.1",
-    "js-pinyin": "^0.2.7"
+    "dayjs": "^1.11.12",
+    "js-pinyin": "^0.2.7",
+    "lunar-calendar": "^0.1.4"
   }
 }

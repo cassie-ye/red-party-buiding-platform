@@ -1,8 +1,11 @@
 <script setup>
 // 接收页面跳转传递过来的参数
 const queryProvince = useRoute().query.citem
+const router = useRouter()
 const onClickLeft = () => {
-  history.go(-2);
+    // navigateTo({ path: '/vrCloud' })
+    // 跳转到/vrCloud页面
+    router.go(-2)
 };
 </script>
 <template>
@@ -22,7 +25,7 @@ const onClickLeft = () => {
                 </div>
             </div>
             <div class="w-full ">
-            <!--
+                <!--
                 https://www.720yun.com/search/26/%E6%B5%99%E6%B1%9F%20%E7%BA%A2%E8%89%B2%E5%9F%BA%E5%9C%B0/2/1
                 博物馆 景区 线上会展
              -->

@@ -1,6 +1,10 @@
 <template>
     <main>
         <!-- <NuxtPage /> -->
-        <slot></slot>
+        <slot ></slot>
+        <Footer/>
     </main>
 </template>
+<style>
+
+</style>

@@ -1,9 +1,6 @@
 <script setup>
 const route = useRouter();
 const onClickLeft = () => history.back();
-definePageMeta({
-    layout: 'hideFooter'
-})
 
 const provincesByAlphabet = ref([
     { alphabet: 'A', children: ['安徽省'], num: 0 },
@@ -35,9 +32,8 @@ const chooseCity = (citem) => {
 </script>
 <template>
     <div>
-        <van-sticky>
-            <van-nav-bar title="选择VR场馆所在区域" left-text="返回" left-arrow @click-left="onClickLeft" />
-        </van-sticky>
+        <van-nav-bar :fixed="true" :placeholder="true" title="选择VR场馆所在基地" left-text="返回" left-arrow
+        @click-left="onClickLeft" />
         <van-index-bar class="indexBar w-full" :sticky="false" highlight-color="#fb6463" :index-list="alphaList">
             <van-index-anchor v-for="(item, index) in provincesByAlphabet" :key="index" :index="index" class="">
                 <span class="indexWord">{{ item.alphabet }}</span>
@@ -47,4 +43,25 @@ const chooseCity = (citem) => {
         </van-index-bar>
     </div>
 </template>
-<style scoped></style>
+<style scoped>
+.van-nav-bar {
+    background-color: #fff;
+    position: fixed;
+    width: 100%;
+    z-index: 100;
+    top: 0;
+    left: 0;
+}
+
+::v-deep .van-nav-bar__arrow {
+    color: black;
+}
+
+::v-deep .van-nav-bar__text {
+    color: black;
+}
+
+::v-deep .van-ellipsis {
+    color: black
+}
+</style>

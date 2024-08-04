@@ -8,9 +8,15 @@ dependencies:
   '@vant/area-data':
     specifier: ^1.5.1
     version: 1.5.1
+  dayjs:
+    specifier: ^1.11.12
+    version: 1.11.12
   js-pinyin:
     specifier: ^0.2.7
     version: 0.2.7
+  lunar-calendar:
+    specifier: ^0.1.4
+    version: 0.1.4
 
 devDependencies:
   '@antfu/eslint-config':
@@ -5569,6 +5575,10 @@ packages:
       is-data-view: 1.0.1
     dev: true
 
+  /dayjs@1.11.12:
+    resolution: {integrity: sha512-Rt2g+nTbLlDWZTwwrIXjy9MeiZmSDI375FvZs72ngxx8PDC6YXOeR3q5LAuPzjZQxhiWdRKac7RKV+YyQYfYIg==}
+    dev: false
+
   /db0@0.1.4:
     resolution: {integrity: sha512-Ft6eCwONYxlwLjBXSJxw0t0RYtA5gW9mq8JfBXn9TtC0nDPlqePAhpv9v4g9aONBi6JI1OXHTKKkUYGd+BOrCA==}
     peerDependencies:
@@ -7902,6 +7912,10 @@ packages:
     dependencies:
       yallist: 3.1.1
     dev: true
+
+  /lunar-calendar@0.1.4:
+    resolution: {integrity: sha512-5r87vbg5yg56z/jkf3A+Ur+ZggUTiJw1VATT9P7RELQgWcTNhfJ+OLkNYroSna6r65bMqyaAgapo9vRN40L75A==}
+    dev: false
 
   /magic-string-ast@0.6.2:
     resolution: {integrity: sha512-oN3Bcd7ZVt+0VGEs7402qR/tjgjbM7kPlH/z7ufJnzTLVBzXJITRHOJiwMmmYMgZfdoWQsfQcY+iKlxiBppnMA==}

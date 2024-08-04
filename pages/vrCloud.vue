@@ -1,5 +1,6 @@
 <script setup>
 const route = useRouter()
+const onClickLeft = () => history.back();
 const tabsList = ref(
     [
         "浙江", "北京", "广东", "四川"
@@ -25,6 +26,8 @@ const gotoVrDetails = () => {
 </script>
 <template>
     <div class="w-full  h-full">
+        <van-nav-bar :fixed="true" :placeholder="true" title="红色基地" left-text="返回" left-arrow
+        @click-left="onClickLeft" />
         <div class="w-full pt1rem h17.5rem top-red-linear-bg ">
             <div
                 class="h-2.3rem bg-white bg-opacity-95 rounded-1rem flex items-center ml0.8rem mr1rem pl0.5rem pr0.5rem ">
@@ -93,5 +96,25 @@ const gotoVrDetails = () => {
             #EF4444 1%,
             #FFB4B4 40%,
             transparent);
+}
+.van-nav-bar {
+    background-color: #fff;
+    position: fixed;
+    width: 100%;
+    z-index: 100;
+    top: 0;
+    left: 0;
+}
+
+::v-deep .van-nav-bar__arrow {
+    color: black;
+}
+
+::v-deep .van-nav-bar__text {
+    color: black;
+}
+
+::v-deep .van-ellipsis {
+    color: black
 }
 </style>

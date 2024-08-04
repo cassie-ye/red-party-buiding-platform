@@ -1,4 +1,7 @@
 <script setup lang="ts">
+definePageMeta({
+    layout: 'with-tabbar'
+})
 interface ModuleItem {
     name: string;
     img: string;

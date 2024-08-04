@@ -2,7 +2,7 @@
 import { useCascaderAreaData } from '@vant/area-data';
 // 引入路由
 import { useRouter } from 'vue-router';
-
+const onClickLeft = () => history.back();
 const router = useRouter();
 const show = ref(false);
 const fieldValue = ref('');
@@ -26,6 +26,8 @@ const gotoAreaDetails = () => {
 </script>
 <template>
     <div>
+        <van-nav-bar :fixed="true" :placeholder="true" title="红色基地" left-text="返回" left-arrow
+            @click-left="onClickLeft" />
         <div class="w-full">
             <div class="w-full h13rem bg-cover bg-no-repeat " style="background-image: url(/red-base/top-bg.jpg);">
                 <div class=" flex items-center justify-between  w-full h3.3rem pl0.5rem pr0.5rem">
@@ -75,4 +77,25 @@ const gotoAreaDetails = () => {
         </div>
     </div>
 </template>
-<style scoped></style>
+<style scoped>
+.van-nav-bar {
+    background-color: #fff;
+    position: fixed;
+    width: 100%;
+    z-index: 100;
+    top: 0;
+    left: 0;
+}
+
+::v-deep .van-nav-bar__arrow {
+    color: black;
+}
+
+::v-deep .van-nav-bar__text {
+    color: black;
+}
+
+::v-deep .van-ellipsis {
+    color: black
+}
+</style>

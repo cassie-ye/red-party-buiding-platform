@@ -1,15 +1,12 @@
 <script setup>
 const onClickLeft = () => history.back();
-definePageMeta({
-    layout: 'hideFooter'
-})
-
 const onClickIcon = () => showToast('点击图标');
 const onClickButton = () => showToast('点击按钮');
 </script>
 <template>
     <div class="relative mb10rem ">
-        <van-nav-bar title="杭州革命烈士纪念馆" left-text="返回" left-arrow @click-left="onClickLeft" />
+        <van-nav-bar :fixed="true" :placeholder="true" title="杭州革命烈士纪念馆" left-text="返回" left-arrow
+        @click-left="onClickLeft" />
         <van-swipe class="my-swipe bg-pink h15rem" :autoplay="3000" indicator-color="white">
             <van-swipe-item>
                 <img class="w-full h-full" src="https://youimg1.c-ctrip.com/target/10080i0000009nk625854.jpg" alt="">
@@ -84,7 +81,7 @@ const onClickButton = () => showToast('点击按钮');
                 </div>
             </div>
         </div>
-        <van-action-bar >
+        <van-action-bar>
             <van-action-bar-icon icon="like-o" text="客服" @click="onClickIcon" />
             <van-action-bar-icon icon="chat-o" text="客服" @click="onClickIcon" />
             <van-action-bar-button type="danger" text="立即预约" @click="onClickButton" />
@@ -96,5 +93,26 @@ const onClickButton = () => showToast('点击按钮');
     color: #fff;
     font-size: 1.25rem;
     text-align: center;
+}
+
+.van-nav-bar {
+    background-color: #fff;
+    position: fixed;
+    width: 100%;
+    z-index: 100;
+    top: 0;
+    left: 0;
+}
+
+::v-deep .van-nav-bar__arrow {
+    color: black;
+}
+
+::v-deep .van-nav-bar__text {
+    color: black;
+}
+
+::v-deep .van-ellipsis {
+    color: black
 }
 </style>
