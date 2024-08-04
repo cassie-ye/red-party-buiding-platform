@@ -18,7 +18,7 @@ const moudleList = ref<ModuleItem[]>([
     {
         name: "每日推荐",
         img: "/home/daily-recommendations.png",
-        link: ""
+        link: "/todayRecommand"
 
     },
     {
