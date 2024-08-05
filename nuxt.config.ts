@@ -18,7 +18,8 @@ export default defineNuxtConfig({
         '@vite-pwa/nuxt',
         // '@nuxt/eslint',
         '@vant/nuxt',
-        "@nuxt/icon"
+        "@nuxt/icon",
+        "@nuxt/ui"
     ],
 
     experimental: {
@@ -59,7 +60,7 @@ export default defineNuxtConfig({
                 { rel: 'icon', href: '/favicon.ico', sizes: 'any' },
                 { rel: 'icon', type: 'image/svg+xml', href: '/nuxt.svg' },
                 { rel: 'apple-touch-icon', href: '/apple-touch-icon.png' },
-                { rel: "stylesheet", href: "//at.alicdn.com/t/c/font_4641437_nr0lc0y5qmp.css" },
+                { rel: "stylesheet", href: "//at.alicdn.com/t/c/font_4641437_gcwzhtw74n7.css" },
                 { rel: "stylesheet", href: "https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" },
             ],
             meta: [

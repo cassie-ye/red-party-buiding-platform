@@ -27,7 +27,7 @@ const moudleList = ref<ModuleItem[]>([
     {
         name: "文旅打卡",
         img: "/home/clouking-in.png",
-        link: ""
+        link: "/culturalTravelClockIn"
 
     },
     {
