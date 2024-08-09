@@ -33,13 +33,13 @@ const moudleList = ref<ModuleItem[]>([
     {
         name: "红色专栏",
         img: "/home/red-column.png",
-        link: ""
+        link: "/redColumn"
 
     },
     {
         name: "文创商城",
         img: "/home/culture-creative-mall.png",
-        link: ""
+        link: "/culturalStore"
 
     },
     {

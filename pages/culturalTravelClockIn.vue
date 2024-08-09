@@ -79,7 +79,7 @@ const gotoFootprintMap = () => {
             <div class="w-full mt1rem ">
                 <p class="font-bold">红色研学护照</p>
                 <p class="font-size-0.8rem color-#9F9F9F mt0.3rem">带着护照去研学</p>
-                <div class="w-full mt0.5rem h13.5rem bg-#fff rounded-0.5rem shadow-xl">
+                <div class="w-full mt0.5rem h15rem bg-#fff rounded-0.5rem shadow-xl">
                     <img class="rounded-t-0.5rem w-full" src="/public/culturalTravelClockIn/ad.jpg" alt="">
                     <div class="flex justify-between items-center">
                         <div class="pl1rem mt0.5rem">
