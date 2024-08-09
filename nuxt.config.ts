@@ -1,6 +1,7 @@
 import { pwa } from './config/pwa'
 import { appDescription } from './constants/index'
 
+
 export default defineNuxtConfig({
     /*
       配置移动端和PC端均可访问
@@ -19,7 +20,8 @@ export default defineNuxtConfig({
         // '@nuxt/eslint',
         '@vant/nuxt',
         "@nuxt/icon",
-        "@nuxt/ui"
+        "@nuxt/ui",
+        '@element-plus/nuxt'
     ],
 
     experimental: {
@@ -60,7 +62,7 @@ export default defineNuxtConfig({
                 { rel: 'icon', href: '/favicon.ico', sizes: 'any' },
                 { rel: 'icon', type: 'image/svg+xml', href: '/nuxt.svg' },
                 { rel: 'apple-touch-icon', href: '/apple-touch-icon.png' },
-                { rel: "stylesheet", href: "//at.alicdn.com/t/c/font_4641437_gcwzhtw74n7.css" },
+                { rel: "stylesheet", href: "//at.alicdn.com/t/c/font_4641437_8lo9md09i84.css" },
                 { rel: "stylesheet", href: "https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" },
             ],
             meta: [

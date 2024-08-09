@@ -1,5 +1,17 @@
 <script setup>
+const route = useRouter()
 const onClickLeft = () => history.back();
+const gotoPunchList = () => {
+    route.push('/punchList')
+}
+
+const gotoTimeLine = () => {
+    route.push('/punchTimeline')
+}
+
+const gotoFootprintMap = () => {
+    route.push('/footprintMap')
+}
 </script>
 <template>
     <div>
@@ -16,16 +28,17 @@ const onClickLeft = () => history.back();
                     初学行者 v1</div>
             </div>
             <div class="w-full flex justify-between mt1rem">
-                <div class="flex w7rem h3.8rem bg-#FFF5DB flex justify-center items-center color-amber rounded-0.5rem">
+                <div @click="gotoPunchList()"
+                    class="flex w7rem h3.8rem bg-#FFF5DB flex justify-center items-center color-amber rounded-0.5rem">
                     <i class="iconfont icon-24gf-clipboardChecklist font-size-1.6rem "></i>
                     <p class="font-size-0.85rem ml0.2rem font-bold">打卡清单</p>
                 </div>
-                <div
+                <div @click="gotoTimeLine()"
                     class="flex w7rem h3.8rem bg-#F1F3FF flex justify-center items-center color-#2C6FEC rounded-0.5rem">
                     <i class="iconfont icon-shijian font-size-1.6rem"></i>
                     <p class="font-size-0.85rem ml0.2rem font-bold">打卡时间轴</p>
                 </div>
-                <div
+                <div @click="gotoFootprintMap()"
                     class="flex w7rem h3.8rem bg-#F4FFF1 flex justify-center items-center color-#59A639 rounded-0.5rem">
                     <i class="iconfont icon-map font-size-1.6rem"></i>
                     <p class="font-size-0.85rem ml0.2rem font-bold">足迹地图</p>
