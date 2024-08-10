@@ -1,5 +1,6 @@
 <script setup>
 const onClickLeft = () => history.back();
+const router = useRouter()
 const value = ref('');
 const method = ref(true)
 const onChange = () => {
@@ -15,7 +16,7 @@ const option1 = [
 const option2 = [
     { text: '默认排序', value: 'a' },
     { text: '销量从高到低', value: 'b' },
-    { text: '销量从低到高', value: 'c' },
+    { text: '价格从低到高', value: 'c' },
 ];
 
 // TODO：把这两个值传给后端发请求
@@ -25,6 +26,10 @@ const changeSelectedOption1 = (e) => {
 
 const changeSelectedOption2 = (e) => {
     console.log(e); // 选中项的value值
+}
+
+const gotoGoodsDetails = () => {
+    router.push('/goodsDetails')
 }
 </script>
 <template>
@@ -46,7 +51,10 @@ const changeSelectedOption2 = (e) => {
             </van-dropdown-menu>
         </div>
         <div class="ml2% mr2% w96% h-full flex flex-wrap justify-between">
-            <div v-if="method" v-for="i in 20" class="mt0.8rem mr1% w48.5% bg-#fff shadow-md rounded-0.5rem">
+            <div v-if="method" v-for="i in 20"
+            class="mt0.8rem mr1% w48.5% bg-#fff shadow-md rounded-0.5rem"
+            @click="gotoGoodsDetails()"
+            >
                 <img class="rounded-t-0.5rem " src="/public/red-base/top-bg.jpg" alt="">
                 <div class="p0.5rem">
                     <div class="shenglue font-size-0.9rem ">

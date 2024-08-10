@@ -116,9 +116,7 @@ const gotoPastRecommand = () => {
 </script>
 
 <template>
-    <div class="w-full  bg-cover bg-no-repeat top-red-linear-bg "
-    style="background: url(/todayRecommand/bg.jpg);"
-    >
+    <div class="w-full  bg-cover bg-no-repeat top-red-linear-bg " style="background: url(/todayRecommand/bg.jpg);">
         <van-nav-bar :fixed="true" :placeholder="true" title="每日推荐" left-text="返回" left-arrow
             @click-left="onClickLeft" />
         <van-overlay :show="showOverlayFlag" @click="show = false">
@@ -135,7 +133,7 @@ const gotoPastRecommand = () => {
             class="w18rem h18rem moveBtn rounded-50% flex flex-col items-center justify-center color-#fff z-99 fixed top-25% left-13%"
             :class="{ 'scale-25 origin-center ease-in-out duration-300': isRoundedAnimateFlag, 'bg-red-5 mt40rem duration-3000': isMovedToBottomFlag, 'max-md:hidden': isShowBottomButtomFlag }">
             <p>{{ currentLunarDate }}</p>
-            <p class="font-size-5rem font-bold">{{ currentGregorianDate }}</p>
+            <p class="font-size-8rem font-bold">{{ currentGregorianDate }}</p>
             <p>{{ currentGregorianYearMouth }}</p>
         </div>
 
@@ -157,11 +155,9 @@ const gotoPastRecommand = () => {
 
         </div>
         <di class="color-#fff fixed right-1.5rem flex flex-col bottom-6rem">
-            <div @click="loveRecommand()" class="flex flex-col items-center justify-center mb1rem"
-                >
+            <div @click="loveRecommand()" class="flex flex-col items-center justify-center mb1rem">
                 <i class="iconfont icon-aixin_shixin font-size-2rem"
-                :class="{ 'color-#FF00D1': loveRecommandFlag }"
-                ></i>
+                    :class="{ 'color-#FF00D1': loveRecommandFlag }"></i>
                 <p class="font-size-0.7rem">34327</p>
             </div>
             <div @click="show = true">

@@ -45,7 +45,7 @@ const moudleList = ref<ModuleItem[]>([
     {
         name: "金牌讲解",
         img: "/home/gold-medal-explanation.png",
-        link: ""
+        link: "/goldMedalExplanation"
 
     },
     {
@@ -163,12 +163,12 @@ const changeTab = (index: { title: string; }) => {
                         </div>
                     </div>
                     <div class=" flex pl0.3rem pr0.3rem justify-between">
-                        <div class="flex justify-center items-center flex-col">
-                            <img class="w4.8rem h3.3rem rounded-0.2rem" src="/home/hot-recommand.jpg" alt="">
+                        <div class="w48.5% flex justify-center items-center flex-col">
+                            <img class="w100% h3.3rem rounded-0.2rem" src="/home/hot-recommand.jpg" alt="">
                             <p class="mt0.3rem font-size-0.5rem">北京·【天安门】</p>
                         </div>
-                        <div class="flex justify-center items-center flex-col">
-                            <img class="w4.8rem h3.3rem rounded-0.2rem" src="/home/hot-recommand.jpg" alt="">
+                        <div class="w48.5%  flex justify-center items-center flex-col">
+                            <img class="w100% h3.3rem rounded-0.2rem" src="/home/hot-recommand.jpg" alt="">
                             <p class="mt0.3rem font-size-0.5rem">北京·【天安门】</p>
                         </div>
                     </div>
