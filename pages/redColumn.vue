@@ -125,15 +125,15 @@ const nextSlide = () => {
     left: 0;
 }
 
-::v-deep .van-nav-bar__arrow {
+:deep(.van-nav-bar__arrow) {
     color: black;
 }
 
-::v-deep .van-nav-bar__text {
+:deep(.van-nav-bar__text) {
     color: black;
 }
 
-::v-deep .van-ellipsis {
+:deep(.van-ellipsis) {
     color: black
 }
 

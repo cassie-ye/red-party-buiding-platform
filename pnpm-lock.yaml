@@ -11,6 +11,9 @@ dependencies:
   dayjs:
     specifier: ^1.11.12
     version: 1.11.12
+  echarts:
+    specifier: ^5.5.1
+    version: 5.5.1
   js-pinyin:
     specifier: ^0.2.7
     version: 0.2.7
@@ -6125,6 +6128,13 @@ packages:
     resolution: {integrity: sha512-I88TYZWc9XiYHRQ4/3c5rjjfgkjhLyW2luGIheGERbNQ6OY7yTybanSpDXZa8y7VUP9YmDcYa+eyq4ca7iLqWA==}
     dev: true
 
+  /echarts@5.5.1:
+    resolution: {integrity: sha512-Fce8upazaAXUVUVsjgV6mBnGuqgO+JNDlcgF79Dksy4+wgGpQB2lmYoO4TSweFg/mZITdpGHomw/cNBJZj1icA==}
+    dependencies:
+      tslib: 2.3.0
+      zrender: 5.6.0
+    dev: false
+
   /ee-first@1.1.1:
     resolution: {integrity: sha512-WMwm9LhRUo+WUaRN+vRuETqG89IgZphVSNkdFgeb6sS/E4OrDIN7t48CAewSHXc6C8lefD8KKfr5vY61brQlow==}
     dev: true
@@ -11026,6 +11036,10 @@ packages:
     resolution: {integrity: sha512-Y/arvbn+rrz3JCKl9C4kVNfTfSm2/mEp5FSz5EsZSANGPSlQrpRI5M4PKF+mJnE52jOO90PnPSc3Ur3bTQw0gA==}
     dev: true
 
+  /tslib@2.3.0:
+    resolution: {integrity: sha512-N82ooyxVNm6h1riLCoyS9e3fuJ3AMG2zIZs2Gd1ATcSFjSA23Q0fzjjZeh0jbJvWVDZ0cJT8yaNNaaXHzueNjg==}
+    dev: false
+
   /tslib@2.6.3:
     resolution: {integrity: sha512-xNvxJEOUiWPGhUuUdQgAJPKOOJfGnIyKySOc09XkKsgdUV/3E2zvwZYdejjmRgPCgcym1juLH3226yA7sEFJKQ==}
     dev: true
@@ -12213,3 +12227,9 @@ packages:
       compress-commons: 6.0.2
       readable-stream: 4.5.2
     dev: true
+
+  /zrender@5.6.0:
+    resolution: {integrity: sha512-uzgraf4njmmHAbEUxMJ8Oxg+P3fT04O+9p7gY+wJRVxo8Ge+KmYv0WJev945EH4wFuc4OY2NLXz46FZrWS9xJg==}
+    dependencies:
+      tslib: 2.3.0
+    dev: false

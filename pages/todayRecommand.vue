@@ -227,15 +227,15 @@ const gotoPastRecommand = () => {
     left: 0;
 }
 
-::v-deep .van-nav-bar__arrow {
+:deep(.van-nav-bar__arrow) {
     color: black;
 }
 
-::v-deep .van-nav-bar__text {
+:deep(.van-nav-bar__text) {
     color: black;
 }
 
-::v-deep .van-ellipsis {
+:deep(.van-ellipsis) {
     color: black
 }
 
@@ -255,7 +255,7 @@ const gotoPastRecommand = () => {
     padding: 1rem 1rem 20rem;
 }
 
-::v-deep .van-cell__value {
+:deep(.van-cell__value) {
     background-color: #626262;
     padding-left: 1rem;
     padding-right: 1rem;
@@ -264,7 +264,7 @@ const gotoPastRecommand = () => {
     border-radius: 1rem;
 }
 
-::v-deep .van-field {
+:deep(.van-field) {
     width: 20rem;
 }
 </style>

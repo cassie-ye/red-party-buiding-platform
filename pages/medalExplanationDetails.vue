@@ -1,24 +1,15 @@
 <script setup>
+const router = useRouter()
 const onClickLeft = () => history.back();
-// rate的分数
-const rateValue = ref(3);
-
-const showAddCartPannel = ref(false)
-const addCart = () => {
-    showAddCartPannel.value = true
-}
-
-const stepperValue = ref(1)
-
-const activeIndex = ref(0)
-
-const successToast = () => {
-    showSuccessToast('加入购物车成功');
+const rateValue = ref(3)
+const gotoPackageSelection = () => {
+    router.push('/packageSelection')
 }
 </script>
+
 <template>
     <div>
-        <van-nav-bar :fixed="true" :placeholder="true" title="环球文旅集章护照本" left-text="返回" left-arrow
+        <van-nav-bar :fixed="true" :placeholder="true" title="嘉兴南湖|金牌说" left-text="返回" left-arrow
             @click-left="onClickLeft" />
         <van-swipe height="370" class="">
             <van-swipe-item>
@@ -41,14 +32,42 @@ const successToast = () => {
             </template>
         </van-swipe>
         <div class="bg-#fff p1rem">
-            <p class="flex items-center color-#F6A50C">
+            <p class="flex items-center color-red-5">
                 <span class="font-bold">￥</span>
-                <span class="font-size-1.5rem font-bold">28.8</span>
+                <span class="font-size-1.5rem font-bold">148 - 1599</span>
             </p>
-            <p class="mt0.2rem font-size-1.5rem font-bold">环球文旅集章护照本</p>
-            <div class="flex justify-between mt0.2rem">
-                <p>一本护照打卡全球</p>
-                <p class="color-#9F9F9F">已售：已售3794</p>
+            <p class="mt0.2rem font-size-1.5rem font-bold">嘉兴南湖 金牌解说</p>
+            <div class="flex justify-between mt0.2rem items-center">
+                <p>走进嘉兴南湖领略党建知识</p>
+                <p class="color-#9F9F9F font-size-0.8rem">1.1w人已体验</p>
+            </div>
+            <div class="p0.2rem border-0.05rem border-solid border-#FA9B00
+            color-#FA9B00 font-size-0.8rem mt0.5rem bg-#FFFCED rounded-0.2rem
+            w12rem
+            ">3小时讲解时长 | 解读红色故事</div>
+        </div>
+        <div class="mt0.6rem bg-#fff p1rem">
+            <p class="font-bold">选择套餐·日期</p>
+            <div class="flex">
+                <div
+                    class="mt0.5rem flex flex-col justify-evenly items-center pt0.3rem pb0.3rem border-solid border-0.05rem border-#DEDEDE w6.5rem mr0.3rem font-size-0.8rem rounded-0.3rem">
+                    <p>今天 08-11</p>
+                    <p>不可约</p>
+                </div>
+                <div
+                    class="mt0.5rem flex flex-col justify-evenly items-center pt0.3rem pb0.3rem border-solid border-0.05rem border-#DEDEDE w6.5rem mr0.3rem font-size-0.8rem rounded-0.3rem">
+                    <p>今天 08-11</p>
+                    <p>不可约</p>
+                </div>
+                <div
+                    class="mt0.5rem flex flex-col justify-evenly items-center pt0.3rem pb0.3rem border-solid border-0.05rem border-#DEDEDE w6.5rem mr0.3rem font-size-0.8rem rounded-0.3rem">
+                    <p>今天 08-11</p>
+                    <p>不可约</p>
+                </div>
+                <div @click="gotoPackageSelection"
+                    class="w3rem mt0.5rem flex flex-col justify-center items-center   border-solid border-0.05rem border-#DEDEDE mr0.3rem font-size-0.8rem rounded-0.3rem">
+                    更多<br>日期
+                </div>
             </div>
         </div>
         <div class="mt0.6rem bg-#fff p1rem">
@@ -81,54 +100,13 @@ const successToast = () => {
             <van-action-bar-button color="#be99ff" type="warning" text="加入购物车" @click="addCart()" />
             <van-action-bar-button color="#7232dd" type="danger" text="立即购买" />
         </van-action-bar>
-        <van-action-sheet v-model:show="showAddCartPannel" title="添加到购物车">
-            <div class="content p1rem">
-                <div class="flex items-center border-b-8 pb0.7rem">
-                    <div class="pr1.5rem">
-                        <div class="font-bold">
-                            <van-icon name="location-o" />
-                            浙江省宁波市海曙区高桥镇学院路899号宁波财经学院
-                        </div>
-                        <div>
-                            <van-icon name="manager-o" />
-                            金佳烨 <span class="color-#9F9F9F">13567529804</span>
-                        </div>
-                    </div>
-                    <van-icon name="arrow" />
-                </div>
-                <div class="mt1rem flex ">
-                    <img class="w5.5rem h5.5rem rounded-0.4rem mr1rem" src="/public/culturalTravelClockIn/1.jpg" alt="">
-                    <div class="flex flex-col justify-between">
-                        <p class="flex items-center color-red-5">
-                            <span class="font-bold">￥</span>
-                            <span class="font-size-1.2rem font-bold">28.8</span>
-                        </p>
-                        <van-stepper v-model="stepperValue" />
-                        <p class="color-#9F9F9F font-size-0.8rem">有货</p>
-                    </div>
-                </div>
-                <div class="mt1rem">
-                    <p class="font-bold mb0.5rem">颜色分类</p>
-                    <div class="flex flex-wrap">
-                        <div v-for="(item,index) in 2" class="pl1rem pr1rem pt0.5rem pb0.5rem rounded-0.3rem font-size-0.9rem  mr0.8rem mb0.5rem"
-                        :class="activeIndex==index?'bg-purple color-#fff':'bg-#E3E3E3'" @click="activeIndex=index"
-                        >
-                            深蓝色
-                        </div>
-                    </div>
-                </div>
-                <div class="mt1rem ml5%">
-                    <div class="w90% h2.5rem bg-purple flex justify-center items-center rounded-1.3rem color-#fff font-bold"
-                    @click="successToast()"
-                    >
-                        加入购物车
-                    </div>
-                </div>
-            </div>
-        </van-action-sheet>
     </div>
 </template>
 <style scoped>
+.box-shadow {
+    box-shadow: 0 2px 4px rgba(.18, .18, .18, .18), 0 0 6px rgba(0, 0, 0, .15)
+}
+
 .van-nav-bar {
     background-color: #fff;
     position: fixed;
@@ -137,7 +115,6 @@ const successToast = () => {
     top: 0;
     left: 0;
 }
-
 :deep(.van-nav-bar__arrow) {
     color: black;
 }
@@ -148,6 +125,15 @@ const successToast = () => {
 
 :deep(.van-ellipsis) {
     color: black
+}
+
+.shenglue {
+    overflow: hidden;
+    overflow-wrap: break-word;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
 }
 
 .custom-indicator {

@@ -1,6 +1,10 @@
 <script setup>
+const router = useRouter()
 const onClickLeft = () => history.back();
 const activeSelectedIndex = ref(0)
+const gotoMedalExplanationDetails = () => {
+    router.push('/medalExplanationDetails')
+}
 </script>
 <template>
     <div>
@@ -13,7 +17,9 @@ const activeSelectedIndex = ref(0)
             </div>
             <p class="mt0.3rem color-#525252">深度剖析党建精髓，让历史在你面前生动再现</p>
             <van-swipe class="mt1rem" :loop="false" :width="130" :show-indicators="false">
-                <van-swipe-item v-for="i in 8" class="relative mr0.5rem">
+                <van-swipe-item v-for="i in 8" class="relative mr0.5rem"
+                @click="gotoMedalExplanationDetails"
+                >
                     <div class="box-shadow mb0.3rem rounded-0.3rem">
                         <img src="/public/red-base/top-bg.jpg" class="w-full h5rem rounded-0.3rem" alt="">
                         <p class="shenglue pl0.5rem pr0.5rem mt0.5rem mb0.5rem">嘉兴南湖嘉兴南湖嘉兴南湖嘉兴南湖嘉兴南湖</p>
@@ -94,15 +100,15 @@ const activeSelectedIndex = ref(0)
     left: 0;
 }
 
-::v-deep .van-nav-bar__arrow {
+:deep(.van-nav-bar__arrow) {
     color: black;
 }
 
-::v-deep .van-nav-bar__text {
+:deep(.van-nav-bar__text) {
     color: black;
 }
 
-::v-deep .van-ellipsis {
+:deep(.van-ellipsis) {
     color: black
 }
 

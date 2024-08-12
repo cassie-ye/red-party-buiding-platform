@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { appName } from '~/constants'
-
+import * as echarts from 'echarts'
 useHead({
     title: appName,
 })
