@@ -2,6 +2,7 @@
 definePageMeta({
     layout: 'with-tabbar'
 })
+const router = useRouter()
 interface ModuleItem {
     name: string;
     img: string;
@@ -51,7 +52,7 @@ const moudleList = ref<ModuleItem[]>([
     {
         name: "交通查询",
         img: "/home/traffic-enquiries.png",
-        link: ""
+        link: "/trafficQuery"
 
     },
     {
@@ -87,6 +88,10 @@ const active = ref(0);
  */
 const changeTab = (index: { title: string; }) => {
     console.log(index.title)
+}
+
+const gotoPartyHistoryTimeline = () => {
+    router.push("/partyHistoryTimeline")
 }
 </script>
 <template>
@@ -176,7 +181,7 @@ const changeTab = (index: { title: string; }) => {
             </div>
             <!-- 党建时间轴 抽奖得好礼 答题得积分 -->
             <div class="mt0.5rem w-full h4rem flex justify-between">
-                <div class="p0.2rem items-center mr2% w32% bg-#fff rounded-0.3rem h-full justify-between">
+                <div @click="gotoPartyHistoryTimeline()" class="p0.2rem items-center mr2% w32% bg-#fff rounded-0.3rem h-full justify-between">
                     <p style="font-family: normal;">党建时间轴</p>
                     <div class="flex">
                         <p class="font-size-0.7rem">凝聚党的重要时刻</p>
