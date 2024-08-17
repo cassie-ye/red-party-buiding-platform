@@ -182,14 +182,14 @@ const gotoPartyHistoryTimeline = () => {
             <!-- 党建时间轴 抽奖得好礼 答题得积分 -->
             <div class="mt0.5rem w-full h4rem flex justify-between">
                 <div @click="gotoPartyHistoryTimeline()" class="p0.2rem items-center mr2% w32% bg-#fff rounded-0.3rem h-full justify-between">
-                    <p style="font-family: normal;">党建时间轴</p>
+                    <p class="font-bold">党建时间轴</p>
                     <div class="flex">
                         <p class="font-size-0.7rem">凝聚党的重要时刻</p>
                         <img class="w2rem color-#717171 mr0.2rem" src="/home/timeline.png" alt="">
                     </div>
                 </div>
                 <div class="relative p0.2rem items-center mr2% w32% bg-#fff rounded-0.3rem h-full justify-between">
-                    <p style="font-family: normal;">答题得积分</p>
+                    <p class="font-bold">答题得积分</p>
                     <div class="flex">
                         <p class="font-size-0.7rem">1122w人正在参与</p>
                         <img class="w2rem color-#717171 mr0.2rem" src="/home/answer-questions.png" alt="">
@@ -207,7 +207,7 @@ const gotoPartyHistoryTimeline = () => {
                     <img class="w2rem color-#717171 mr0.2rem" src="/home/lucky-draw.png" alt="">
                 </div> -->
                     <div class="p0.2rem ">
-                        <p style="font-family: normal;">50元</p>
+                        <p class="font-bold">50元</p>
                         <p class="font-size-0.7rem">抽奖领现金</p>
                     </div>
                     <div class="relative w35% h-full bg-red-5 flex justify-center items-center overflow-hidden">

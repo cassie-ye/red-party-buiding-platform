@@ -178,7 +178,9 @@ const gotoSearchForAirlineTickets = () => {
                                 公务/头等舱</div>
                         </div>
                         <div
-                            class="flex justify-center items-center font-size-1.2rem color-#fff mt3rem w-90% h3rem bg-blue ml5% rounded-1.5rem">
+                            class="flex justify-center items-center font-size-1.2rem color-#fff mt3rem w-90% h3rem bg-blue ml5% rounded-1.5rem"
+                            @click="gotoSearchForAirlineTickets()"
+                            >
                             搜索机票
                         </div>
                     </div>
@@ -254,7 +256,7 @@ const gotoSearchForAirlineTickets = () => {
                 </van-checkbox-group>
                 <div
                     class="mt2rem mb2rem w90%  rounded-1.5rem flex justify-center items-center font-size-1.2rem color-#fff h2.5rem bg-blue"
-                    @click="gotoSearchForAirlineTickets()"
+                    @click="showSelectPassengerPannelFlag=false"
                     >
                     确定</div>
             </div>
