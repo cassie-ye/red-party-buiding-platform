@@ -89,6 +89,10 @@ const gotoPartyHistoryTimeline = () => {
  */
 const getAllBaseCategoryList = async () => {
     const res = await getAllBaseCategoryListAPI()
+    // debugger
+    // const { data } = await useFetch('/api/item')
+    // const { data } = await useAPI(`/base-cate/selectAll`, {server: false, lazy: true})
+    console.log(res)
     tabsList.value = res
 }
 getAllBaseCategoryList()
@@ -98,6 +102,7 @@ getAllBaseCategoryList()
  */
 const getBaseListByCategory = async (categoryId) => {
     const res = await getBaseListByCategoryAPI(categoryId)
+    // const { data } = await useAPI(`/tb-place/getPlaceListByCategory/${categoryId}`)
     currentSelectedCategoryBaseList.value = res
 }
 

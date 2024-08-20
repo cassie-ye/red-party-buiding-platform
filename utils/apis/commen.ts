@@ -9,15 +9,11 @@ import httpRequest from "../fetch.js";
  * @returns
  */
 const registerAPI = (data: any) => {
-    return httpRequest.post("/user/save", data, {
-        server: false,
-    });
+    return httpRequest.post("/user/save", data);
 };
 
 const loginAPI = (data: any) => {
-    return httpRequest.post("/login", data, {
-        server: false,
-    });
+    return httpRequest.post("/login", data);
 };
 
 export { registerAPI,loginAPI };

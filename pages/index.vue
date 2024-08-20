@@ -1,4 +1,4 @@
-<script setup>
+<script setup >
 import { loginAPI } from "../utils/apis/commen.ts"
 import { useUserStore } from '../store/user.js'
 const tel = ref('')
