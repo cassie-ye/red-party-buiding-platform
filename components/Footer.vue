@@ -5,7 +5,7 @@
     <DarkToggle />
   </div> -->
     <van-tabbar :route="true" :placeholder="true">
-        <van-tabbar-item icon="home-o" to="/">
+        <van-tabbar-item icon="home-o" to="/home">
             首页
         </van-tabbar-item>
         <van-tabbar-item icon="search" to="/hh">

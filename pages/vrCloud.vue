@@ -1,4 +1,5 @@
 <script setup>
+import { getRedBaseByProvinceAPI, getAllProvinceAndAreaListAPI } from "../utils/apis/redBase.ts"
 const route = useRouter()
 const onClickLeft = () => history.back();
 const tabsList = ref(
@@ -23,11 +24,25 @@ const gotoIndexBar = () => {
 const gotoVrDetails = () => {
     route.push('/vrDetails')
 }
+
+const provinceAndAreaList = ref([])
+/**
+ * 调接口获取所有省市
+ */
+const getAllProvinceAndAreaList = async () => {
+    const res = await getAllProvinceAndAreaListAPI()
+    provinceAndAreaList.value = res.map(option => ({
+        text: option.label,
+        value: option.value,
+    }));
+    console.log(provinceAndAreaList.value)
+}
+getAllProvinceAndAreaList()
 </script>
 <template>
     <div class="w-full  h-full">
         <van-nav-bar :fixed="true" :placeholder="true" title="红色基地" left-text="返回" left-arrow
-        @click-left="onClickLeft" />
+            @click-left="onClickLeft" />
         <div class="w-full pt1rem h17.5rem top-red-linear-bg ">
             <div
                 class="h-2.3rem bg-white bg-opacity-95 rounded-1rem flex items-center ml0.8rem mr1rem pl0.5rem pr0.5rem ">
@@ -97,6 +112,7 @@ const gotoVrDetails = () => {
             #FFB4B4 40%,
             transparent);
 }
+
 .van-nav-bar {
     background-color: #fff;
     position: fixed;

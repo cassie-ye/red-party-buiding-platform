@@ -2,27 +2,84 @@
 import { useCascaderAreaData } from '@vant/area-data';
 // 引入路由
 import { useRouter } from 'vue-router';
+import { getAllProvinceAndAreaListAPI, getRedBaseByProvinceAndCityAPI ,getRandomRedBaseAPI} from "../utils/apis/redBase.ts";
 const onClickLeft = () => history.back();
 const router = useRouter();
 const show = ref(false);
 const fieldValue = ref('');
 const cascaderValue = ref('');
-const options = useCascaderAreaData();
-// 处理省市区数据
-options.forEach((province) => {
-    province.children.forEach((city) => {
-        delete city.children
-    })
-})
+// const options = useCascaderAreaData();
+// // 处理省市区数据
+// options.forEach((province) => {
+//     province.children.forEach((city) => {
+//         delete city.children
+//     })
+// })
+// console.log(options)
+
+/**
+ * 选择地区
+ * @param param0
+ */
 const onFinish = ({ selectedOptions }) => {
     show.value = false;
     fieldValue.value = selectedOptions.map((option) => option.text).join('/');
-    console.log(fieldValue.value)
-};
+    const obj = {
+        proId: selectedOptions[0].value,
+        citId: selectedOptions[1].value
+    }
+    getRedBaseByProvinceAndCity(obj)
+}
 
+/**
+ * 进入地区详情
+ */
 const gotoAreaDetails = () => {
     router.push('/areaDetails')
 }
+
+/**
+ * 进入搜索
+ */
+const gotoSearchRedBase = () => {
+    router.push('/searchRedBase')
+}
+
+const provinceAndAreaList = ref([])
+/**
+ * 调接口获取所有省市
+ */
+const getAllProvinceAndAreaList = async () => {
+    const res = await getAllProvinceAndAreaListAPI()
+    provinceAndAreaList.value = res.map(option => ({
+        text: option.label,
+        value: option.value,
+        children: option.children.map(child => ({
+            text: child.label,
+            value: child.value
+        }))
+    }));
+    console.log(provinceAndAreaList.value)
+}
+getAllProvinceAndAreaList()
+
+const queryByConditionReturnResBaseList = ref([])
+/**
+ * 调接口根据省份和城市获取红色基地
+ */
+const getRedBaseByProvinceAndCity = async (obj) => {
+    const res = await getRedBaseByProvinceAndCityAPI(obj)
+    queryByConditionReturnResBaseList.value = res
+}
+
+/**
+ * 调接口获取随机红色基地
+ */
+const getRandomRedBase = async()=>{
+    const res = await getRandomRedBaseAPI()
+    queryByConditionReturnResBaseList.value = res
+}
+getRandomRedBase()
 </script>
 <template>
     <div>
@@ -46,7 +103,7 @@ const gotoAreaDetails = () => {
                     </div>
                 </div>
                 <!-- 搜索框-->
-                <div
+                <div @click="gotoSearchRedBase()"
                     class=" h-2.3rem bg-white bg-opacity-95 rounded-1rem flex items-center ml0.8rem mr1rem mt8.5rem pl0.5rem pr0.5rem">
                     <Icon name="ic:outline-search" style="color: #9F9F9F" size="25" />
                     <p class="color-#9F9F9F font-size-0.9rem">想去哪儿研学，搜一搜</p>
@@ -57,19 +114,19 @@ const gotoAreaDetails = () => {
                 <van-field v-model="fieldValue" is-link readonly label="地区" placeholder="请选择所在地区"
                     @click="show = true" />
                 <van-popup v-model:show="show" round position="bottom">
-                    <van-cascader v-model="cascaderValue" title="请选择想去的地区" :options="options" @close="show = false"
-                        @finish="onFinish" columns="2" class="pt1.5rem" />
+                    <van-cascader v-model="cascaderValue" title="请选择想去的地区" :options="provinceAndAreaList"
+                        @close="show = false" @finish="onFinish" columns="2" class="pt1.5rem" />
                 </van-popup>
             </div>
             <div class="w-full pl0.5rem pr0.5rem mt0.5rem flex justify-between flex-wrap" @click="gotoAreaDetails">
-                <div class="w49% bg-#fff rounded-0.3rem mb0.5rem" v-for="item in 8">
-                    <img src="https://www.zj.gov.cn/picture/yunyou/d8c275b3a3b4c7cd374c1fd243a350e6.jpg" alt=""
-                        class="w-full h10rem rounded-t-0.3rem">
+                <div class="w49% bg-#fff rounded-0.3rem mb0.5rem"
+                    v-for="(item, index) in queryByConditionReturnResBaseList" :key="index">
+                    <img :src="item.image" alt="" class="w-full h10rem rounded-t-0.3rem">
                     <div class="flex flex-col items-center pt0.5rem pb1rem">
-                        <p class="pt0.2rem font-bold">四明山烈士陵园</p>
+                        <p class="pt0.2rem font-bold">{{ item.name }}</p>
                         <div class="font-size-0.7rem pl0.5rem pr0.5rem ">
                             <i class="iconfont icon-didian01 color-red-6 font-size-1.2rem mr0.3rem"></i>
-                            <span class="mt0.35rem">浙江省宁波市余姚市四明山镇四明山国家森林公园</span>
+                            <span class="mt0.35rem">{{ item.position }}</span>
                         </div>
                     </div>
                 </div>
