@@ -26,6 +26,8 @@ const gotoVrDetails = () => {
 }
 
 const provinceAndAreaList = ref([])
+
+const vrCloudHomeShowThreeCityAreaValueIdsList = ref([])
 /**
  * 调接口获取所有省市
  */
@@ -35,6 +37,12 @@ const getAllProvinceAndAreaList = async () => {
         text: option.label,
         value: option.value,
     }));
+    provinceAndAreaList.value.map((item => {
+        if (item.text === '浙江省' || item.text === "北京市" || item.text === "广东省") {
+            vrCloudHomeShowThreeCityAreaValueIdsList.value.push(item)
+            console.log(vrCloudHomeShowThreeCityAreaValueIdsList.value)
+        }
+    }))
     console.log(provinceAndAreaList.value)
 }
 getAllProvinceAndAreaList()

@@ -21,6 +21,15 @@ export interface IResultData<T> {
     msg: string;
 }
 
+const transformedData = (data: any) => {
+    // Do whatever you want to transform the data
+    let ret = ''
+    for (let it in data) {
+        ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
+    }
+    return ret
+}
+
 /**
  * api请求封装，使用useFetch函数
  * @param { String } url 请求地址
@@ -49,8 +58,14 @@ class HttpRequest {
                 // 将数据设置为newOptions的params属性
                 newOptions.params = data;
             }
-            if (method === "POST" || method === "PUT") {
-                // 将数据设置为newOptions的body属性
+            if (method === "POST") {
+                // newOptions.body = transformedData(data)
+                // newOptions.headers = {
+                //     'Content-Type': 'application/x-www-form-urlencoded',
+                // }
+                newOptions.body = data;
+            }
+            if (method === "PUT") {
                 newOptions.body = data;
             }
 
@@ -61,7 +76,7 @@ class HttpRequest {
                 if (token) {
                     options.headers = {
                         // 'Authorization': 'Bearer ' + 'token',
-                        'Authorization': `Bearer ${token}`
+                        'Authorization': token
                     }
                 }
             };
@@ -86,7 +101,6 @@ class HttpRequest {
     post<T extends ResponseType>(url: string, data: any, options?: FetchOptions<T>) {
         return this.request(url, "POST", data, options);
     }
-
 
     Put<T extends ResponseType>(url: string, data: any, options?: FetchOptions<T>) {
         return this.request(url, "PUT", data, options);

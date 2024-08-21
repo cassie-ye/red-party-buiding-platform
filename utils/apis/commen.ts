@@ -13,7 +13,7 @@ const registerAPI = (data: any) => {
 };
 
 const loginAPI = (data: any) => {
-    return httpRequest.post("/login", data);
+    return httpRequest.post("/login",data);
 };
 
 export { registerAPI,loginAPI };

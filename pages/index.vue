@@ -1,4 +1,4 @@
-<script setup >
+<script setup>
 import { loginAPI } from "../utils/apis/commen.ts"
 import { useUserStore } from '../store/user.js'
 const tel = ref('')
@@ -18,20 +18,58 @@ const userStore = useUserStore()
 const login = async (data) => {
     const res = await loginAPI(data)
     console.log(res)
-    if (res.status === 'success') {
-        userStore.userInfo.token = res.token
-        console.log(userStore.userInfo)
-        showSuccessToast('登录成功');
-        setTimeout(() => {
-            router.push('/home')
-        }, 3000)
-    }
+    // if (res.status === 'success') {
+    //     userStore.userInfo.token = res.token
+    //     console.log(userStore.userInfo)
+    //     showSuccessToast('登录成功');
+    //     setTimeout(() => {
+    //         router.push('/home')
+    //     }, 3000)
+    // }
+    // console.log(JSON.parse(res))
 }
+const transformedData = (data) => {
+    let ret = ''
+    for (let it in data) {
+        ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
+    }
+    return ret.slice(0, -1) // 移除末尾的 '&'
+};
+
+const performLogin = async () => {
+    const body = transformedData(loginData.value);
+    const headers = {
+        'Content-Type': 'application/x-www-form-urlencoded',
+    };
+
+    // try {
+        const res = await $fetch('http://localhost:10087/login', {
+            method: 'POST',
+            headers: headers,
+            body: body
+        });
+
+        const result = JSON.parse(res)
+        console.log(result)
+
+        if (result.status === 'success') {
+            userStore.userInfo.token = result.token
+            console.log(userStore.userInfo)
+            showSuccessToast('登录成功');
+            setTimeout(() => {
+                router.push('/home')
+            }, 3000)
+        }
+    // } catch (error) {
+    //     console.error('Error during login:', error);
+    // }
+};
+
 
 const userLogin = () => {
     loginData.value.username = tel.value
     loginData.value.password = password.value
-    login(loginData.value)
+    performLogin()
 }
 </script>
 <template>

@@ -72,25 +72,21 @@ definePageMeta({
             <div class="flex flex-col items-center">
                 <i class="iconfont icon-dingdan font-size-1.5rem mr0.3rem"></i>
                 <span class="font-size-0.9rem mr0.2rem">我的订单</span>
-                <span class="font-bold">0</span>
             </div>
             <div class="w0.05rem h1rem bg-#A5A5A5"></div>
             <div class="flex flex-col items-center">
                 <i class="iconfont icon-xiaoxi font-size-1.5rem mr0.3rem"></i>
                 <span class="font-size-0.9rem mr0.2rem">我的消息</span>
-                <span class="font-bold">0</span>
             </div>
             <div class="w0.05rem h1rem bg-#A5A5A5"></div>
             <div class="flex flex-col items-center">
                 <i class="iconfont icon-shouhuodizhiguanli font-size-1.5rem mr0.3rem"></i>
                 <span class="font-size-0.9rem mr0.2rem">地址管理</span>
-                <span class="font-bold">0</span>
             </div>
             <div class="w0.05rem h1rem bg-#A5A5A5"></div>
             <div class="flex flex-col items-center">
-                <i class="iconfont icon-biji font-size-1.5rem mr0.3rem"></i>
-                <span class="font-size-0.9rem mr0.2rem">我的关注</span>
-                <span class="font-bold">0</span>
+                <i class="iconfont icon-tongji font-size-1.5rem mr0.3rem color-red-6"></i>
+                <span class="font-size-0.9rem mr0.2rem">个人报告</span>
             </div>
         </div>
     </div>

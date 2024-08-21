@@ -121,6 +121,31 @@ const selectPassages = (value) => {
 const gotoSearchForAirlineTickets = () => {
     router.push('/searchForAirlineTickets')
 }
+
+async function addTodo(departureDate, departureCityName, arrivalCityName) {
+    // 构造请求参数
+    const params = new URLSearchParams({
+        r: 'train/trainTicket/getTickets',
+        'primary[departureDate]': departureDate,
+        'primary[departureCityName]': departureCityName,
+        'primary[arrivalCityName]': arrivalCityName
+    }).toString();
+
+    // 发起请求
+    try {
+        const response = await $fetch(`https://huoche.tuniu.com/yii.php?${params}`, {
+            method: 'GET', // 使用 'GET' 方法进行请求
+        });
+
+        // 处理响应
+        console.log('Response:', response);
+        return response;
+    } catch (error) {
+        // 处理错误
+        console.error('Error:', error);
+    }
+}
+addTodo('2024-08-21', 'Beijing', 'Shanghai');
 </script>
 <template>
     <div>
@@ -177,10 +202,8 @@ const gotoSearchForAirlineTickets = () => {
                                 @click="selectFlightClassIndex = 1">
                                 公务/头等舱</div>
                         </div>
-                        <div
-                            class="flex justify-center items-center font-size-1.2rem color-#fff mt3rem w-90% h3rem bg-blue ml5% rounded-1.5rem"
-                            @click="gotoSearchForAirlineTickets()"
-                            >
+                        <div class="flex justify-center items-center font-size-1.2rem color-#fff mt3rem w-90% h3rem bg-blue ml5% rounded-1.5rem"
+                            @click="gotoSearchForAirlineTickets()">
                             搜索机票
                         </div>
                     </div>
@@ -254,10 +277,8 @@ const gotoSearchForAirlineTickets = () => {
                         </van-cell>
                     </van-cell-group>
                 </van-checkbox-group>
-                <div
-                    class="mt2rem mb2rem w90%  rounded-1.5rem flex justify-center items-center font-size-1.2rem color-#fff h2.5rem bg-blue"
-                    @click="showSelectPassengerPannelFlag=false"
-                    >
+                <div class="mt2rem mb2rem w90%  rounded-1.5rem flex justify-center items-center font-size-1.2rem color-#fff h2.5rem bg-blue"
+                    @click="showSelectPassengerPannelFlag = false">
                     确定</div>
             </div>
         </van-action-sheet>
