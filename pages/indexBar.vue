@@ -27,7 +27,6 @@ const alphaList = ref(['A', 'F', 'G', 'H', 'J', 'L', 'N', 'Q', 'S', 'X', 'Y', 'Z
 const chooseCity = (citem) => {
     console.log(citem)
     navigateTo({ path: '/provinceVrCloud', query: { citem: citem } })
-
 }
 </script>
 <template>

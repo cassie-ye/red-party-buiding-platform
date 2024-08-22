@@ -38,6 +38,15 @@ const getRedBaseByProvinceAndCityAPI = (obj: any) => {
 }
 
 /**
+ * 获取指定省份的红色基地
+ * @param proId
+ * @returns
+ */
+const getRedBaseByProvinceIdAPI = (proId: Number) => {
+    return httpRequest.get(`/tb-place/getPlaceListByProvince/${proId}`)
+}
+
+/**
  * 获取随机的红色基地
  * @returns
  */
@@ -45,15 +54,10 @@ const getRandomRedBaseAPI = () => {
     return httpRequest.get("/tb-place/getRandomCourse")
 }
 
-/**
- * 获取指定省份的红色基地列表
- * @param proId
- * @returns
- */
-const getRedBaseByProvinceAPI = (proId: Number) => {
-    return httpRequest.get(`/tb-place/getPlaceListByProvince/${proId}`)
-}
 
+const getRedBaseDetailsByIdAPI = (id: Number) => {
+    return httpRequest.get(`/tb-place/getCourse/${id}`)
+}
 // /**
 //  * @description 获取当前城市天气
 //  * @returns 列表数据
@@ -78,5 +82,10 @@ const getRedBaseByProvinceAPI = (proId: Number) => {
 //     });
 // };
 
-export { getBaseListByCategoryAPI, getAllBaseCategoryListAPI, getAllProvinceAndAreaListAPI, getRedBaseByProvinceAndCityAPI, getRandomRedBaseAPI, getRedBaseByProvinceAPI };
+export {
+    getBaseListByCategoryAPI, getAllBaseCategoryListAPI,
+    getAllProvinceAndAreaListAPI, getRedBaseByProvinceAndCityAPI,
+    getRandomRedBaseAPI,
+    getRedBaseByProvinceIdAPI,getRedBaseDetailsByIdAPI
+};
 

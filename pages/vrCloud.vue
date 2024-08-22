@@ -1,5 +1,5 @@
 <script setup>
-import { getRedBaseByProvinceAPI, getAllProvinceAndAreaListAPI } from "../utils/apis/redBase.ts"
+import { getAllProvinceAndAreaListAPI,getRedBaseByProvinceIdAPI } from "../utils/apis/redBase.ts"
 const route = useRouter()
 const onClickLeft = () => history.back();
 const tabsList = ref(
@@ -15,14 +15,24 @@ const active = ref(0);
  */
 const changeTab = (index) => {
     console.log(index.title)
+    // getRedBaseByProvinceId(index.value)
+    vrCloudHomeShowThreeCityAreaValueIdsList.value.map((item)=>{
+        if(item.text.includes(index.title)){
+            // console.log(item)
+            getRedBaseByProvinceId(item.value)
+        }
+    })
 }
 
 const gotoIndexBar = () => {
     route.push('/indexBar')
 }
 
-const gotoVrDetails = () => {
-    route.push('/vrDetails')
+const gotoVrDetails = (vrUrl) => {
+    route.push({
+        path: '/vrDetails',
+        query: { vrUrl }
+    });
 }
 
 const provinceAndAreaList = ref([])
@@ -38,14 +48,25 @@ const getAllProvinceAndAreaList = async () => {
         value: option.value,
     }));
     provinceAndAreaList.value.map((item => {
-        if (item.text === '浙江省' || item.text === "北京市" || item.text === "广东省") {
+        if (item.text === '浙江省' || item.text === "北京市" || item.text === "广东省" ||item.text === "湖南省") {
             vrCloudHomeShowThreeCityAreaValueIdsList.value.push(item)
-            console.log(vrCloudHomeShowThreeCityAreaValueIdsList.value)
+            // console.log(vrCloudHomeShowThreeCityAreaValueIdsList.value)
         }
     }))
-    console.log(provinceAndAreaList.value)
+    // console.log(provinceAndAreaList.value)
 }
 getAllProvinceAndAreaList()
+
+const nowVrCloudHomeShowWhichProvinceRedBaseList = ref([])
+/**
+ * 调接口根据省份Id查询省份的红色基地信息
+ */
+const getRedBaseByProvinceId = async (proId) => {
+    const res = await getRedBaseByProvinceIdAPI(proId)
+    nowVrCloudHomeShowWhichProvinceRedBaseList.value = res
+    // console.log(nowVrCloudHomeShowWhichProvinceRedBaseList.value)
+}
+getRedBaseByProvinceId(1)
 </script>
 <template>
     <div class="w-full  h-full">
@@ -66,37 +87,37 @@ getAllProvinceAndAreaList()
         <!-- 滑动标签页 -->
         <div class="relative w-full">
             <van-tabs v-model:active="active" swipeable class=" " color="red" @click-tab="changeTab">
-                <van-tab class="w-full " v-for="(item, index) in tabsList" :title="item">
+                <van-tab class="w-full " v-for="(item, index) in vrCloudHomeShowThreeCityAreaValueIdsList" :title="item.text.slice(0,-1)">
                     <div class="w-full pt1rem pl0.5rem pr0.5rem bg-#fff">
                         <div class="relative">
-                            <img src="https://www.finding.com.cn/uploadfile/2021/1115/202111151012328.jpg" alt=""
-                                class="rounded-1rem w-full h11rem" @click="gotoVrDetails">
+                            <img :src="nowVrCloudHomeShowWhichProvinceRedBaseList[0].image" alt=""
+                                class="rounded-1rem w-full h11rem" @click="gotoVrDetails(nowVrCloudHomeShowWhichProvinceRedBaseList[0].vr)">
                             <div
                                 class="absolute left-45% top-35% font-size-1.5rem color-#fff font-bold w3.5rem h3.5rem rounded-50% border-solid border-0.1rem border-#fff flex justify-center items-center">
                                 VR
                             </div>
                             <div
                                 class="pt0.1rem pb0.1rem pl0.6rem pr0.6rem bg-red-5 rounded-0.5rem absolute left-0.5rem bottom-0.5rem color-#fff font-size-0.8rem">
-                                嘉兴南湖
+                                {{ nowVrCloudHomeShowWhichProvinceRedBaseList[0].name }}
                             </div>
                         </div>
                         <div class="w-full ">
-                            <p class="mt0.8rem font-bold">浙江省红色基地精选VR场景</p>
-                            <div class=" flex mt0.5rem w-full h5.7rem overflow-hidden mb0.8rem" v-for="item in 8">
+                            <p class="mt0.8rem font-bold">{{item.text}}红色基地精选VR场景</p>
+                            <div class=" flex mt0.5rem w-full h5.7rem overflow-hidden mb0.8rem" v-for="(item,index) in nowVrCloudHomeShowWhichProvinceRedBaseList" :key="index">
                                 <div class="relative w10rem rounded-0.3rem h5.7rem">
                                     <div
                                         class="absolute left-40% top-35% font-size-1rem color-#fff font-bold w2rem h2rem rounded-50% border-solid border-0.1rem border-#fff flex justify-center items-center">
                                         VR
                                     </div>
                                     <img class="w10rem rounded-0.3rem h5.7rem"
-                                        src="https://pavo.elongstatic.com/i/Hotel870_470/nw_MdYOwAeC8E.jpg" alt="">
+                                        :src="item.image" alt="">
                                 </div>
-                                <div class="pl0.5rem flex-1 flex flex-col justify-between">
-                                    <p class="font-size-0.9rem font-bold">红十三军军部旧址</p>
-                                    <p class="font-size-0.8rem color-#525252">hong 13th military headquarters site</p>
+                                <div @click="gotoVrDetails(item.vr)" class="pl0.5rem flex-1 flex flex-col justify-between">
+                                    <p class="font-size-0.9rem font-bold">{{item.name}}</p>
+                                    <p class="font-size-0.8rem color-#525252">{{item.position}}</p>
                                     <div class="flex items-center">
                                         <Icon name="iconoir:keyframe-position-solid" color="red-5" size="20" />
-                                        <p class="font-size-0.8rem color-#9F9F9F ml0.2rem">"浙江·嘉兴</p>
+                                        <p class="font-size-0.8rem color-#9F9F9F ml0.2rem">{{item.category}}</p>
                                     </div>
                                 </div>
 

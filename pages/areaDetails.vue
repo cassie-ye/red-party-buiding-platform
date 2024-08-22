@@ -1,28 +1,49 @@
 <script setup>
+import { getRedBaseDetailsByIdAPI } from "../utils/apis/redBase.ts"
 const onClickLeft = () => history.back();
 const onClickIcon = () => showToast('点击图标');
 const onClickButton = () => showToast('点击按钮');
+const router = useRoute()
+const areaId = router.query.areaId
+// console.log(areaId)
+const redBaseDetails = ref({})
+const getRedBaseDetailsById = async (areaId) => {
+    const res = await getRedBaseDetailsByIdAPI(areaId)
+    // console.log(res)
+    redBaseDetails.value = res
+}
+getRedBaseDetailsById(areaId)
 </script>
 <template>
     <div class="relative mb10rem ">
-        <van-nav-bar :fixed="true" :placeholder="true" title="杭州革命烈士纪念馆" left-text="返回" left-arrow
-        @click-left="onClickLeft" />
-        <van-swipe class="my-swipe bg-pink h15rem" :autoplay="3000" indicator-color="white">
+        <van-nav-bar :fixed="true" :placeholder="true" :title="redBaseDetails.name" left-text="返回" left-arrow
+            @click-left="onClickLeft" />
+        <van-swipe class="my-swipe h15rem" :autoplay="3000" indicator-color="white">
             <van-swipe-item>
-                <img class="w-full h-full" src="https://youimg1.c-ctrip.com/target/10080i0000009nk625854.jpg" alt="">
+                <img class="w-full h-full" :src="redBaseDetails.image" alt="">
             </van-swipe-item>
-            <van-swipe-item>
+            <!-- <van-swipe-item>
                 <img class="w-full h-full"
                     src="https://img.cjyun.org/a/10194/202108/3a888c968c54a23b7d831629b724c39b.jpeg" alt="">
-            </van-swipe-item>
+            </van-swipe-item> -->
         </van-swipe>
         <div class="pl1rem pr1rem bg-#fff absolute top-15rem w-full rounded-t-1.5rem pb4rem">
-            <p class="mt0.8rem font-size-1.2rem font-bold color-red-6">杭州革命烈士纪念馆</p>
+            <p class="mt0.8rem font-size-1.2rem font-bold color-red-6">{{ redBaseDetails.name }}</p>
             <div class="font-size-0.8rem pl0.2rem pr0.2rem flex">
                 <i class="mt0.2rem iconfont icon-didian01 color-red-6 font-size-1rem mr0.3rem"></i>
-                <p class="mt0.35rem ">浙江省宁波市余姚市四明山镇四明山国家森林公园</p>
+                <p class="mt0.35rem ">{{ redBaseDetails.position }}</p>
             </div>
             <div class="">
+                <!-- 景区简介 -->
+                <div>
+                    <div class="flex mt1rem items-center">
+                        <i class="iconfont icon-jianjie color-red-6 mr0.5rem"></i>
+                        <p class="font-bold">基地简介</p>
+                    </div>
+                    <p class="mt0.2rem font-size-0.8rem">
+                        {{ redBaseDetails.info }}
+                    </p>
+                </div>
                 <!-- 开放信息 -->
                 <div>
                     <div class="flex mt1rem items-center">

@@ -1,13 +1,19 @@
 <script setup>
 const onClickLeft = () => history.back();
+// 获取路由传递过来的vrUrl
+const route = useRoute();
+const vrUrl = route.query.vrUrl;
 </script>
 <template>
     <div>
         <van-nav-bar :fixed="true" :placeholder="true" title="VR演示厅" left-text="返回" left-arrow
         @click-left="onClickLeft" />
-        <iframe id="inlineFrameExample" title="Inline Frame Example"
-            src="https://www.720yun.com/t/a9vkcefyOiw?scene_id=60336613">
+        <iframe v-if="vrUrl" id="inlineFrameExample" title="Inline Frame Example"
+            :src="vrUrl">
         </iframe>
+        <div v-else>
+            <van-empty description="该基地暂未上传VR场馆" />
+        </div>
     </div>
 </template>
 <style scoped>

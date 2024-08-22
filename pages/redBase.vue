@@ -2,7 +2,7 @@
 import { useCascaderAreaData } from '@vant/area-data';
 // 引入路由
 import { useRouter } from 'vue-router';
-import { getAllProvinceAndAreaListAPI, getRedBaseByProvinceAndCityAPI ,getRandomRedBaseAPI} from "../utils/apis/redBase.ts";
+import { getAllProvinceAndAreaListAPI, getRedBaseByProvinceAndCityAPI, getRandomRedBaseAPI } from "../utils/apis/redBase.ts";
 const onClickLeft = () => history.back();
 const router = useRouter();
 const show = ref(false);
@@ -34,8 +34,12 @@ const onFinish = ({ selectedOptions }) => {
 /**
  * 进入地区详情
  */
-const gotoAreaDetails = () => {
-    router.push('/areaDetails')
+const gotoAreaDetails = (areaId) => {
+    console.log(areaId)
+    router.push({
+        path: '/areaDetails',
+        query: { areaId }
+    });
 }
 
 /**
@@ -75,9 +79,10 @@ const getRedBaseByProvinceAndCity = async (obj) => {
 /**
  * 调接口获取随机红色基地
  */
-const getRandomRedBase = async()=>{
+const getRandomRedBase = async () => {
     const res = await getRandomRedBaseAPI()
     queryByConditionReturnResBaseList.value = res
+    console.log('radom', res)
 }
 getRandomRedBase()
 </script>
@@ -118,8 +123,8 @@ getRandomRedBase()
                         @close="show = false" @finish="onFinish" columns="2" class="pt1.5rem" />
                 </van-popup>
             </div>
-            <div class="w-full pl0.5rem pr0.5rem mt0.5rem flex justify-between flex-wrap" @click="gotoAreaDetails">
-                <div class="w49% bg-#fff rounded-0.3rem mb0.5rem"
+            <div class="w-full pl0.5rem pr0.5rem mt0.5rem flex justify-between flex-wrap">
+                <div @click="gotoAreaDetails(item.id)" class="w49% bg-#fff rounded-0.3rem mb0.5rem"
                     v-for="(item, index) in queryByConditionReturnResBaseList" :key="index">
                     <img :src="item.image" alt="" class="w-full h10rem rounded-t-0.3rem">
                     <div class="flex flex-col items-center pt0.5rem pb1rem">

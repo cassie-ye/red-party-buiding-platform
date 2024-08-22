@@ -118,6 +118,18 @@ const changeTab = (e) => {
 }
 // 一进页面就发请求
 getBaseListByCategory(currentSelectedTabIndex.value)
+
+/**
+ * 进入地区详情
+ */
+ const gotoAreaDetails = (areaId) => {
+    console.log(areaId)
+    router.push({
+        path: '/areaDetails',
+        query: { areaId }
+    });
+}
+
 </script>
 <template>
     <div class="pb3rem">
@@ -270,7 +282,7 @@ getBaseListByCategory(currentSelectedTabIndex.value)
         <van-tabs v-model:active="active" swipeable class="mt0.5rem " color="red" @click-tab="changeTab">
             <van-tab class="w-full" v-for="(item, index) in tabsList" :title="item.name" :name="index">
                 <div class="w-full pl0.5rem pr0.5rem mt0.5rem flex justify-between flex-wrap">
-                    <div class="w49% bg-#fff rounded-0.3rem mb0.5rem"
+                    <div @click="gotoAreaDetails(item.id)" class="w49% bg-#fff rounded-0.3rem mb0.5rem flex flex-col items-center"
                         v-for="(item, index) in currentSelectedCategoryBaseList" :key="index">
                         <img :src="item.image" alt="" class="w-full h10rem rounded-t-0.3rem">
                         <div class="flex flex-col items-center pt0.5rem pb1rem">

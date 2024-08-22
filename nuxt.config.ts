@@ -20,7 +20,7 @@ export default defineNuxtConfig({
         // '@nuxt/eslint',
         '@vant/nuxt',
         "@nuxt/icon",
-        "@nuxt/ui",
+        // "@nuxt/ui",
         '@element-plus/nuxt',
         '@pinia-plugin-persistedstate/nuxt'
     ],
@@ -65,7 +65,7 @@ export default defineNuxtConfig({
                 { rel: 'icon', href: '/favicon.ico', sizes: 'any' },
                 { rel: 'icon', type: 'image/svg+xml', href: '/nuxt.svg' },
                 { rel: 'apple-touch-icon', href: '/apple-touch-icon.png' },
-                { rel: "stylesheet", href: "//at.alicdn.com/t/c/font_4641437_oeb73bi4lnn.css" },
+                { rel: "stylesheet", href: "//at.alicdn.com/t/c/font_4641437_slthxt3gth.css" },
                 { rel: "stylesheet", href: "https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" },
             ],
             meta: [
