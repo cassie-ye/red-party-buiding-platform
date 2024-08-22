@@ -67,6 +67,7 @@ export default defineNuxtConfig({
                 { rel: 'apple-touch-icon', href: '/apple-touch-icon.png' },
                 { rel: "stylesheet", href: "//at.alicdn.com/t/c/font_4641437_slthxt3gth.css" },
                 { rel: "stylesheet", href: "https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" },
+                // { rel: "text/javascript", href: "https://api.map.baidu.com/api?v=1.0&&type=webgl&ak=xNceWXpU5pTmlF8IE21JknGmWURGLcdY" },
             ],
             meta: [
                 { name: "charset", content: "UTF-8" },
@@ -75,6 +76,7 @@ export default defineNuxtConfig({
                 { name: 'apple-mobile-web-app-status-bar-style', content: 'black-translucent' },
                 { name: 'theme-color', media: '(prefers-color-scheme: light)', content: '#fff' },
                 { name: 'theme-color', media: '(prefers-color-scheme: dark)', content: '#222222' },
+                // { name: 'viewport', content: 'initial-scale=1.0, user-scalable=no' }
             ],
             style: [
                 `
