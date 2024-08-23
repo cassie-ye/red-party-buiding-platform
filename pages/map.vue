@@ -35,7 +35,7 @@ function initMap() {
     var point = new BMapGL.Point(116.404, 39.915);  // 创建点坐标
 
     map.centerAndZoom(point, 15);
-
+    map.enableScrollWheelZoom(true); 
     let marker = new BMapGL.Marker(point)
     map.addOverlay(marker)
 }
