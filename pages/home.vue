@@ -122,7 +122,7 @@ getBaseListByCategory(currentSelectedTabIndex.value)
 /**
  * 进入地区详情
  */
- const gotoAreaDetails = (areaId) => {
+const gotoAreaDetails = (areaId) => {
     console.log(areaId)
     router.push({
         path: '/areaDetails',
@@ -168,34 +168,25 @@ getBaseListByCategory(currentSelectedTabIndex.value)
                     <div class="font-size-0.8rem">{{ item.name }}</div>
                 </NuxtLink>
             </div>
-            <!-- 热门推荐和人气最高 -->
+            <!-- 红色地图和红色课程 -->
             <div class="mt0.5rem flex justify-between">
                 <div class="p0.1rem mr2% w49% h7rem bg-gradient-to-l from-#FFEFF1 to-#fff rounded-0.5rem">
                     <div class="flex justify-between p0.3rem">
-                        <div class="font-bold">热门推荐</div>
+                        <div class="font-bold">红色地图</div>
                         <div
-                            class="w5rem h1rem mt0.2rem  flex justify-between bg-#fff rounded-0.5rem pl0.3rem pr0.1rem">
-                            <van-swipe class="h1.3rem flex font-size-0.6rem ml0.3rem color-red-5" vertical
-                                :autoplay="3000" indicator-color="white" :show-indicators="false">
-                                <van-swipe-item>南京博物馆</van-swipe-item>
-                                <van-swipe-item>北京博物馆</van-swipe-item>
-                                <van-swipe-item>东京博物馆</van-swipe-item>
-                                <van-swipe-item>xi'jing</van-swipe-item>
-                            </van-swipe>
-                            <Icon name="ic:round-keyboard-arrow-right" color="red-5" size="15"></Icon>
+                            class="w5rem h1rem mt0.2rem  flex justify-between bg-red-5 rounded-0.5rem pl0.3rem pr0.1rem">
+                            <p class="color-#fff font-size-0.7rem">快速导航</p>
+                            <Icon name="ic:round-keyboard-arrow-right" color="#fff" size="15"></Icon>
                         </div>
                     </div>
-                    <div class=" flex font-size-0.7rem pl0.3rem pr0.3rem">
-                        <img class="h4rem rounded-0.2rem" src="/home/hot-recommand.jpg" alt="">
-                        <div class="ml0.3rem">
-                            <p class="font-size-0.8rem font-bold">北京天安门</p>
-                            <p class="color-#717171">生在红旗下，长在春风里</p>
-                        </div>
+                    <div class="h4.2rem flex justify-between pl0.3rem pr0.3rem">
+                        <img class="h-full w75% rounded-0.3rem" src="/home/map.jpg" alt="">
+                        <div class="font-size-0.86rem top-red-linear-bg w20% font-bold flex justify-center items-center rounded-t-0.2rem pl0.2rem">攻略指南</div>
                     </div>
                 </div>
                 <div class="p0.1rem  w49% h7rem bg-gradient-to-l from-#FFEFF1 to-#fff rounded-0.5rem">
                     <div class="flex justify-between p0.3rem">
-                        <div class="font-bold">人气最高</div>
+                        <div class="font-bold">红色课程</div>
                         <div
                             class="w5rem h1rem mt0.2rem  flex justify-between bg-#fff rounded-0.5rem pl0.3rem pr0.1rem">
                             <p class="handle-text w4rem flex font-size-0.6rem ml0.3rem color-#FF864B">
@@ -256,6 +247,54 @@ getBaseListByCategory(currentSelectedTabIndex.value)
                     </div>
                 </div>
             </div>
+            <!-- 热门推荐和人气最高 -->
+            <div class="mt0.5rem flex justify-between">
+                <div class="p0.1rem mr2% w49% h7rem bg-gradient-to-l from-#FFEFF1 to-#fff rounded-0.5rem">
+                    <div class="flex justify-between p0.3rem">
+                        <div class="font-bold">热门推荐</div>
+                        <div
+                            class="w5rem h1rem mt0.2rem  flex justify-between bg-#fff rounded-0.5rem pl0.3rem pr0.1rem">
+                            <van-swipe class="h1.3rem flex font-size-0.6rem ml0.3rem color-red-5" vertical
+                                :autoplay="3000" indicator-color="white" :show-indicators="false">
+                                <van-swipe-item>南京博物馆</van-swipe-item>
+                                <van-swipe-item>北京博物馆</van-swipe-item>
+                                <van-swipe-item>东京博物馆</van-swipe-item>
+                                <van-swipe-item>xi'jing</van-swipe-item>
+                            </van-swipe>
+                            <Icon name="ic:round-keyboard-arrow-right" color="red-5" size="15"></Icon>
+                        </div>
+                    </div>
+                    <div class=" flex font-size-0.7rem pl0.3rem pr0.3rem">
+                        <img class="h4rem rounded-0.2rem" src="/home/hot-recommand.jpg" alt="">
+                        <div class="ml0.3rem">
+                            <p class="font-size-0.8rem font-bold">北京天安门</p>
+                            <p class="color-#717171">生在红旗下，长在春风里</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="p0.1rem  w49% h7rem bg-gradient-to-l from-#FFEFF1 to-#fff rounded-0.5rem">
+                    <div class="flex justify-between p0.3rem">
+                        <div class="font-bold">人气最高</div>
+                        <div
+                            class="w5rem h1rem mt0.2rem  flex justify-between bg-#fff rounded-0.5rem pl0.3rem pr0.1rem">
+                            <p class="handle-text w4rem flex font-size-0.6rem ml0.3rem color-#FF864B">
+                                {{ computedHightPeopleString }}
+                            </p>
+                            <Icon name="ic:round-keyboard-arrow-right" color="#FF864B" size="15"></Icon>
+                        </div>
+                    </div>
+                    <div class=" flex pl0.3rem pr0.3rem justify-between">
+                        <div class="w48.5% flex justify-center items-center flex-col">
+                            <img class="w100% h3.3rem rounded-0.2rem" src="/home/hot-recommand.jpg" alt="">
+                            <p class="mt0.3rem font-size-0.5rem">北京·【天安门】</p>
+                        </div>
+                        <div class="w48.5%  flex justify-center items-center flex-col">
+                            <img class="w100% h3.3rem rounded-0.2rem" src="/home/hot-recommand.jpg" alt="">
+                            <p class="mt0.3rem font-size-0.5rem">北京·【天安门】</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <!-- 轮播图 -->
             <van-swipe class="swipe mt0.5rem rounded-0.3rem" :autoplay="3000" indicator-color="white">
                 <van-swipe-item>
@@ -275,14 +314,13 @@ getBaseListByCategory(currentSelectedTabIndex.value)
                         alt="">
                 </van-swipe-item>
             </van-swipe>
-
-
         </div>
         <!-- 滑动标签页 -->
-        <van-tabs v-model:active="active" swipeable class="mt0.5rem " color="red" @click-tab="changeTab">
+        <van-tabs v-model:active="active" swipeable class="mt8rem " color="red" @click-tab="changeTab">
             <van-tab class="w-full" v-for="(item, index) in tabsList" :title="item.name" :name="index">
                 <div class="w-full pl0.5rem pr0.5rem mt0.5rem flex justify-between flex-wrap">
-                    <div @click="gotoAreaDetails(item.id)" class="w49% bg-#fff rounded-0.3rem mb0.5rem flex flex-col items-center"
+                    <div @click="gotoAreaDetails(item.id)"
+                        class="w49% bg-#fff rounded-0.3rem mb0.5rem flex flex-col items-center"
                         v-for="(item, index) in currentSelectedCategoryBaseList" :key="index">
                         <img :src="item.image" alt="" class="w-full h10rem rounded-t-0.3rem">
                         <div class="flex flex-col items-center pt0.5rem pb1rem">
