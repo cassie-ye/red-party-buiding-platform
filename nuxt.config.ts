@@ -76,7 +76,7 @@ export default defineNuxtConfig({
                 { name: 'apple-mobile-web-app-status-bar-style', content: 'black-translucent' },
                 { name: 'theme-color', media: '(prefers-color-scheme: light)', content: '#fff' },
                 { name: 'theme-color', media: '(prefers-color-scheme: dark)', content: '#222222' },
-                // { name: 'viewport', content: 'initial-scale=1.0, user-scalable=no' }
+                { name: 'viewport', content: 'initial-scale=1.0, user-scalable=no' }
             ],
             style: [
                 `
@@ -113,7 +113,12 @@ export default defineNuxtConfig({
         // For UnoCSS
         inlineStyles: false,
     },
-
+    plugins: [
+        {
+            src: '~/plugins/md5-global.js',
+            mode: 'client'
+        }
+    ],
     // eslint: {
     //     config: {
     //         standalone: false,
