@@ -130,6 +130,12 @@ const gotoAreaDetails = (areaId) => {
     });
 }
 
+/**
+ * 进入百度地图
+ */
+const gotoBMapGL = () => {
+    router.push("/map")
+}
 </script>
 <template>
     <div class="pb3rem">
@@ -170,7 +176,8 @@ const gotoAreaDetails = (areaId) => {
             </div>
             <!-- 红色地图和红色课程 -->
             <div class="mt0.5rem flex justify-between">
-                <div class="p0.1rem mr2% w49% h7rem bg-gradient-to-l from-#FFEFF1 to-#fff rounded-0.5rem">
+                <div @click="gotoBMapGL()"
+                    class="p0.1rem mr2% w49% h7rem bg-gradient-to-l from-#FFEFF1 to-#fff rounded-0.5rem">
                     <div class="flex justify-between p0.3rem">
                         <div class="font-bold">红色地图</div>
                         <div
@@ -181,7 +188,9 @@ const gotoAreaDetails = (areaId) => {
                     </div>
                     <div class="h4.2rem flex justify-between pl0.3rem pr0.3rem">
                         <img class="h-full w75% rounded-0.3rem" src="/home/map.jpg" alt="">
-                        <div class="font-size-0.86rem top-red-linear-bg w20% font-bold flex justify-center items-center rounded-t-0.2rem pl0.2rem">攻略指南</div>
+                        <div
+                            class="font-size-0.86rem top-red-linear-bg w20% font-bold flex justify-center items-center rounded-t-0.2rem pl0.2rem">
+                            攻略指南</div>
                     </div>
                 </div>
                 <div class="p0.1rem  w49% h7rem bg-gradient-to-l from-#FFEFF1 to-#fff rounded-0.5rem">

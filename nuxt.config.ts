@@ -7,7 +7,7 @@ export default defineNuxtConfig({
       配置移动端和PC端均可访问
     */
     devServer: {
-        host: process.env.mode === "start" ? "localhost" : "0.0.0.0",
+        host: process.env.mode === "start" ? "192.168.0.111" : "0.0.0.0",
         port: process.env.mode === "start" ? 3000 : 3333
     },
 
