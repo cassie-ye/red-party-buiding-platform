@@ -370,7 +370,6 @@ const gotoBMapGL = () => {
     font-size: 1.25rem;
     line-height: 0.375rem;
     text-align: center;
-    background-color: #39a9ed;
 }
 
 .handle-text {

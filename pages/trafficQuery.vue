@@ -122,30 +122,30 @@ const gotoSearchForAirlineTickets = () => {
     router.push('/searchForAirlineTickets')
 }
 
-async function addTodo(departureDate, departureCityName, arrivalCityName) {
-    // 构造请求参数
-    const params = new URLSearchParams({
-        r: 'train/trainTicket/getTickets',
-        'primary[departureDate]': departureDate,
-        'primary[departureCityName]': departureCityName,
-        'primary[arrivalCityName]': arrivalCityName
-    }).toString();
+// async function addTodo(departureDate, departureCityName, arrivalCityName) {
+//     // 构造请求参数
+//     const params = new URLSearchParams({
+//         r: 'train/trainTicket/getTickets',
+//         'primary[departureDate]': departureDate,
+//         'primary[departureCityName]': departureCityName,
+//         'primary[arrivalCityName]': arrivalCityName
+//     }).toString();
 
-    // 发起请求
-    try {
-        const response = await $fetch(`https://huoche.tuniu.com/yii.php?${params}`, {
-            method: 'GET', // 使用 'GET' 方法进行请求
-        });
+//     // 发起请求
+//     try {
+//         const response = await $fetch(`https://huoche.tuniu.com/yii.php?${params}`, {
+//             method: 'GET', // 使用 'GET' 方法进行请求
+//         });
 
-        // 处理响应
-        console.log('Response:', response);
-        return response;
-    } catch (error) {
-        // 处理错误
-        console.error('Error:', error);
-    }
-}
-addTodo('2024-08-21', 'Beijing', 'Shanghai');
+//         // 处理响应
+//         console.log('Response:', response);
+//         return response;
+//     } catch (error) {
+//         // 处理错误
+//         console.error('Error:', error);
+//     }
+// }
+// addTodo('2024-08-21', 'Beijing', 'Shanghai');
 </script>
 <template>
     <div>

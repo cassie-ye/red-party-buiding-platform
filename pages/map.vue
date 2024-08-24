@@ -1,7 +1,13 @@
 <script setup>
+import Cluster from '@bmapgl-plugin/cluster';
+/**
+ * 加载百度地图
+ */
 const LoadBaiduMapScript = () => {
     const AK = 'xNceWXpU5pTmlF8IE21JknGmWURGLcdY'
     const BMap_URL = `https://api.map.baidu.com/api?v=1.0&type=webgl&ak=${AK}&callback=init`
+    const url = "https://unpkg.com/@bmapgl-plugin/cluster"
+    const url2 = "https://mapopen-pub-jsapi.cdn.bcebos.com/static/js/bjpoi.js"
     return new Promise((resolve, reject) => {
         // 如果已加载直接返回
         if (typeof BMapGL !== "undefined") {
@@ -18,6 +24,12 @@ const LoadBaiduMapScript = () => {
         scriptNode.setAttribute("type", "text/javascript");
         scriptNode.setAttribute("src", BMap_URL);
         document.body.appendChild(scriptNode);
+        let scriptNode2 = document.createElement("script");
+        scriptNode2.setAttribute("src", url);
+        document.body.appendChild(scriptNode2);
+        let scriptNode3 = document.createElement("script");
+        scriptNode3.setAttribute("src", url2);
+        document.body.appendChild(scriptNode3);
     })
 }
 // 地图对象
@@ -42,6 +54,7 @@ const infoWindow = ref(null)
 // 变量用于存储当前打开的信息窗口
 let currentInfoWindow = null;
 
+
 /**
  * 获取当前位置
  */
@@ -59,6 +72,7 @@ function getLocation() {
 
 }
 
+
 /**
  * 初始化地图
  * @param longitude 经度
@@ -70,11 +84,15 @@ function initMap(longitude, latitude) {
     var point = new BMapGL.Point(longitude, latitude);  // 创建点坐标
     mapObj.value.centerAndZoom(point, 15);
     mapObj.value.enableScrollWheelZoom(true);
+    addCluster()
     let marker = new BMapGL.Marker(point, { icon: myIcon })
     mapObj.value.addOverlay(marker)
     addRedBaseListMarkers()
 }
 
+/**
+ * 添加红色基地的marker和infoWindo
+ */
 function addRedBaseListMarkers() {
     redBaseInfoList.value.map((item) => {
         var point = new BMapGL.Point(item.lat, item.lng);
@@ -110,6 +128,9 @@ function addRedBaseListMarkers() {
 
 }
 
+/**
+ * 信息窗口点击事件 点击跳转到百度地图
+ */
 function infoWindowClick() {
     console.log(currentInfoWindow)
     const lat = currentInfoWindow.latLng.lat;
@@ -118,6 +139,9 @@ function infoWindowClick() {
     window.open(url);
 }
 
+/**
+ * 页面挂载
+ */
 onMounted(async () => {
     await LoadBaiduMapScript()
     getLocation()

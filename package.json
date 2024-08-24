@@ -37,6 +37,7 @@
     "vue-tsc": "^2.0.17"
   },
   "dependencies": {
+    "@bmapgl-plugin/cluster": "^0.0.5",
     "@pinia-plugin-persistedstate/nuxt": "^1.2.1",
     "@vant/area-data": "^1.5.1",
     "dayjs": "^1.11.12",
