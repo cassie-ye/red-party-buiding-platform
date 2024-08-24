@@ -1,4 +1,6 @@
 export const useSearchRedBaseListStore = defineStore('searchRedBase', () => {
     const searchRedBaseList = ref([])
-    return { searchRedBaseList}
-  })
+    return { searchRedBaseList }
+}, {
+    persist: true
+})

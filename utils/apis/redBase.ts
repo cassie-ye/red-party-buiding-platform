@@ -71,6 +71,10 @@ const getHotRedBaseListAPI = () => {
     return httpRequest.get("/tb-place/getHotPlaces")
 }
 
+const getRedBaseByKeywordAPI = (name: String) => {
+    return httpRequest.get(`/tb-place/getPlaceByName/${name}`,{data:name})
+}
+
 
 // /**
 //  * @description 获取当前城市天气
@@ -100,6 +104,7 @@ export {
     getBaseListByCategoryAPI, getAllBaseCategoryListAPI,
     getAllProvinceAndAreaListAPI, getRedBaseByProvinceAndCityAPI,
     getRandomRedBaseAPI,
-    getRedBaseByProvinceIdAPI, getRedBaseDetailsByIdAPI, getHotRedBaseListAPI
+    getRedBaseByProvinceIdAPI, getRedBaseDetailsByIdAPI, getHotRedBaseListAPI,
+    getRedBaseByKeywordAPI
 };
 

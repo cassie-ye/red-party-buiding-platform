@@ -138,6 +138,9 @@ const gotoBMapGL = () => {
 }
 
 const hotRedBaseList = ref([])
+/**
+ * 调接口获取热门红色基地列表
+ */
 const getHotRedBaseList = async () => {
     const res = await getHotRedBaseListAPI()
     // console.log(res)
@@ -145,6 +148,13 @@ const getHotRedBaseList = async () => {
     console.log(hotRedBaseList.value)
 }
 getHotRedBaseList()
+
+/**
+ * 进入搜索
+ */
+const gotoSearchRedBase = () => {
+    router.push("/searchRedBase")
+}
 </script>
 <template>
     <div class="pb3rem">
@@ -152,7 +162,7 @@ getHotRedBaseList()
             <!-- 头部搜索框 客服  更多-->
             <div class="flex items-center justify-between">
                 <!-- 搜索框-->
-                <div class="w-18rem h-2rem bg-white  rounded-1rem rounded-bl-0rem flex items-center pl0.8rem
+                <div @click="gotoSearchRedBase()" class="w-18rem h-2rem bg-white  rounded-1rem rounded-bl-0rem flex items-center pl0.8rem
                 border-solid border-0.1rem border-red-4">
                     <Icon name="ic:outline-search" style="color: #EF4444" size="25" />
                     <van-swipe class=" h2.3rem flex pt0.5rem font-size-0.9rem ml0.3rem color-red-5" vertical
@@ -436,7 +446,6 @@ getHotRedBaseList()
     font-size: 1..25rem;
     line-height: 4.5rem;
     text-align: center;
-    background-color: #39a9ed;
 }
 
 .shenglue {
