@@ -20,6 +20,9 @@ dependencies:
   echarts:
     specifier: ^5.5.1
     version: 5.5.1
+  gcoord:
+    specifier: ^1.0.6
+    version: 1.0.6
   js-pinyin:
     specifier: ^0.2.7
     version: 0.2.7
@@ -7261,6 +7264,11 @@ packages:
       strip-ansi: 6.0.1
       wide-align: 1.1.5
     dev: true
+
+  /gcoord@1.0.6:
+    resolution: {integrity: sha512-Z+uyWrD2BTWmJOUvAdEAZQdQIVA5MFwUu7P5BfBdQEpLiVAsNw9mZF3/QbDJ4ZbfcJEnFKgHXOgUFXo5r/aVPg==}
+    engines: {node: '>=16.11.0'}
+    dev: false
 
   /gensync@1.0.0-beta.2:
     resolution: {integrity: sha512-3hN7NaskYvMDLQY55gnW3NQ+mesEAepTqlg+VEbj7zzqEMBVNhzcGYYeqFo/TlYz6eQiFcp1HcsCZO+nGgS8zg==}

@@ -8,6 +8,7 @@ const LoadBaiduMapScript = () => {
     const BMap_URL = `https://api.map.baidu.com/api?v=1.0&type=webgl&ak=${AK}&callback=init`
     const url = "https://unpkg.com/@bmapgl-plugin/cluster"
     const url2 = "https://mapopen-pub-jsapi.cdn.bcebos.com/static/js/bjpoi.js"
+    const url3 = "https://unpkg.com/gcoord/dist/gcoord.global.prod.js"
     return new Promise((resolve, reject) => {
         // 如果已加载直接返回
         if (typeof BMapGL !== "undefined") {
@@ -30,6 +31,9 @@ const LoadBaiduMapScript = () => {
         let scriptNode3 = document.createElement("script");
         scriptNode3.setAttribute("src", url2);
         document.body.appendChild(scriptNode3);
+        let scriptNode4 = document.createElement("script");
+        scriptNode4.setAttribute("src", url3);
+        document.body.appendChild(scriptNode4);
     })
 }
 // 地图对象
@@ -53,7 +57,7 @@ const redBaseInfoList = ref([
 const infoWindow = ref(null)
 // 变量用于存储当前打开的信息窗口
 let currentInfoWindow = null;
-
+var cluster = null;
 
 /**
  * 获取当前位置
@@ -68,10 +72,10 @@ function getLocation() {
         currentPosition.value.lat = res.latitude
         currentPosition.value.lng = res.longitude
         initMap(res.longitude, res.latitude)
+        // console.log(res)
     })
 
 }
-
 
 /**
  * 初始化地图
@@ -84,10 +88,46 @@ function initMap(longitude, latitude) {
     var point = new BMapGL.Point(longitude, latitude);  // 创建点坐标
     mapObj.value.centerAndZoom(point, 15);
     mapObj.value.enableScrollWheelZoom(true);
-    addCluster()
+    console.log(Cluster)
     let marker = new BMapGL.Marker(point, { icon: myIcon })
     mapObj.value.addOverlay(marker)
+    addCluster()
     addRedBaseListMarkers()
+}
+
+function addCluster() {
+    cluster = new Cluster.View(mapObj.value);
+    console.log(cluster)
+    cluster.on(Cluster.ClusterEvent.CLICK, (e) => {
+        console.log('ClusterEvent.CLICK', e);
+    });
+    cluster.on(Cluster.ClusterEvent.MOUSE_OVER, (e) => {
+        console.log('ClusterEvent.MOUSEOVER', e);
+    });
+    cluster.on(Cluster.ClusterEvent.MOUSE_OUT, (e) => {
+        console.log('ClusterEvent.MOUSEOUT', e);
+    });
+    var points = Cluster.pointTransformer(POIS, function (data) {
+        return {
+            point: [data.location.lng, data.location.lat],
+            properties: {
+                name: data.name,
+                address: data.address,
+                province: data.province,
+                city: data.city,
+                area: data.area
+            }
+        }
+    });
+    redBaseInfoList.value = points
+    console.log('00', points)
+    cluster.setData(points);
+}
+
+// 移除聚合数据
+function removeCluster() {
+    cluster && cluster.destroy();
+    cluster = null;
 }
 
 /**
@@ -95,7 +135,8 @@ function initMap(longitude, latitude) {
  */
 function addRedBaseListMarkers() {
     redBaseInfoList.value.map((item) => {
-        var point = new BMapGL.Point(item.lat, item.lng);
+        console.log(item)
+        var point = new BMapGL.Point(item.geometry.coordinates[0], item.geometry.coordinates[1]);
         var marker = new BMapGL.Marker(point);        // 创建标注
         mapObj.value.addOverlay(marker);
         var infoWindowDom = document.getElementById("infoWindow");
@@ -104,7 +145,7 @@ function addRedBaseListMarkers() {
             height: 80,    // 信息窗口高度
             title: "红色基地"  // 信息窗口标题
         }
-        opts.title = item.name
+        opts.title = item.properties.name
         var infoWindow = new BMapGL.InfoWindow(infoWindowDom, opts);  // 创建信息窗口对象
         // 给标记添加点击事件
         marker.addEventListener('click', () => {
@@ -116,7 +157,7 @@ function addRedBaseListMarkers() {
             mapObj.value.openInfoWindow(infoWindow, point);
             // 更新当前打开的信息窗口
             currentInfoWindow = infoWindow;
-            console.log(currentInfoWindow)
+            // console.log(currentInfoWindow)
 
         });
         // 信息窗口的其他事件，例如点击窗口内部
@@ -132,7 +173,7 @@ function addRedBaseListMarkers() {
  * 信息窗口点击事件 点击跳转到百度地图
  */
 function infoWindowClick() {
-    console.log(currentInfoWindow)
+    // console.log(currentInfoWindow)
     const lat = currentInfoWindow.latLng.lat;
     const lng = currentInfoWindow.latLng.lng;
     const url = `https://api.map.baidu.com/marker?location=${lat},${lng}&title=目标位置&content=这里是目标位置&output=html`;

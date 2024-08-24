@@ -1,5 +1,5 @@
 <script setup>
-import { getBaseListByCategoryAPI, getAllBaseCategoryListAPI } from "../utils/apis/redBase.ts"
+import { getBaseListByCategoryAPI, getAllBaseCategoryListAPI,getHotRedBaseListAPI } from "../utils/apis/redBase.ts"
 definePageMeta({
     layout: 'with-tabbar'
 })
@@ -92,7 +92,7 @@ const getAllBaseCategoryList = async () => {
     // debugger
     // const { data } = await useFetch('/api/item')
     // const { data } = await useAPI(`/base-cate/selectAll`, {server: false, lazy: true})
-    console.log(res)
+    // console.log(res)
     tabsList.value = res
 }
 getAllBaseCategoryList()
@@ -136,6 +136,15 @@ const gotoAreaDetails = (areaId) => {
 const gotoBMapGL = () => {
     router.push("/map")
 }
+
+const hotRedBaseList = ref([])
+const getHotRedBaseList = async () => {
+    const res = await getHotRedBaseListAPI()
+    // console.log(res)
+    hotRedBaseList.value = res
+    console.log(hotRedBaseList.value)
+}
+getHotRedBaseList()
 </script>
 <template>
     <div class="pb3rem">
@@ -263,21 +272,21 @@ const gotoBMapGL = () => {
                         <div class="font-bold">热门推荐</div>
                         <div
                             class="w5rem h1rem mt0.2rem  flex justify-between bg-#fff rounded-0.5rem pl0.3rem pr0.1rem">
-                            <van-swipe class="h1.3rem flex font-size-0.6rem ml0.3rem color-red-5" vertical
+                            <van-swipe class="h1.05rem flex font-size-0.6rem ml0.3rem color-red-5" vertical
                                 :autoplay="3000" indicator-color="white" :show-indicators="false">
-                                <van-swipe-item>南京博物馆</van-swipe-item>
-                                <van-swipe-item>北京博物馆</van-swipe-item>
+                                <van-swipe-item class="shenglue"v-for="item in hotRedBaseList">{{item.name}}</van-swipe-item>
+                                <!-- <van-swipe-item>北京博物馆</van-swipe-item>
                                 <van-swipe-item>东京博物馆</van-swipe-item>
-                                <van-swipe-item>xi'jing</van-swipe-item>
+                                <van-swipe-item>xi'jing</van-swipe-item> -->
                             </van-swipe>
                             <Icon name="ic:round-keyboard-arrow-right" color="red-5" size="15"></Icon>
                         </div>
                     </div>
                     <div class=" flex font-size-0.7rem pl0.3rem pr0.3rem">
-                        <img class="h4rem rounded-0.2rem" src="/home/hot-recommand.jpg" alt="">
+                        <img class="h4rem rounded-0.2rem" :src="hotRedBaseList[0]?.image" alt="">
                         <div class="ml0.3rem">
-                            <p class="font-size-0.8rem font-bold">北京天安门</p>
-                            <p class="color-#717171">生在红旗下，长在春风里</p>
+                            <p class="font-size-0.8rem font-bold">{{hotRedBaseList[0]?.name}}</p>
+                            <p class="color-#717171 mt0.2rem">查看详情</p>
                         </div>
                     </div>
                 </div>
@@ -287,19 +296,19 @@ const gotoBMapGL = () => {
                         <div
                             class="w5rem h1rem mt0.2rem  flex justify-between bg-#fff rounded-0.5rem pl0.3rem pr0.1rem">
                             <p class="handle-text w4rem flex font-size-0.6rem ml0.3rem color-#FF864B">
-                                {{ computedHightPeopleString }}
+                                {{ "查看详情" }}
                             </p>
                             <Icon name="ic:round-keyboard-arrow-right" color="#FF864B" size="15"></Icon>
                         </div>
                     </div>
                     <div class=" flex pl0.3rem pr0.3rem justify-between">
                         <div class="w48.5% flex justify-center items-center flex-col">
-                            <img class="w100% h3.3rem rounded-0.2rem" src="/home/hot-recommand.jpg" alt="">
-                            <p class="mt0.3rem font-size-0.5rem">北京·【天安门】</p>
+                            <img class="w100% h3.3rem rounded-0.2rem" :src="hotRedBaseList[1]?.image" alt="">
+                            <p class="mt0.3rem font-size-0.5rem">{{hotRedBaseList[1]?.name}}</p>
                         </div>
                         <div class="w48.5%  flex justify-center items-center flex-col">
-                            <img class="w100% h3.3rem rounded-0.2rem" src="/home/hot-recommand.jpg" alt="">
-                            <p class="mt0.3rem font-size-0.5rem">北京·【天安门】</p>
+                            <img class="w100% h3.3rem rounded-0.2rem" :src="hotRedBaseList[2]?.image" alt="">
+                            <p class="mt0.3rem font-size-0.5rem">{{hotRedBaseList[2]?.name}}</p>
                         </div>
                     </div>
                 </div>
@@ -428,5 +437,14 @@ const gotoBMapGL = () => {
     line-height: 4.5rem;
     text-align: center;
     background-color: #39a9ed;
+}
+
+.shenglue {
+    overflow: hidden;
+    overflow-wrap: break-word;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
 }
 </style>

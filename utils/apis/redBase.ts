@@ -54,10 +54,24 @@ const getRandomRedBaseAPI = () => {
     return httpRequest.get("/tb-place/getRandomCourse")
 }
 
-
+/**
+ * 根据Id获取红色基地详情
+ * @param id
+ * @returns
+ */
 const getRedBaseDetailsByIdAPI = (id: Number) => {
     return httpRequest.get(`/tb-place/getCourse/${id}`)
 }
+
+/**
+ * 获取热门红色基地列表
+ * @returns
+ */
+const getHotRedBaseListAPI = () => {
+    return httpRequest.get("/tb-place/getHotPlaces")
+}
+
+
 // /**
 //  * @description 获取当前城市天气
 //  * @returns 列表数据
@@ -86,6 +100,6 @@ export {
     getBaseListByCategoryAPI, getAllBaseCategoryListAPI,
     getAllProvinceAndAreaListAPI, getRedBaseByProvinceAndCityAPI,
     getRandomRedBaseAPI,
-    getRedBaseByProvinceIdAPI,getRedBaseDetailsByIdAPI
+    getRedBaseByProvinceIdAPI, getRedBaseDetailsByIdAPI, getHotRedBaseListAPI
 };
 

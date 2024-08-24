@@ -22,7 +22,7 @@ export default defineNuxtConfig({
         "@nuxt/icon",
         // "@nuxt/ui",
         '@element-plus/nuxt',
-        '@pinia-plugin-persistedstate/nuxt'
+        '@pinia-plugin-persistedstate/nuxt',
     ],
     piniaPersistedstate: {
         storage: 'localStorage',
@@ -119,6 +119,7 @@ export default defineNuxtConfig({
             mode: 'client'
         }
     ],
+    
     // eslint: {
     //     config: {
     //         standalone: false,

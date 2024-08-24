@@ -49,6 +49,7 @@ const performLogin = async () => {
             body: body
         });
 
+        // const result = JSON.parse(res)
         const result = JSON.parse(res)
         console.log(result)
 
@@ -69,6 +70,7 @@ const performLogin = async () => {
 const userLogin = () => {
     loginData.value.username = tel.value
     loginData.value.password = password.value
+    // login(loginData.value)
     performLogin()
 }
 </script>
