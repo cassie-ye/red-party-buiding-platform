@@ -1,6 +1,6 @@
 <script setup>
 definePageMeta({
-    layout: 'withTabbar'
+    layout: 'with-tabbar'
 })
 </script>
 <template>

@@ -1,5 +1,5 @@
 <script setup>
-import { getBaseListByCategoryAPI, getAllBaseCategoryListAPI,getHotRedBaseListAPI } from "../utils/apis/redBase.ts"
+import { getBaseListByCategoryAPI, getAllBaseCategoryListAPI, getHotRedBaseListAPI } from "../utils/apis/redBase.ts"
 definePageMeta({
     layout: 'with-tabbar'
 })
@@ -284,7 +284,8 @@ const gotoSearchRedBase = () => {
                             class="w5rem h1rem mt0.2rem  flex justify-between bg-#fff rounded-0.5rem pl0.3rem pr0.1rem">
                             <van-swipe class="h1.05rem flex font-size-0.6rem ml0.3rem color-red-5" vertical
                                 :autoplay="3000" indicator-color="white" :show-indicators="false">
-                                <van-swipe-item class="shenglue"v-for="item in hotRedBaseList">{{item.name}}</van-swipe-item>
+                                <van-swipe-item class="shenglue" v-for="item in hotRedBaseList">{{ item.name
+                                    }}</van-swipe-item>
                                 <!-- <van-swipe-item>北京博物馆</van-swipe-item>
                                 <van-swipe-item>东京博物馆</van-swipe-item>
                                 <van-swipe-item>xi'jing</van-swipe-item> -->
@@ -295,7 +296,7 @@ const gotoSearchRedBase = () => {
                     <div class=" flex font-size-0.7rem pl0.3rem pr0.3rem">
                         <img class="h4rem rounded-0.2rem" :src="hotRedBaseList[0]?.image" alt="">
                         <div class="ml0.3rem">
-                            <p class="font-size-0.8rem font-bold">{{hotRedBaseList[0]?.name}}</p>
+                            <p class="font-size-0.8rem font-bold">{{ hotRedBaseList[0]?.name }}</p>
                             <p class="color-#717171 mt0.2rem">查看详情</p>
                         </div>
                     </div>
@@ -314,11 +315,11 @@ const gotoSearchRedBase = () => {
                     <div class=" flex pl0.3rem pr0.3rem justify-between">
                         <div class="w48.5% flex justify-center items-center flex-col">
                             <img class="w100% h3.3rem rounded-0.2rem" :src="hotRedBaseList[1]?.image" alt="">
-                            <p class="mt0.3rem font-size-0.5rem">{{hotRedBaseList[1]?.name}}</p>
+                            <p class="mt0.3rem font-size-0.5rem">{{ hotRedBaseList[1]?.name }}</p>
                         </div>
                         <div class="w48.5%  flex justify-center items-center flex-col">
                             <img class="w100% h3.3rem rounded-0.2rem" :src="hotRedBaseList[2]?.image" alt="">
-                            <p class="mt0.3rem font-size-0.5rem">{{hotRedBaseList[2]?.name}}</p>
+                            <p class="mt0.3rem font-size-0.5rem">{{ hotRedBaseList[2]?.name }}</p>
                         </div>
                     </div>
                 </div>
@@ -351,12 +352,15 @@ const gotoSearchRedBase = () => {
                         class="w49% bg-#fff rounded-0.3rem mb0.5rem flex flex-col items-center"
                         v-for="(item, index) in currentSelectedCategoryBaseList" :key="index">
                         <img :src="item.image" alt="" class="w-full h10rem rounded-t-0.3rem">
-                        <div class="flex flex-col items-center pt0.5rem pb1rem">
-                            <p class="pt0.2rem font-bold">{{ item.name }}</p>
-                            <div class="font-size-0.7rem pl0.5rem pr0.5rem ">
-                                <i class="iconfont icon-didian01 color-red-6 font-size-1.2rem mr0.3rem"></i>
-                                <span class="mt0.35rem">{{ item.position }}</span>
-                            </div>
+                        <div class="font-bold w94% mt0.5rem ml3% flex justify-center text-center shenglue">{{ item.name
+                            }}</div>
+                        <div class="font-size-0.7rem w96% mt0.2rem ml2% flex justify-center shenglue">
+                            <i class="iconfont icon-didian01 color-red-6 font-size-1rem mr0.1rem"></i>
+                            <span class="mt0.27rem">{{ item.position }}</span>
+                        </div>
+                        <div class="font-size-0.7rem mt0.5rem w94% ml3% flex justify-end items-center mb0.3rem">
+                            <i class="iconfont icon-daozhequ- color-red-6 font-size-1.4rem mr0.1rem"></i>
+                            <span class="mt0.27rem">到这去</span>
                         </div>
                     </div>
                 </div>

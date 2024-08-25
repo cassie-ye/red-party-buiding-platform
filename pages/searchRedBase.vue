@@ -52,12 +52,6 @@ const inputContent = (e) => {
     }
 }
 
-// 创建一个去重函数
-function uniqueArray(array) {
-    // 使用Set去重
-    return [...new Set(array)];
-}
-
 /**
  * 使用防抖函数创建一个防抖版本
  * 设置防抖时间为300毫秒
@@ -115,6 +109,9 @@ const clearAllRecordTags = () => {
         });
 }
 
+/**
+ * 点击搜索历史记录的其中一项Item，跳转到Item详情页
+ */
 const gotoSearchHistoryItem = async (index) => {
     const areaName = searchRedBaseListStore.searchRedBaseList[index]
     await getRedBaseByKeyword(areaName)

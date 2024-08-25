@@ -1,5 +1,7 @@
 <script setup>
 import Cluster from '@bmapgl-plugin/cluster';
+const onClickLeft = () => history.back();
+
 /**
  * 加载百度地图
  */
@@ -120,7 +122,7 @@ function addCluster() {
         }
     });
     redBaseInfoList.value = points
-    console.log('00', points)
+    // console.log('00', points)
     cluster.setData(points);
 }
 
@@ -135,7 +137,6 @@ function removeCluster() {
  */
 function addRedBaseListMarkers() {
     redBaseInfoList.value.map((item) => {
-        console.log(item)
         var point = new BMapGL.Point(item.geometry.coordinates[0], item.geometry.coordinates[1]);
         var marker = new BMapGL.Marker(point);        // 创建标注
         mapObj.value.addOverlay(marker);
@@ -192,6 +193,8 @@ onMounted(async () => {
 
 <template>
     <div>
+        <van-nav-bar :fixed="true" :placeholder="true" title="红色地图" left-text="返回" left-arrow
+        @click-left="onClickLeft" />
         <!-- <div>我是首页哈哈哈哈哈</div> -->
         <div id="container" class="w-vw h-vh"></div>
         <div id="infoWindow" class=" h-80% flex justify-between">
@@ -204,4 +207,26 @@ onMounted(async () => {
     </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+.van-nav-bar {
+    background-color: #fff;
+    position: fixed;
+    width: 100%;
+    z-index: 100;
+    top: 0;
+    left: 0;
+}
+
+:deep(.van-nav-bar__arrow) {
+    color: black;
+}
+
+:deep(.van-nav-bar__text) {
+    color: black;
+}
+
+:deep(.van-ellipsis) {
+    color: black
+}
+
+</style>
