@@ -2,17 +2,22 @@
 definePageMeta({
     layout: 'with-tabbar'
 })
+
+const router = useRouter()
+const gotoEditUserInfo = () => {
+    router.push('/editUserInfo')
+}
 </script>
 <template>
     <div class="bg-#EFEEF3 w-vw h-vh pl1rem pr1rem">
-        <div class="relative bg-#FCFCFC  w-full p0.8rem pr1rem pl1rem mt3rem rounded-0.5rem">
+        <div class="relative bg-#FCFCFC  w-full p0.8rem pr1rem pl1rem mt2rem rounded-0.5rem">
             <img class="absolute w4.5rem h4.5rem rounded-0.5rem top-[-1.3rem] left-1.5rem border-solid border-0.15rem border-#fff"
                 src="/public/red-base/top-bg.jpg" alt="">
             <div class="w71% ml29% flex items-center justify-between ">
                 <p class="font-bold font-size-1.3rem">Cassie燁</p>
                 <div class="flex items-center">
                     <van-icon class="shadow-2xl mr1rem" name="qr" size="18" color="#B9BABC" />
-                    <div class="flex items-center">
+                    <div @click="gotoEditUserInfo" class="flex items-center">
                         <van-icon class="shadow-2xl" name="edit" size="18" color="#B9BABC" />
                         <p class="color-#B9BABC font-size-0.9rem">编辑资料</p>
                     </div>

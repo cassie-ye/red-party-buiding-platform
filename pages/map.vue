@@ -189,13 +189,28 @@ onMounted(async () => {
     getLocation()
 })
 
+const searchValue = ref()
+const value1 = ref(0);
+const option1 = [
+    { text: '当前位置', value: 0 },
+    { text: '全国范围', value: 1 },
+];
+const changeSelectedRange = (e) => {
+    console.log(e); // 选中项的value值
+}
+
 </script>
 
 <template>
     <div>
         <van-nav-bar :fixed="true" :placeholder="true" title="红色地图" left-text="返回" left-arrow
-        @click-left="onClickLeft" />
-        <!-- <div>我是首页哈哈哈哈哈</div> -->
+            @click-left="onClickLeft" />
+        <div class="flex">
+            <van-search v-model="searchValue" class="" placeholder="请输入搜索关键词" />
+            <van-dropdown-menu @change="changeSelectedRange">
+                <van-dropdown-item v-model="value1" :options="option1" />
+            </van-dropdown-menu>
+        </div>
         <div id="container" class="w-vw h-vh"></div>
         <div id="infoWindow" class=" h-80% flex justify-between">
             <img class="h-full w-60%" src="/public/red-base/top-bg.jpg" alt="">
@@ -229,4 +244,18 @@ onMounted(async () => {
     color: black
 }
 
+:deep(.van-search){
+    width: 75%;
+    height: 3rem;
+}
+
+:deep(.van-dropdown-menu){
+    width: 25%;
+    height: 3rem;
+    border-color:#fff;
+}
+
+:deep(.van-dropdown-menu__bar) {
+  box-shadow: unset !important;
+}
 </style>
