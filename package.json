@@ -45,6 +45,7 @@
     "gcoord": "^1.0.6",
     "js-pinyin": "^0.2.7",
     "lunar-calendar": "^0.1.4",
-    "md5": "^2.3.0"
+    "md5": "^2.3.0",
+    "vue-echarts": "^7.0.3"
   }
 }

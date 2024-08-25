@@ -20,7 +20,7 @@ export default defineNuxtConfig({
         // '@nuxt/eslint',
         '@vant/nuxt',
         "@nuxt/icon",
-        // "@nuxt/ui",
+        "@nuxt/ui",
         '@element-plus/nuxt',
         '@pinia-plugin-persistedstate/nuxt',
     ],
@@ -119,6 +119,9 @@ export default defineNuxtConfig({
             mode: 'client'
         }
     ],
+    build: {
+        transpile: [/echarts/],
+    },
 
     // eslint: {
     //     config: {

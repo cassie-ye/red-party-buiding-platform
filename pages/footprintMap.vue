@@ -1,154 +1,104 @@
 <template>
-    <div>
-        <div id='mapDom' style="width: 600px; height: 600px">
-            
-        </div>
+    <div class="h-screen w-screen">
+        <van-nav-bar :fixed="true" :placeholder="true" title="红色地图" left-text="返回" left-arrow
+            @click-left="onClickLeft" />
+        <div class="h-full w-full" id="china-map"></div>
     </div>
 </template>
 
-// <script setup>
-// import { onMounted } from 'vue'
-// import * as echarts from 'echarts'
-// import '../assets/china.json'
-// import { getCityPositionByName } from '../assets/cityPosition.js'
+<script>
+import chinaJson from '../assets/china.json'
 
-// // 模拟10条数据
-// let mockData = [
-//     { name: '北京', value: 500 },
-//     { name: '天津', value: 200 },
-//     { name: '河南', value: 300 },
-//     { name: '广西', value: 300 },
-//     { name: '广东', value: 300 },
-//     { name: '河北', value: 300 },
-// ]
+export default {
+    mounted() {
+        this.initEcharts();
+    },
+    methods: {
+        async initEcharts() {
+            // 注册geojson
+            this.$echarts.registerMap('china', chinaJson);
 
-// onMounted(() => {
-//     let data = mockData.map(i => {
-//         let cityPosition = getCityPositionByName(i.name).value
-//         return {
-//             name: i.name,
-//             value: cityPosition.concat(i.value),
-//         }
-//     })
+            const option = {
+                title: {
+                    text: 'aaa)',
+                    subtext: 'ggg',
+                    sublink: 'http://www.census.gov/popest/data/datasets.html',
+                    left: 'right'
+                },
+                tooltip: {
+                    trigger: 'item',
+                    showDelay: 0,
+                    transitionDuration: 0.2
+                },
+                visualMap: {
+                    left: 'right',
+                    min: 500000,
+                    max: 38000000,
+                    inRange: {
+                        color: [
+                            '#313695',
+                            '#4575b4',
+                            '#74add1',
+                            '#abd9e9',
+                            '#e0f3f8',
+                            '#ffffbf',
+                            '#fee090',
+                            '#fdae61',
+                            '#f46d43',
+                            '#d73027',
+                            '#a50026'
+                        ]
+                    },
+                    text: ['High', 'Low'],
+                    calculable: true
+                },
+                toolbox: {
+                    show: true,
+                    //orient: 'vertical',
+                    left: 'left',
+                    top: 'top',
+                    feature: {
+                        dataView: { readOnly: false },
+                        restore: {},
+                        saveAsImage: {}
+                    }
+                },
+                series: [
+                    {
+                        name: '中国',
+                        type: 'map',
+                        roam: true,
+                        map: 'china',
+                        emphasis: {
+                            label: {
+                                show: true
+                            }
+                        },
+                        data: [
+                            { name: '山东', value: 4822023 },
+                            { name: '山西', value: 731449 },
+                            { name: '河南', value: 6553255 },
+                            { name: '河北', value: 2949131 },
+                            { name: '陕西', value: 38041430 },
+                            { name: '广东', value: 5187582 },
+                            { name: '福建', value: 3590347 },
+                            { name: '浙江', value: 917092 },
+                            { name: '甘肃', value: 632323 },
+                            { name: '吉林', value: 19317568 },
+                            { name: '新疆', value: 9919945 },
+                            { name: '内蒙古', value: 1392313 },
+                        ]
+                    }
+                ]
+            };
 
-//     let initMap = echarts.init(document.querySelector('#mapDom'))
-//     initMap.setOption({
-//         backgroundColor: 'transparent', // 设置背景色透明
-//         // 必须设置
-//         tooltip: {
-//             show: false,
-//         },
-//         // 地图阴影配置
-//         geo: {
-//             map: china,
-//             // 这里必须定义，不然后面series里面不生效
-//             tooltip: {
-//                 show: false,
-//             },
-//             label: {
-//                 show: false,
-//             },
-//             zoom: 1.03,
-//             silent: true, // 不响应鼠标时间
-//             show: true,
-//             roam: false, // 地图缩放和平移
-//             aspectScale: 0.75, // scale 地图的长宽比
-//             itemStyle: {
-//                 borderColor: '#0FA3F0',
-//                 borderWidth: 1,
-//                 areaColor: '#070f71',
-//                 shadowColor: 'rgba(1,34,73,0.48)',
-//                 shadowBlur: 10,
-//                 shadowOffsetX: -10,
-//                 shadowOffsetY: 10,
-//             },
-//             select: {
-//                 disabled: true,
-//             },
-//             emphasis: {
-//                 disabled: true,
-//                 areaColor: '#00F1FF',
-//             },
-//             // 地图区域的多边形 图形样式 阴影效果
-//             // z值小的图形会被z值大的图形覆盖
-//             top: '10%',
-//             left: 'center',
-//             // 去除南海诸岛阴影 series map里面没有此属性
-//             regions: [{
-//                 name: '南海诸岛',
-//                 selected: false,
-//                 emphasis: {
-//                     disabled: true,
-//                 },
-//                 itemStyle: {
-//                     areaColor: '#00000000',
-//                     borderColor: '#00000000',
-//                 },
-//             }],
-//             z: 1,
-//         },
-//         series: [
-//             // 地图配置
-//             {
-//                 type: 'map',
-//                 map: 'china',
-//                 zoom: 1,
-//                 tooltip: {
-//                     show: false,
-//                 },
-//                 label: {
-//                     show: true, // 显示省份名称
-//                     color: '#ffffff',
-//                     align: 'center',
-//                 },
-//                 top: '10%',
-//                 left: 'center',
-//                 aspectScale: 0.75,
-//                 roam: false, // 地图缩放和平移
-//                 itemStyle: {
-//                     borderColor: '#3ad6ff', // 省分界线颜色  阴影效果的
-//                     borderWidth: 1,
-//                     areaColor: '#17348b',
-//                     opacity: 1,
-//                 },
-//                 // 去除选中状态
-//                 select: {
-//                     disabled: true,
-//                 },
-//                 // 控制鼠标悬浮上去的效果
-//                 emphasis: { // 聚焦后颜色
-//                     disabled: false, // 开启高亮
-//                     label: {
-//                         align: 'center',
-//                         color: '#ffffff',
-//                     },
-//                     itemStyle: {
-//                         color: '#ffffff',
-//                         areaColor: '#0075f4',// 阴影效果 鼠标移动上去的颜色
-//                     },
-//                 },
-//                 z: 2,
-//                 data: data,
-//             },
-//             {
-//                 type: 'scatter',
-//                 coordinateSystem: 'geo',
-//                 symbol: 'pin',
-//                 symbolSize: [50, 50],
-//                 label: {
-//                     show: true,
-//                     color: '#fff',
-//                     formatter(value) {
-//                         return value.data.value[2]
-//                     },
-//                 },
-//                 itemStyle: {
-//                     color: '#e30707', //标志颜色
-//                 },
-//                 z: 2,
-//                 data: data,
-//             },
-//         ],
-//     })
-// })
-// </script>
+            const myChart = this.$echarts.init(document.getElementById("china-map"));// 图标初始化
+            myChart.setOption(option);
+            window.addEventListener("resize", () => {
+                myChart.resize();
+            });
+        },
+
+    }
+};
+</script>

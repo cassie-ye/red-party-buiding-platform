@@ -1,5 +1,5 @@
 <script setup>
-import { _backgroundColor } from '#tailwind-config/theme';
+// import { _backgroundColor } from '#tailwind-config/theme';
 
 const onClickLeft = () => history.back();
 const getRandomBrightColor = () => {
