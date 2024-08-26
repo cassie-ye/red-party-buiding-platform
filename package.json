@@ -46,6 +46,10 @@
     "js-pinyin": "^0.2.7",
     "lunar-calendar": "^0.1.4",
     "md5": "^2.3.0",
-    "vue-echarts": "^7.0.3"
+    "sockjs": "^0.3.24",
+    "sockjs-client": "^1.6.1",
+    "stompjs": "^2.3.3",
+    "vue-echarts": "^7.0.3",
+    "ws": "^8.18.0"
   }
 }
