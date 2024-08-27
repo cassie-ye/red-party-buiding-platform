@@ -1,9 +1,12 @@
 <script setup>
-import { loginAPI } from "../utils/apis/commen.ts"
 import { useUserStore } from '../store/user.js'
+import { getUserInfoAPI } from "../utils/apis/user.ts"
 const tel = ref('')
 const password = ref('')
 const router = useRouter()
+/**
+ * 去注册
+ */
 const gotoRegister = () => {
     router.push('/register')
 }
@@ -15,19 +18,10 @@ const loginData = ref({
 
 const userStore = useUserStore()
 
-const login = async (data) => {
-    const res = await loginAPI(data)
-    console.log(res)
-    // if (res.status === 'success') {
-    //     userStore.userInfo.token = res.token
-    //     console.log(userStore.userInfo)
-    //     showSuccessToast('登录成功');
-    //     setTimeout(() => {
-    //         router.push('/home')
-    //     }, 3000)
-    // }
-    // console.log(JSON.parse(res))
-}
+/**
+ * 处理请求数据
+ * @param {*} data
+ */
 const transformedData = (data) => {
     let ret = ''
     for (let it in data) {
@@ -36,18 +30,34 @@ const transformedData = (data) => {
     return ret.slice(0, -1) // 移除末尾的 '&'
 };
 
+/**
+ * 调接口获取用户信息 存到pinia中
+ */
+const getUserInfo = async () => {
+    const res = await getUserInfoAPI()
+    // console.log(res)
+    userStore.userInfo.infoObj = res
+}
+
+/**
+ * 登录
+ */
 const performLogin = async () => {
     const body = transformedData(loginData.value);
     const headers = {
         'Content-Type': 'application/x-www-form-urlencoded',
     };
-
-    // try {
-        const res = await $fetch('http://10.10.12.170:10087/login', {
+    try {
+        const res = await $fetch('http://192.168.0.111:10087/login', {
             method: 'POST',
             headers: headers,
             body: body
         });
+        // const res = await $fetch('http://10.10.12.170:10087/login', {
+        //     method: 'POST',
+        //     headers: headers,
+        //     body: body
+        // });
 
         // const result = JSON.parse(res)
         const result = JSON.parse(res)
@@ -60,13 +70,16 @@ const performLogin = async () => {
             setTimeout(() => {
                 router.push('/home')
             }, 3000)
+            await getUserInfo()
         }
-    // } catch (error) {
-    //     console.error('Error during login:', error);
-    // }
+    } catch (error) {
+        console.error('Error during login:', error);
+    }
 };
 
-
+/**
+ * 调接口实现登录
+ */
 const userLogin = () => {
     loginData.value.username = tel.value
     loginData.value.password = password.value

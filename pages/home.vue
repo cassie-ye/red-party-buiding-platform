@@ -155,6 +155,8 @@ getHotRedBaseList()
 const gotoSearchRedBase = () => {
     router.push("/searchRedBase")
 }
+
+
 </script>
 <template>
     <div class="pb3rem">

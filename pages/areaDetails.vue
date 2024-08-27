@@ -1,18 +1,29 @@
 <script setup>
 import { getRedBaseDetailsByIdAPI } from "../utils/apis/redBase.ts"
+const route = useRoute()
+const router = useRouter()
 const onClickLeft = () => history.back();
 const onClickIcon = () => showToast('点击图标');
-const onClickButton = () => showToast('点击按钮');
-const router = useRoute()
-const areaId = router.query.areaId
-// console.log(areaId)
+const areaId = route.query.areaId
 const redBaseDetails = ref({})
+/**
+ * 调接口获取基地详情资料
+ */
 const getRedBaseDetailsById = async (areaId) => {
     const res = await getRedBaseDetailsByIdAPI(areaId)
-    // console.log(res)
     redBaseDetails.value = res
 }
 getRedBaseDetailsById(areaId)
+
+/**
+ * 点击立即预约，跳转到基地预约页面
+ */
+ const gotoReserveRedBase = () => {
+    router.push({
+        path: '/reserveRedBase',
+        query: { areaId }
+    });
+}
 </script>
 <template>
     <div class="relative mb10rem ">
@@ -105,7 +116,7 @@ getRedBaseDetailsById(areaId)
         <van-action-bar>
             <van-action-bar-icon icon="like-o" text="客服" @click="onClickIcon" />
             <van-action-bar-icon icon="chat-o" text="客服" @click="onClickIcon" />
-            <van-action-bar-button type="danger" text="立即预约" @click="onClickButton" />
+            <van-action-bar-button type="danger" text="立即预约" @click="gotoReserveRedBase()" />
         </van-action-bar>
     </div>
 </template>

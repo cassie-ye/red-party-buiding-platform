@@ -71,10 +71,50 @@ const getHotRedBaseListAPI = () => {
     return httpRequest.get("/tb-place/getHotPlaces")
 }
 
+/**
+ * 根据关键字搜索红色基地
+ * @param name
+ * @returns
+ */
 const getRedBaseByKeywordAPI = (name: String) => {
-    return httpRequest.get(`/tb-place/getPlaceByName/${name}`,{data:name})
+    return httpRequest.get(`/tb-place/getPlaceByName/${name}`, { data: name })
 }
 
+/**
+ * 预约红色基地
+ * @param data
+ * @returns
+ */
+const reserveRedBaseAPI = (data: any) => {
+    return httpRequest.post("/orders/createOrderToCache", data);
+}
+
+/**
+ * 获取红色基地可以预约的日期
+ * @param baseId
+ * @returns
+ */
+const getRedBaseCanBeReservedDatesAPI = (baseId: any) => {
+    return httpRequest.get(`/trip/get/${baseId}`);
+}
+
+/**
+ * 获取指定日期的红色基地活动内容
+ * @param baseId
+ * @param date
+ * @returns
+ */
+const getRedBaseDayActivityContentByBaseIdAndSelectedDateAPI = (baseId: any, date: any) => {
+    return httpRequest.get(`/trip/getThisRouteTrip/${baseId}/${date}`);
+}
+
+/**
+ * 获取全局唯一订单id
+ * @returns
+ */
+const getReserveRedBaseOrderIdAPI = ()=>{
+    return httpRequest.get("/helper/getGlobalId");
+}
 
 // /**
 //  * @description 获取当前城市天气
@@ -105,6 +145,7 @@ export {
     getAllProvinceAndAreaListAPI, getRedBaseByProvinceAndCityAPI,
     getRandomRedBaseAPI,
     getRedBaseByProvinceIdAPI, getRedBaseDetailsByIdAPI, getHotRedBaseListAPI,
-    getRedBaseByKeywordAPI
+    getRedBaseByKeywordAPI, reserveRedBaseAPI, getRedBaseCanBeReservedDatesAPI,
+    getRedBaseDayActivityContentByBaseIdAndSelectedDateAPI,getReserveRedBaseOrderIdAPI
 };
 

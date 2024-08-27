@@ -35,7 +35,6 @@ const onFinish = ({ selectedOptions }) => {
  * 进入地区详情
  */
 const gotoAreaDetails = (areaId) => {
-    console.log(areaId)
     router.push({
         path: '/areaDetails',
         query: { areaId }

@@ -1,10 +1,11 @@
 <script setup>
 import Stomp from 'stompjs';
 import SockJS from "sockjs-client/dist/sockjs.min.js";
-import { updateUserInfoAPI } from "../utils/apis/user.ts"
+import { updateUserInfoAPI,getUserInfoAPI } from "../utils/apis/user.ts"
 import { useUserStore } from '../store/user.js'
+const router = useRouter()
 const token = useUserStore().userInfo.token
-console.log(token)
+// const userInfo = useUserStore().userInfo.infoObj
 const onClickLeft = () => history.back();
 const name = ref('')
 const compony = ref('')
@@ -12,39 +13,84 @@ const position = ref('')
 const phoneNumber = ref('')
 const idCardNumber = ref('')
 const email = ref('')
-const obj = ref({
+const editUserInfoObj = ref({
     "createTime": "",
-    "department": "3333",
-    "email": "347843",
+    "department": "",
+    "email": "",
     "id": 0,
-    "idcard": "3306813957596",
-    "name": "Cassie",
-    "position": "vvv",
+    "idcard": "",
+    "name": "",
+    "position": "",
     "uid": 0,
-    "username": "Cassie"
+    "username": ""
 })
+
+let userInfo = null
+const getUserInfo = async () => {
+    const res = await getUserInfoAPI()
+    userInfo = res
+}
+
+await getUserInfo()
+
+name.value = userInfo.name
+compony.value = userInfo.department
+position.value = userInfo.position
+phoneNumber.value = userInfo.username
+idCardNumber.value = userInfo.idcard
+email.value = userInfo.email
+
+const show = ref(false)
+
+/**
+ * 调接口修改用户信息
+ * @param obj
+ */
 const updateUserInfo = async (obj) => {
     const res = await updateUserInfoAPI(obj)
     console.log(res)
+    if(res){
+        showSuccessToast('资料上传成功，等待管理员审核');
+        setTimeout(() => {
+                router.push('/my')
+            }, 3000)
+    }
 }
 
-const BASE_URL = "http://10.10.12.170:10087";
+const BASE_URL = "http://192.168.0.111:10087";
+// const BASE_URL = "http://10.10.12.170:10087";
 const stompClient = Stomp.over(new SockJS(BASE_URL + '/ws/ep'));
 console.log(stompClient)
-let authToken =  token;
+let authToken = token;
 stompClient.connect({ 'Auth-Token': authToken }, success => {
-    console.log("成功")
-    // setInterval(()=>{
-    //     console.log('运行中')
-    // })
     stompClient.subscribe('/user/queue/chat', message => {
         console.log('listen-----');
-        const friendList = JSON.parse(message.body)
-        console.log(friendList);
+        const result = JSON.parse(message.body)
+        console.log(result);
+        const showNotify = () => {
+            show.value = true;
+            setTimeout(() => {
+                show.value = false;
+            }, 5000);
+        };
+        showNotify()
     })
 }, error => {
     console.log("失败")
 });
+
+/**
+ * 点击保存按钮将编辑资料的内容提交给管理员审核
+ */
+const saveEditContent = () => {
+    editUserInfoObj.value.department = compony.value
+    editUserInfoObj.value.email = email.value
+    editUserInfoObj.value.idcard = idCardNumber.value
+    editUserInfoObj.value.name = name.value
+    editUserInfoObj.value.position = position.value
+    editUserInfoObj.value.username = phoneNumber.value
+    updateUserInfo(editUserInfoObj.value)
+}
 </script>
 <template>
     <div>
@@ -58,10 +104,26 @@ stompClient.connect({ 'Auth-Token': authToken }, success => {
             <van-field class="mt0.3rem" v-model="phoneNumber" label="手机号" placeholder="请输入您的手机号" type="tel" />
             <van-field class="mt0.3rem" v-model="idCardNumber" label="身份证" placeholder="请输入您的身份证号码" type="number" />
             <van-field class="mt0.3rem" v-model="email" label="邮箱" placeholder="请输入您的邮箱" />
-            <div @click="updateUserInfo(obj)"
+            <div @click="saveEditContent()"
                 class="w95% mt1rem bg-red-600 h2.5rem rounded-1.5rem color-#fff flex justify-center items-center font-size-0.9rem">
                 保存
             </div>
+            <van-notify v-model:show="show">
+                <div class="w-full h-full p-0.5rem flex">
+                    <div class="w10% h-full  flex justify-center items-center">
+                        <div class="w2rem h2rem rounded-50% bg-red-500 flex justify-center items-center">
+                            <van-icon name="bell" color="#fff" size="18" />
+                        </div>
+                    </div>
+                    <div class="w80% h-full flex flex-col justify-center items-start pl0.5rem">
+                        <div>系统消息</div>
+                        <div class="color-#717171 font-size-0.8rem">您提交的修改资料内容已通过审核并更新</div>
+                    </div>
+                    <div class="w10% h-full flex justify-center items-center color-#717171 font-size-0.7rem">
+                        <p>刚刚</p>
+                    </div>
+                </div>
+            </van-notify>
         </div>
     </div>
 </template>
@@ -90,5 +152,17 @@ stompClient.connect({ 'Auth-Token': authToken }, success => {
 :deep(.van-cell-group) {
     margin-top: 1rem;
     background-color: transparent;
+}
+
+:deep(.van-notify) {
+    background-color: #fff;
+    color: #000;
+    height: 4rem;
+    border-radius: 0.5rem;
+    margin-left: 3.5%;
+    width: 93%;
+    margin-top: 1.5rem;
+    box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+    padding: 0;
 }
 </style>
