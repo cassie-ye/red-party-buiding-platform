@@ -112,7 +112,7 @@ const getRedBaseDayActivityContentByBaseIdAndSelectedDateAPI = (baseId: any, dat
  * 获取全局唯一订单id
  * @returns
  */
-const getReserveRedBaseOrderIdAPI = ()=>{
+const getReserveRedBaseOrderIdAPI = () => {
     return httpRequest.get("/helper/getGlobalId");
 }
 
@@ -146,6 +146,6 @@ export {
     getRandomRedBaseAPI,
     getRedBaseByProvinceIdAPI, getRedBaseDetailsByIdAPI, getHotRedBaseListAPI,
     getRedBaseByKeywordAPI, reserveRedBaseAPI, getRedBaseCanBeReservedDatesAPI,
-    getRedBaseDayActivityContentByBaseIdAndSelectedDateAPI,getReserveRedBaseOrderIdAPI
+    getRedBaseDayActivityContentByBaseIdAndSelectedDateAPI, getReserveRedBaseOrderIdAPI
 };
 

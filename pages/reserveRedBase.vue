@@ -3,6 +3,7 @@ import { reserveRedBaseAPI, getRedBaseCanBeReservedDatesAPI, getRedBaseDetailsBy
 import { getUserInfoAPI } from "../utils/apis/user.ts";
 import dayjs from 'dayjs';
 const route = useRoute()
+const router = useRouter()
 const onClickLeft = () => history.back();
 
 // 发起预约基地请求 所需要的参数对象
@@ -240,13 +241,25 @@ const getReserveRedBaseOrderId = async () => {
     reserveOrderId.value = res
 }
 
+/**
+ * 预约接口
+ */
 const reserveRedBase = async (data) => {
-    const res = await reserveRedBaseAPI(data)
-    console.log(res)
+    await reserveRedBaseAPI(data)
 }
 
-const goPay = async () => {
-    if (selectedReserveDate.value !== '请选择您的行程'
+const showGetOrderIdPannelFlag = ref(false)
+
+/**
+ * 点击下单按钮 生成订单Id
+ */
+const paymentLinkParams = {
+    subject: '',
+    totalAmount: '',
+    traceNo: ''
+}
+const placeAnOrder = async () => {
+    if (selectedReserveDate.value !== '请选择你要预约的日期'
         && selectedActivity.value !== '请选择您的行程'
         && reservePeopleName.value !== ''
         && reservePeopleDepartment.value !== ''
@@ -260,14 +273,30 @@ const goPay = async () => {
         reserveDataObj.position = reservePeoplePosition.value
         reserveDataObj.phone = reservePeoplePhoneNumber.value
         reserveDataObj.idcard = reservePeopleIdCard.value
+        showGetOrderIdPannelFlag.value = true
         await getReserveRedBaseOrderId()
-        console.log(reserveOrderId.value)
         reserveDataObj.id = reserveOrderId.value
-        console.log('可以支付')
-        await reserveRedBase(reserveDataObj)
+        console.log(reserveDataObj)
+        paymentLinkParams.subject = `${reserveDataObj.basename}${reserveDataObj.tripname}`,
+        paymentLinkParams.totalAmount = reserveDataObj.price,
+        paymentLinkParams.traceNo = reserveDataObj.id
     } else {
         showFailToast('请填写完整信息');
     }
+}
+
+/**
+ * 点击确认并提交按钮
+ * 调用预约基地接口
+ * 跳转到支付链接
+ */
+const condirmAndSubmitOrder = () => {
+    reserveRedBase(reserveDataObj)
+    console.log(paymentLinkParams)
+    router.push({
+        path: '/paymentLink',
+        query: paymentLinkParams
+    });
 }
 </script>
 <template>
@@ -366,7 +395,19 @@ const goPay = async () => {
                     <p class="font-size-0.8rem color-#FFB400">共减免￥0.00</p>
                 </div>
             </div>
-            <van-action-bar-button @click="goPay()" color="" type="danger" text="去支付" />
+            <van-action-bar-button @click="placeAnOrder()" color="" type="danger" text="下单" />
+            <van-action-sheet v-model:show="showGetOrderIdPannelFlag" title="核对预约信息">
+                <div class="content font-size-0.9rem">
+                    <div>预约人：{{ reserveDataObj.username }}</div>
+                    <div>预约项目：{{ reserveDataObj.tripname }}</div>
+                    <div>预约日期：{{ reserveDataObj.startdate }}</div>
+                    <div>联系电话：{{ reserveDataObj.phone }}</div>
+                </div>
+                <div @click="condirmAndSubmitOrder()"
+                    class="w90% ml5% mb2rem bg-red-600 h2.5rem rounded-1.5rem color-#fff flex justify-center items-center font-size-0.9rem">
+                    确认并提交订单
+                </div>
+            </van-action-sheet>
         </van-action-bar>
     </div>
 </template>
