@@ -21,7 +21,7 @@ const selectPayMethod = (index) => {
 /**
  * 确认支付 跳转到支付宝沙箱
  */
-const confirmPayment =  () => {
+const confirmPayment = () => {
     if (currentSelectedPayMethodIndex.value == 0) {
         // TODO：支付链接
         window.open(`http://10.10.12.170:10087/alipay/pay?subject=${route.query.subject}&totalAmount=${route.query.totalAmount}&traceNo=${route.query.traceNo}`)
@@ -36,7 +36,7 @@ const confirmPayment =  () => {
             <div class="flex justify-center">
                 <p class="font-bold">
                     <span class="font-size-1.4rem">￥</span>
-                    <span class="font-size-2.5rem">888</span>
+                    <span class="font-size-2.5rem">{{ route.query.totalAmount }}</span>
                 </p>
             </div>
             <div>

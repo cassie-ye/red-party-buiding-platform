@@ -4,8 +4,18 @@ definePageMeta({
 })
 
 const router = useRouter()
+/**
+ * 跳转到编辑个人信息页面
+ */
 const gotoEditUserInfo = () => {
     router.push('/editUserInfo')
+}
+
+/**
+ * 跳转到我的订单页面
+ */
+const gotoMyOrder = () => {
+    router.push('/myOrder')
 }
 </script>
 <template>
@@ -74,7 +84,7 @@ const gotoEditUserInfo = () => {
             </div>
         </div>
         <div class=" bg-#FCFCFC flex items-center justify-between w-full p0.8rem pr1rem pl1rem mt0.8rem rounded-0.5rem">
-            <div class="flex flex-col items-center">
+            <div @click="gotoMyOrder()" class="flex flex-col items-center">
                 <i class="iconfont icon-dingdan font-size-1.5rem mr0.3rem"></i>
                 <span class="font-size-0.9rem mr0.2rem">我的订单</span>
             </div>

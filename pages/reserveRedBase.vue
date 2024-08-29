@@ -278,8 +278,8 @@ const placeAnOrder = async () => {
         reserveDataObj.id = reserveOrderId.value
         console.log(reserveDataObj)
         paymentLinkParams.subject = `${reserveDataObj.basename}${reserveDataObj.tripname}`,
-        paymentLinkParams.totalAmount = reserveDataObj.price,
-        paymentLinkParams.traceNo = reserveDataObj.id
+            paymentLinkParams.totalAmount = reserveDataObj.price,
+            paymentLinkParams.traceNo = reserveDataObj.id
     } else {
         showFailToast('请填写完整信息');
     }

@@ -1,10 +1,11 @@
 <script setup>
-import { useCascaderAreaData } from '@vant/area-data';
+definePageMeta({
+    layout: 'with-tabbar'
+})
 // 引入路由
 import { useRouter } from 'vue-router';
 import { getAllProvinceAndAreaListAPI, getRedBaseByProvinceAndCityAPI, getRandomRedBaseAPI } from "../utils/apis/redBase.ts";
 
-const onClickLeft = () => history.back();
 const router = useRouter();
 const show = ref(false);
 const fieldValue = ref('');
@@ -88,8 +89,6 @@ getRandomRedBase()
 </script>
 <template>
     <div>
-        <van-nav-bar :fixed="true" :placeholder="true" title="红色基地" left-text="返回" left-arrow
-            @click-left="onClickLeft" />
         <div class="w-full">
             <div class="w-full h13rem bg-cover bg-no-repeat " style="background-image: url(/red-base/top-bg.jpg);">
                 <div class=" flex items-center justify-between  w-full h3.3rem pl0.5rem pr0.5rem">
