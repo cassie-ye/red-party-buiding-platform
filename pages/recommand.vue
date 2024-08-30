@@ -11,10 +11,19 @@ const router = useRouter()
 const gotoNotesDetails = () => {
     router.push('/notesDetails')
 }
+
+const state = reactive({
+    offset: { x: document.body.clientWidth * 300 / 375, y: 504 }
+})
+
+const gotoPublishNotes = () => {
+    router.push('/publishNotes')
+}
 </script>
 <template>
     <div>
-        <div class="fixed left-0 top-0 w-full h3rem flex bg-#fff items-center pl0.5rem pr0.5rem justify-between pt0.5rem pb0.5rem">
+        <div
+            class="fixed left-0 top-0 w-full h3rem flex bg-#fff items-center pl0.5rem pr0.5rem justify-between pt0.5rem pb0.5rem">
             <van-icon name="ellipsis" size="23" />
             <div class="flex h1.5rem pt1rem pb0.7rem items-center w50% justify-between font-size-0.9rem">
                 <div v-for="(item, index) in tabTitleList" :key="index"
@@ -25,8 +34,10 @@ const gotoNotesDetails = () => {
             </div>
             <van-icon name="search" size="23" />
         </div>
-        <div v-if="activeTabIndex === 1" class="w-full pl0.5rem pr0.5rem mt3.5rem flex justify-between flex-wrap">
-            <div @click="gotoNotesDetails" v-if="isEmpty" class="w49% bg-#fff rounded-0.3rem mb0.5rem" v-for="(item, index) in 8" :key="index">
+        <div v-if="activeTabIndex === 1"
+            class="w-full pl0.5rem pr0.5rem mt3.5rem mb5rem flex justify-between flex-wrap">
+            <div @click="gotoNotesDetails" v-if="isEmpty" class="w49% bg-#fff rounded-0.3rem mb0.5rem"
+                v-for="(item, index) in 8" :key="index">
                 <img src="/public/red-base/top-bg.jpg" alt="" class="w-full h10rem rounded-t-0.3rem">
                 <div class="flex flex-col pt0.5rem pb1rem">
                     <p class="pt0.2rem font-size-0.9rem pl0.5rem shenglue2">浙江各地市公务员待遇解密，还值得报考吗ssssssssssssssss</p>
@@ -46,6 +57,9 @@ const gotoNotesDetails = () => {
                 <van-empty description="暂无推荐的笔记" />
             </div>
         </div>
+        <van-floating-bubble v-model:offset="state.offset" axis="xy" icon="records-o" magnetic="x"
+            @click="gotoPublishNotes()"
+             />
     </div>
 </template>
 <style scoped>

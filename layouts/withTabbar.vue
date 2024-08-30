@@ -1,7 +1,7 @@
 <template>
     <main>
         <!-- <NuxtPage /> -->
-        <slot ></slot>
+        <slot class="pb10rem"></slot>
         <Footer/>
     </main>
 </template>

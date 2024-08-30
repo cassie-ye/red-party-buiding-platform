@@ -15,11 +15,11 @@ const onChange = (index) => {
         <van-tabbar-item icon="home-o" to="/home">
             首页
         </van-tabbar-item>
-        <van-tabbar-item icon="list-switching" to="/redbasetabbar">
-            基地
-        </van-tabbar-item>
         <van-tabbar-item icon="fire-o" to="/recommand">
             推荐
+        </van-tabbar-item>
+        <van-tabbar-item icon="list-switching" to="/messages">
+            消息
         </van-tabbar-item>
         <van-tabbar-item icon="contact-o" to="/my">
             我的
@@ -30,5 +30,8 @@ const onChange = (index) => {
 <style scoped>
 .van-tabbar__placeholder {
     height: 0px !important;
+}
+:deep(.van-tabbar){
+    border-top: 0.05rem solid #dcdde1;
 }
 </style>

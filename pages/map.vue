@@ -190,15 +190,29 @@ onMounted(async () => {
 })
 
 const searchValue = ref()
-const value1 = ref(0);
-const option1 = [
-    { text: '当前位置', value: 0 },
-    { text: '全国范围', value: 1 },
-];
-const changeSelectedRange = (e) => {
-    console.log(e); // 选中项的value值
-}
 
+const columns = [
+    { text: '当前位置', value: 'currentPosition' },
+    { text: '全国', value: 'country' },
+];
+const fieldValue = ref('当前位置');
+const showPicker = ref(false);
+
+/**
+ * 关闭选择器界面。
+ * 将用户选择的第一个选项的文本值更新到某个字段中。
+ * @param param0
+ */
+const onConfirm = ({ selectedOptions }) => {
+    showPicker.value = false;
+    fieldValue.value = selectedOptions[0].text;
+    if(selectedOptions[0].text == '全国'){
+        mapObj.value.setZoom(3.5)
+    }
+    if(selectedOptions[0].text == '当前位置'){
+        initMap(currentPosition.value.lng, currentPosition.value.lat)
+    }
+};
 </script>
 
 <template>
@@ -207,10 +221,14 @@ const changeSelectedRange = (e) => {
             @click-left="onClickLeft" />
         <div class="flex">
             <van-search v-model="searchValue" class="" placeholder="请输入搜索关键词" />
-            <van-dropdown-menu @change="changeSelectedRange">
-                <van-dropdown-item v-model="value1" :options="option1" />
-            </van-dropdown-menu>
+            <div @click="showPicker = true" class="bg-#fff flex-1 flex justify-center items-center font-size-0.9rem">
+                <span class="mr0.5rem">{{ fieldValue }}</span>
+                <van-icon name="arrow-down" />
+            </div>
         </div>
+        <van-popup v-model:show="showPicker" round position="bottom">
+            <van-picker :columns="columns" @cancel="showPicker = false" @confirm="onConfirm" />
+        </van-popup>
         <div id="container" class="w-vw h-vh"></div>
         <div id="infoWindow" class=" h-80% flex justify-between">
             <img class="h-full w-60%" src="/public/red-base/top-bg.jpg" alt="">
@@ -244,18 +262,18 @@ const changeSelectedRange = (e) => {
     color: black
 }
 
-:deep(.van-search){
+:deep(.van-search) {
     width: 75%;
     height: 3rem;
 }
 
-:deep(.van-dropdown-menu){
+:deep(.van-dropdown-menu) {
     width: 25%;
     height: 3rem;
-    border-color:#fff;
+    border-color: #fff;
 }
 
 :deep(.van-dropdown-menu__bar) {
-  box-shadow: unset !important;
+    box-shadow: unset !important;
 }
 </style>

@@ -55,8 +55,8 @@ const gotoMyOrder = () => {
         </div>
         <div class=" bg-#FCFCFC flex items-center justify-between w-full p0.8rem pr1rem pl1rem mt0.8rem rounded-0.5rem">
             <div class="flex items-center justify-center rounded-0.5rem w40%">
-                <i class="iconfont icon-_kecheng font-size-1.6rem mr0.3rem"></i>
-                <span class="font-size-0.9rem mr0.2rem">课程学习</span>
+                <i class="iconfont icon-haoyouliebiao font-size-1.6rem mr0.3rem"></i>
+                <span class="font-size-0.9rem mr0.2rem">好友列表</span>
             </div>
             <div class="w0.05rem h1rem bg-#A5A5A5"></div>
             <div class="flex items-center  w40%">
