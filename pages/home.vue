@@ -156,6 +156,12 @@ const gotoSearchRedBase = () => {
     router.push("/searchRedBase")
 }
 
+/**
+ * 进入抽奖
+ */
+const gotoLottery = () => {
+    router.push("/lottery")
+}
 
 </script>
 <template>
@@ -257,7 +263,7 @@ const gotoSearchRedBase = () => {
                         <i class="iconfont icon-hot color-red-5 anima font-size-1.2rem"></i>
                     </div>
                 </div>
-                <div class="items-center w32% flex bg-#fff rounded-0.3rem h-full justify-between
+                <div @click="gotoLottery()" class="items-center w32% flex bg-#fff rounded-0.3rem h-full justify-between
             border-solid border-0.1rem border-red-5
             ">
                     <!-- <p style="font-family: normal;">抽奖得好礼</p>

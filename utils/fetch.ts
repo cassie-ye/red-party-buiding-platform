@@ -12,8 +12,8 @@ import { useUserStore } from "../store/user.js";
 type Methods = "GET" | "POST" | "DELETE" | "PUT";
 
 // URL 基地址
-// const BASE_URL = "http://192.168.0.111:10087";
-const BASE_URL = "http://10.10.12.170:10087";
+const BASE_URL = "http://192.168.0.111:10087";
+// const BASE_URL = "http://10.10.12.170:10087";
 // const BASE_URL = "http://192.168.43.108:10087"
 // 请求结果数据格式
 export interface IResultData<T> {
