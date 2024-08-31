@@ -1,67 +1,94 @@
 <template>
-    <div class="h-screen w-screen">
-        <van-nav-bar :fixed="true" :placeholder="true" title="红色地图" left-text="返回" left-arrow
+    <div>
+        <van-nav-bar :fixed="true" :placeholder="true" title="足迹地图" left-text="返回" left-arrow
             @click-left="onClickLeft" />
-        <div class="h-full w-full bg-#03050c" id="china-map"></div>
+        <div class="h-screen w-screen">
+            <div class="h-full w-full bg-black pt3rem" id="china-map"></div>
+        </div>
     </div>
 </template>
 
 <script>
-import chinaJson from '../assets/china.json'
+import chinaJson from '@/assets/china.json'
 
 export default {
     data() {
         return {
-            maptitle: "设备分布图",
-            options: {},
-            code: "china", //china 代表中国 其他地市是行政编码
-            echartBindClick: false,
-            isSouthChinaSea: false, //是否要展示南海群岛  修改此值请刷新页面
+            dataList: [
+                { name: '青海省', value: 857 },
+                { name: '湖南省', value: 58 },
+                { name: '青海省', value: 371 },
+                { name: '山东省', value: 209 },
+                { name: '辽宁省', value: 604 },
+                { name: '上海', value: 6 },
+                { name: '江苏省', value: 629 },
+                { name: '宁夏回族自治区', value: 169 }
+            ],
+            features: [],
+            cityCenter: {},
+            mydata: [
+                { name: "江苏省", value: 2 },
+                { name: "广东省", value: 277 },
+                { name: "浙江省", value: 888 },
+                { name: "北京市", value: 87 },
+            ],
+            newData: [
+                {
+                    name: "江苏省",
+                    value: [119.486506, 32.983991, 2],
+                },
+                {
+                    name: "广东省",
+                    value: [113.429919, 23.334643, 277],
+                },
+                {
+                    name: "浙江省",
+                    value: [120.109913, 29.181466, 8],
+                },
+                {
+                    name: "北京市",
+                    value: [116.41995, 40.18994, 88]
+                }
+            ]
         }
     },
     mounted() {
-        // this.getData("china");
-        this.initEcharts();
+        this.initEcharts("china", this.mydata, this.newData);
+        this.features = this.$echarts.getMap('china').geoJSON.features
+        console.log(this.features)
+        this.features.map((item) => {
+            this.cityCenter[item.properties.name] =
+                item.properties.centroid || item.properties.center;
+        });
+        // 城市中心
+        console.log(this.cityCenter)
     },
     methods: {
-        getData(code) {
-            currentGET("big8", { regionCode: code }).then((res) => {
-                console.log("设备分布", res);
-                if (res.success) {
-                    this.getGeojson(res.data.regionCode, res.data.dataList);
-                    this.mapclick();
-                } else {
-                    this.$Message.warning(res.msg);
-                }
-            });
-        },
-        async initEcharts(myData) {
+        async initEcharts(name, data, data2) {
             // 注册geojson
             this.$echarts.registerMap('china', chinaJson);
             const option = {
+                backgroundColor: "rgba(0,0,0,0)",
                 title: {
-                    text: 'Cassie燁的打卡地图',
-                    subtext: '一共打卡32个红色基地',
-                    // 点击标题之后跳转的网址
+                    text: 'Cassie燁的足迹地图',
+                    subtext: '共打卡5个红色基地',
                     sublink: 'http://www.census.gov/popest/data/datasets.html',
-                    left: 'right'
-                },
-                /*
-                    定义了一个当鼠标悬停在图表元素上时立即显示、带有 0.2 秒过渡动画的提示框，
-                */
-                tooltip: {
-                    trigger: 'item',
-                    showDelay: 0,
-                    transitionDuration: 0.2,
-                    backgroundColor: "rgba(0,0,0,.6)",
-                    borderColor: "rgba(147, 235, 248, .8)",
+                    left: 'right',
                     textStyle: {
                         color: "#FFF",
                     },
+                    subtextStyle: {
+                        color: "#0180fb", // 副标题颜色，修改为你需要的颜色
+                    },
+                },
+                tooltip: {
+                    trigger: 'item',
+                    showDelay: 0,
+                    transitionDuration: 0.2
                 },
                 visualMap: {
                     left: 0,
-                    bottom: 20,
+                    bottom: 130,
                     pieces: [
                         { gte: 10, label: "10个以上" }, // 不指定 max，表示 max 为无限大（Infinity）。
                         { gte: 6, lte: 10, label: "6-10个" },
@@ -83,9 +110,6 @@ export default {
                         color: "#fff",
                     },
                 },
-                /*
-                    左上角的数据视图 刷新 下载工具栏
-                */
                 toolbox: {
                     show: true,
                     //orient: 'vertical',
@@ -95,21 +119,31 @@ export default {
                         dataView: { readOnly: false },
                         restore: {},
                         saveAsImage: {}
-                    }
+                    },
+                },
+                geo: {
+                    map: "china",
+                    roam: false,
+                    selectedMode: false, //是否允许选中多个区域
+                    zoom: 1.2,
+                    top: 100,
+                    // aspectScale: 0.78,
+                    show: false,
                 },
                 series: [
                     {
-                        name: '中国',
-                        type: 'map',
-                        roam: true,
-                        map: 'china',
+                        name: "MAP",
+                        type: "map",
+                        map: name,
+                        // aspectScale: 0.78,
+                        data: data,
+                        // data: [1,100],
+                        selectedMode: false, //是否允许选中多个区域
+                        zoom: 1.2,
+                        geoIndex: 1,
+                        top: 100,
                         tooltip: {
                             show: true,
-                            backgroundColor: "rgba(0,0,0,.6)",
-                            borderColor: "rgba(147, 235, 248, .8)",
-                            textStyle: {
-                                color: "#FFF",
-                            },
                             formatter: function (params) {
                                 if (params.data) {
                                     return params.name + "：" + params.data["value"];
@@ -117,25 +151,29 @@ export default {
                                     return params.name;
                                 }
                             },
+                            backgroundColor: "rgba(0,0,0,.6)",
+                            borderColor: "rgba(147, 235, 248, .8)",
+                            textStyle: {
+                                color: "#FFF",
+                            },
                         },
                         label: {
                             show: false,
                             color: "#000",
                             // position: [-10, 0],
-
+                            formatter: function (val) {
+                                // console.log(val)
+                                if (val.data !== undefined) {
+                                    return val.name.slice(0, 2);
+                                } else {
+                                    return "";
+                                }
+                            },
                             rich: {},
                         },
                         emphasis: {
                             label: {
                                 show: false,
-                                formatter: function (val) {
-                                    // console.log(val)
-                                    if (val.data !== undefined) {
-                                        return val.name.slice(0, 2);
-                                    } else {
-                                        return "";
-                                    }
-                                },
                             },
                             itemStyle: {
                                 areaColor: "#389BB7",
@@ -167,22 +205,63 @@ export default {
                             shadowOffsetY: 2,
                             shadowBlur: 10,
                         },
-                        data: [
-                            { name: '山东', value: 1 },
-                            { name: '山西', value: 2 },
-                            { name: '河南', value: 3 },
-                            { name: '河北', value: 4 },
-                            { name: '陕西', value: 5 },
-                            { name: '广东', value: 6 },
-                            { name: '福建', value: 7 },
-                            { name: '浙江', value: 90 },
-                            { name: '甘肃', value: 78 },
-                            { name: '吉林', value: 33 },
-                            { name: '新疆', value: 0 },
-                            { name: '内蒙古', value: 200 },
-                        ]
-                    }
-                ]
+                    },
+                    {
+                        data: data2,
+                        type: "effectScatter",
+                        coordinateSystem: "geo",
+                        symbolSize: function (val) {
+                            return 4;
+                            // return val[2] / 50;
+                        },
+                        legendHoverLink: true,
+                        showEffectOn: "render",
+                        rippleEffect: {
+                            // period: 4,
+                            scale: 6,
+                            color: "rgba(255,255,255, 1)",
+                            brushType: "fill",
+                        },
+                        tooltip: {
+                            show: true,
+                            formatter: function (params) {
+                                if (params.data) {
+                                    return params.name + "：" + params.data["value"][2];
+                                } else {
+                                    return params.name;
+                                }
+                            },
+                            backgroundColor: "rgba(0,0,0,.6)",
+                            borderColor: "rgba(147, 235, 248, .8)",
+                            textStyle: {
+                                color: "#FFF",
+                            },
+                        },
+                        label: {
+                            formatter: (param) => {
+                                return param.name.slice(0, 2);
+                            },
+
+                            fontSize: 11,
+                            offset: [0, 2],
+                            position: "bottom",
+                            textBorderColor: "#fff",
+                            textShadowColor: "#000",
+                            textShadowBlur: 10,
+                            textBorderWidth: 0,
+                            color: "#FFF",
+                            show: true,
+                        },
+                        // colorBy: "data",
+                        itemStyle: {
+                            color: "rgba(255,255,255,1)",
+                            borderColor: "rgba(2255,255,255,2)",
+                            borderWidth: 4,
+                            shadowColor: "#000",
+                            shadowBlur: 10,
+                        },
+                    },
+                ],
             };
 
             const myChart = this.$echarts.init(document.getElementById("china-map"));// 图标初始化
@@ -192,8 +271,9 @@ export default {
             });
         },
         onClickLeft() {
-            history.back();
+            history.back()
         }
+
     }
 };
 </script>
@@ -217,5 +297,9 @@ export default {
 
 :deep(.van-ellipsis) {
     color: black
+}
+
+:deep(.van-action-bar){
+    height: 4rem;
 }
 </style>
