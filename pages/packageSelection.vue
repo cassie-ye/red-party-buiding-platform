@@ -51,6 +51,9 @@ const currentSelectedTeacherIndex = ref(-1)
 const teacherTypeArr = ref([
     "上午场", "下午场", "一日游"
 ])
+const teacherTypeArr2 = ref([
+    "殿堂级", "精英级", "专业级"
+])
 
 const selectTeacherType = (index) => {
     currentSelectedTeacherIndex.value = index
@@ -71,7 +74,7 @@ const gotoFillInOrderInfo = () => {
     <div>
         <van-nav-bar :fixed="true" :placeholder="true" title="套餐选择" left-text="返回" left-arrow
             @click-left="onClickLeft" />
-        <div class="top-red-linear-bg w-full h31rem bg-red pl0.5rem pr0.5rem pt1rem">
+        <div class="pb5rem top-red-linear-bg w-full h31rem bg-red pl0.5rem pr0.5rem pt1rem">
             <div class="mb1rem bg-#fff w-95% ml2.5% rounded-1rem p1rem">
                 <p class="font-bold font-size-1.2rem">嘉兴南湖 —— 带你领略小船上的故事</p>
                 <p class="mt1rem font-size-0.9rem color-#525252">请由上至下选择出行日期、讲师级别、场次</p>
@@ -104,7 +107,7 @@ const gotoFillInOrderInfo = () => {
                 </div>
                 <p class="font-bold mt1rem">选择讲师</p>
                 <div class="flex">
-                    <div v-for="(item, index) in teacherTypeArr" :key="index"
+                    <div v-for="(item, index) in teacherTypeArr2" :key="index"
                         class="mt0.5rem flex flex-col justify-evenly items-center pt0.3rem pb0.3rem border-solid border-0.05rem border-#DEDEDE w6.5rem mr0.3rem font-size-0.8rem rounded-0.3rem"
                         :class="index === currentSelectedTeacherIndex ? 'bg-yellow color-#fff' : 'bg-#fff'"
                         @click="selectTeacherType(index)">
@@ -112,7 +115,7 @@ const gotoFillInOrderInfo = () => {
                     </div>
                 </div>
                 <p class="font-bold mt1rem">选择场次</p>
-                <div class="flex">
+                <div class="flex pb5rem">
                     <div v-for="(item, index) in teacherTypeArr" :key="index"
                         class="mt0.5rem flex flex-col justify-evenly items-center pt0.3rem pb0.3rem border-solid border-0.05rem border-#DEDEDE w6.5rem mr0.3rem font-size-0.8rem rounded-0.3rem"
                         :class="index === currentSelectedTimeTypeIndex ? 'bg-purple color-#fff' : 'bg-#fff'"
@@ -124,7 +127,7 @@ const gotoFillInOrderInfo = () => {
             <van-calendar v-model:show="show" :formatter="formatter" @confirm="onConfirm" />
 
         </div>
-        <van-action-bar class="pl1rem pr1rem">
+        <van-action-bar class="pl1rem pr1rem ">
             <div class="w10rem h-full color-red-5 flex justify-start items-center font-size-1.2rem font-bold">￥34</div>
             <van-action-bar-button @click="gotoFillInOrderInfo()" color="" type="danger" text="下一步" />
         </van-action-bar>

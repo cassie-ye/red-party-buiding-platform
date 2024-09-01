@@ -7,25 +7,25 @@ const state = ref({
     prizeList: [
         { name: 'Thanks', pic: '/choujiang/thank.png' },
         {
-            name: '杭州大运会门票',
+            name: '20元代金券',
             pic:
                 'https://obs-xhlj.obs.cn-east-3.myhuaweicloud.com/2023/5/014a39c8a5c440ccbb9549db8bb8c0af.jpg',
         },
         { name: 'Thanks', pic: '/choujiang/thank.png' },
         {
-            name: '睡眠记忆枕头',
+            name: '50个积分',
             pic:
                 'https://obs-xhlj.obs.cn-east-3.myhuaweicloud.com/2023/4/3518223caed3401f8e0c72bc91593b2c.jpg',
         },
         { name: 'Thanks', pic: '/choujiang/thank.png' },
         {
-            name: '安恒小龙人抱枕',
+            name: '10个积分',
             pic:
                 'https://obs-xhlj.obs.cn-east-3.myhuaweicloud.com/2023/4/e49da182c8364cb7af6d39fe2bcd2fd3.jpg',
         },
         { name: 'Thanks', pic: '/choujiang/thank.png' },
         {
-            name: '故宫文化日历',
+            name: '50元代金券',
             pic:
                 'https://obs-xhlj.obs.cn-east-3.myhuaweicloud.com/2023/4/68d6d7ff155842f28f31ff0c1a66b77b.png',
         },
@@ -89,7 +89,7 @@ function start() {
         // console.log('中奖ID>>>', prizeId, state.value.prizeList[prizeId])
         state.value.prizeId = prizeId
         activeIndex.value = prizeId
-        // console.log(activeIndex.value)
+        console.log(activeIndex.value)
         startRun()
 
     }

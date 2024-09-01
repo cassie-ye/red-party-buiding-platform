@@ -102,12 +102,12 @@ class HttpRequest {
         return this.request(url, "POST", data, options);
     }
 
-    Put<T extends ResponseType>(url: string, data: any, options?: FetchOptions<T>) {
+    put<T extends ResponseType>(url: string, data: any, options?: FetchOptions<T>) {
         return this.request(url, "PUT", data, options);
     }
 
 
-    Delete<T extends ResponseType>(url: string, params: any, options?: FetchOptions<T>) {
+    delete<T extends ResponseType>(url: string, params?: any, options?: FetchOptions<T>) {
         return this.request(url, "DELETE", params, options);
     }
 }

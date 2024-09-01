@@ -1,10 +1,13 @@
 <script setup>
 import { reserveRedBaseAPI, getRedBaseCanBeReservedDatesAPI, getRedBaseDetailsByIdAPI, getRedBaseDayActivityContentByBaseIdAndSelectedDateAPI, getReserveRedBaseOrderIdAPI } from "../utils/apis/redBase.ts"
 import { getUserInfoAPI } from "../utils/apis/user.ts";
+import { judgeIsExistNoPayOrderAPI, deleteNoPayOrdersAPI } from "../utils/apis/pay.ts"
+import { useUserStore } from "../store/user.js"
 import dayjs from 'dayjs';
 const route = useRoute()
 const router = useRouter()
 const onClickLeft = () => history.back();
+const userStore = useUserStore()
 
 // 发起预约基地请求 所需要的参数对象
 const reserveDataObj = {
@@ -274,15 +277,29 @@ const placeAnOrder = async () => {
         reserveDataObj.phone = reservePeoplePhoneNumber.value
         reserveDataObj.idcard = reservePeopleIdCard.value
         showGetOrderIdPannelFlag.value = true
-        await getReserveRedBaseOrderId()
-        reserveDataObj.id = reserveOrderId.value
-        console.log(reserveDataObj)
-        paymentLinkParams.subject = `${reserveDataObj.basename}${reserveDataObj.tripname}`,
-            paymentLinkParams.totalAmount = reserveDataObj.price,
-            paymentLinkParams.traceNo = reserveDataObj.id
     } else {
         showFailToast('请填写完整信息');
     }
+}
+
+const isExistNoPayOrderFlag = ref(false)
+/**
+ * 调接口判断是否存在未支付的订单
+ */
+const judgeIsExistNoPayOrder = async () => {
+    const res = await judgeIsExistNoPayOrderAPI()
+    isExistNoPayOrderFlag.value = res
+    userStore.userInfo.isNoPayOrder = res
+    console.log(userStore.isNoPayOrder)
+}
+
+/**
+ * 调接口删除未支付的订单
+ */
+const deleteNoPayOrders = async () => {
+    await deleteNoPayOrdersAPI()
+    userStore.updateUserInfoHasNoPayOrder(false)
+    console.log(userStore.userInfo.isExistNoPayOrderFlag)
 }
 
 /**
@@ -290,13 +307,38 @@ const placeAnOrder = async () => {
  * 调用预约基地接口
  * 跳转到支付链接
  */
-const condirmAndSubmitOrder = () => {
-    reserveRedBase(reserveDataObj)
-    console.log(paymentLinkParams)
-    router.push({
-        path: '/paymentLink',
-        query: paymentLinkParams
-    });
+const condirmAndSubmitOrder = async () => {
+    await judgeIsExistNoPayOrder()
+    console.log(isExistNoPayOrderFlag.value)
+    if (isExistNoPayOrderFlag.value) {
+        showConfirmDialog({
+            title: '标题',
+            message:
+                '是否取消之前未支付订单，前往支付?',
+        })
+            .then(async () => {
+                await deleteNoPayOrders()
+                // 取消未支付的订单
+                // await getMyNoPayOrder()
+            })
+            .catch(() => {
+                showFailToast('抱歉，您必须先支付未支付的订单才能继续预约');
+            });
+    } else {
+        await getReserveRedBaseOrderId()
+        reserveDataObj.id = reserveOrderId.value
+        console.log(reserveDataObj)
+        paymentLinkParams.subject = `${reserveDataObj.basename}${reserveDataObj.tripname}`,
+        paymentLinkParams.totalAmount = reserveDataObj.price,
+        paymentLinkParams.traceNo = reserveDataObj.id
+        reserveRedBase(reserveDataObj)
+        console.log(paymentLinkParams)
+        router.push({
+            path: '/paymentLink',
+            query: paymentLinkParams
+        });
+    }
+
 }
 </script>
 <template>
@@ -370,7 +412,7 @@ const condirmAndSubmitOrder = () => {
                 </van-action-sheet>
             </div>
             <div>
-                <div class="w-full bg-#fff mt0.5rem ">
+                <div v-if="reservePeopleInfo.name" class="w-full bg-#fff mt0.5rem ">
                     <van-popover v-model:show="showPopover" :actions="actions" @select="selectReservePeopleInfo()"
                         right-start>
                         <template #reference class="w-full">
@@ -378,6 +420,7 @@ const condirmAndSubmitOrder = () => {
                         </template>
                     </van-popover>
                 </div>
+                <van-field v-model="reservePeopleName" label="预约人" placeholder="请输入您的姓名" />
                 <van-field v-model="reservePeopleDepartment" label="所在单位" placeholder="请输入您所在单位" />
                 <van-field v-model="reservePeoplePosition" label="职位" placeholder="请输入您的职位" />
                 <van-field v-model="reservePeoplePhoneNumber" type="tel" label="电话" placeholder="请输入您的电话" />

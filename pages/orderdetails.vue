@@ -1,30 +1,45 @@
 <script setup>
 const onClickLeft = () => history.back();
+const route = useRoute()
 const router = useRouter()
+const orderInfo = ref({});
+/**
+ * 得到页面传参的orderInfo的信息
+ */
+onMounted(() => {
+    const queryOrderInfo = route.query.orderInfo;
+    if (queryOrderInfo) {
+        try {
+            orderInfo.value = JSON.parse(queryOrderInfo);
+            console.log(orderInfo.value);
+        } catch (e) {
+            console.error('Failed to parse orderInfo from query:', e);
+        }
+    }
+});
 </script>
 <template>
     <div>
-        <van-nav-bar :fixed="true" :placeholder="true" title="下单成功" left-text="返回" left-arrow
+        <van-nav-bar :fixed="true" :placeholder="true" title="订单详情" left-text="返回" left-arrow
             @click-left="onClickLeft" />
-        <div class="h-vh w-vw bg-#fff p1rem">
-            <p class="font-size-1.3rem color-red-6 font-bold">付款成功!</p>
+        <div class="h-vh w-vw bg-#fff p1rem pt0.5rem">
             <div>
-                <p class="mt1rem"><span class="font-bold font-size-0.9rem">订单编号：</span>202208121111</p>
+                <p class="mt1rem"><span class="font-bold font-size-0.9rem">订单编号：</span>{{ orderInfo.id }}</p>
                 <div class="mt0.5rem flex">
                     <img class="w6rem h6rem rounded-0.5rem " src="/public/red-base/top-bg.jpg" alt="">
                     <div class="w60% h-full pl0.3rem font-size-0.9rem">
-                        <p class="shenglue">嘉兴南湖--带你领略小船上的故事</p>
+                        <p class="shenglue">{{ orderInfo.tripname }}</p>
                         <div class="color-#959595 font-size-0.8rem">
-                            <p>预约基地：{{ "嘉兴南湖" }}</p>
-                            <p>预约时间：{{ "2025-08-11" }}</p>
-                            <p>预约人：{{ "上午场" }}</p>
-                            <p>联系电话：{{ "13568959589" }}</p>
+                            <p>预约基地：{{ orderInfo.basename }}</p>
+                            <p>预约时间：{{ orderInfo?.startdate?.slice(0, 10) }}</p>
+                            <p>预约人：{{ orderInfo.username }}</p>
+                            <p>联系电话：{{ orderInfo.phone }}</p>
                         </div>
                     </div>
                     <div class="">
                         <p class="flex items-center color-red-5 font-bold">
                             <span class="">￥</span>
-                            <span class="font-size-0.9rem ">1486.77</span>
+                            <span class="font-size-0.9rem ">{{ orderInfo.price }}</span>
                         </p>
                     </div>
                 </div>
@@ -33,13 +48,13 @@ const router = useRouter()
                 <div class="flex items-center justify-between w-full">
                     <div>实付款</div>
                     <div class="color-#9ea5ab">
-                        ￥39.9
+                        {{ orderInfo.price }}
                     </div>
                 </div>
                 <div class="flex mt0.5rem items-center justify-between w-full">
                     <div>订单编号</div>
                     <div class="color-#9ea5ab">
-                        202208121111
+                        {{ orderInfo.id }}
                     </div>
                 </div>
                 <div class="flex mt0.5rem items-center justify-between w-full">
@@ -57,13 +72,7 @@ const router = useRouter()
                 <div class="flex mt0.5rem items-center justify-between w-full">
                     <div>创建时间</div>
                     <div class="color-#9ea5ab">
-                        2024-08-11 12:00:11
-                    </div>
-                </div>
-                <div class="flex mt0.5rem items-center justify-between w-full">
-                    <div>创建时间</div>
-                    <div class="color-#9ea5ab">
-                        2024-08-11 12:00:11
+                        {{ orderInfo.gmtpayment.slice(0,10) }}&nbsp;{{ orderInfo.gmtpayment.slice(11,19) }}
                     </div>
                 </div>
             </div>

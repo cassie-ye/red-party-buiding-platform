@@ -1,5 +1,7 @@
 <script setup>
 import { getBaseListByCategoryAPI, getAllBaseCategoryListAPI, getHotRedBaseListAPI } from "../utils/apis/redBase.ts"
+import { useUserStore } from "../store/user.js"
+const userStore = useUserStore()
 definePageMeta({
     layout: 'with-tabbar'
 })
@@ -162,6 +164,71 @@ const gotoSearchRedBase = () => {
 const gotoLottery = () => {
     router.push("/lottery")
 }
+
+/**
+ * 加载百度地图 获取地理位置信息
+ */
+const LoadBaiduMapScript = () => {
+    const AK = 'xNceWXpU5pTmlF8IE21JknGmWURGLcdY'
+    const BMap_URL = `https://api.map.baidu.com/api?v=1.0&type=webgl&ak=${AK}&callback=init`
+    const url = "https://unpkg.com/@bmapgl-plugin/cluster"
+    const url2 = "https://mapopen-pub-jsapi.cdn.bcebos.com/static/js/bjpoi.js"
+    const url3 = "https://unpkg.com/gcoord/dist/gcoord.global.prod.js"
+    return new Promise((resolve, reject) => {
+        // 如果已加载直接返回
+        if (typeof BMapGL !== "undefined") {
+            resolve(BMapGL);
+            return true;
+        }
+        // 百度地图异步加载回调处理
+        window.init = function () {
+            console.log("百度地图脚本初始化成功...");
+            resolve(BMapGL);
+        };
+        // 插入script脚本
+        let scriptNode = document.createElement("script");
+        scriptNode.setAttribute("type", "text/javascript");
+        scriptNode.setAttribute("src", BMap_URL);
+        document.body.appendChild(scriptNode);
+        let scriptNode2 = document.createElement("script");
+        scriptNode2.setAttribute("src", url);
+        document.body.appendChild(scriptNode2);
+        let scriptNode3 = document.createElement("script");
+        scriptNode3.setAttribute("src", url2);
+        document.body.appendChild(scriptNode3);
+        let scriptNode4 = document.createElement("script");
+        scriptNode4.setAttribute("src", url3);
+        document.body.appendChild(scriptNode4);
+    })
+}
+// 地图对象
+const mapObj = ref(null)
+// 当前位置经纬度
+const currentPosition = ref({})
+/**
+ * 获取当前位置
+ */
+function getLocation() {
+    //当前位置
+    var geolocation = new BMapGL.Geolocation();
+    // 开启SDK辅助定位
+    geolocation.enableSDKLocation();
+    geolocation.getCurrentPosition((res) => {
+        // latitude纬度 longitude经度
+        currentPosition.value.lat = res.latitude
+        currentPosition.value.lng = res.longitude
+        // userStore.userInfo.currentPosition = currentPosition.value
+        userStore.updateUserInfoCurrentPosition(res)
+    })
+}
+
+/**
+ * 页面挂载
+ */
+onMounted(async () => {
+    await LoadBaiduMapScript()
+    getLocation()
+})
 
 </script>
 <template>

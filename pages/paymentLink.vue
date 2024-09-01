@@ -22,9 +22,17 @@ const selectPayMethod = (index) => {
  * 确认支付 跳转到支付宝沙箱
  */
 const confirmPayment = () => {
+    // if (currentSelectedPayMethodIndex.value == 0) {
+    //     // TODO：支付链接
+    //     window.open(`http://192.168.0.111:10087/alipay/pay?subject=${route.query.subject}&totalAmount=${route.query.totalAmount}&traceNo=${route.query.traceNo}`)
+    // }
     if (currentSelectedPayMethodIndex.value == 0) {
         // TODO：支付链接
-        window.open(`http://10.10.12.170:10087/alipay/pay?subject=${route.query.subject}&totalAmount=${route.query.totalAmount}&traceNo=${route.query.traceNo}`)
+        const url = `http://192.168.0.111:10087/alipay/pay?subject=${route.query.subject}&totalAmount=${route.query.totalAmount}&traceNo=${route.query.traceNo}`
+        router.push({
+            path: '/aliPay',
+            query: { url }
+        })
     }
 }
 </script>

@@ -1,6 +1,10 @@
 <script setup>
 import { useUserStore } from '../store/user.js'
 import { getUserInfoAPI } from "../utils/apis/user.ts"
+import { judgeIsExistNoPayOrderAPI } from "../utils/apis/pay.ts"
+definePageMeta({
+    layout: 'register-login'
+})
 const tel = ref('')
 const password = ref('')
 const router = useRouter()
@@ -40,6 +44,15 @@ const getUserInfo = async () => {
 }
 
 /**
+ * 调接口判断是否存在未支付的订单
+ */
+const judgeIsExistNoPayOrder = async () => {
+    const res = await judgeIsExistNoPayOrderAPI()
+    userStore.userInfo.isNoPayOrder = res
+    console.log(userStore.isNoPayOrder)
+}
+
+/**
  * 登录
  */
 const performLogin = async () => {
@@ -76,6 +89,7 @@ const performLogin = async () => {
                 router.push('/home')
             }, 3000)
             await getUserInfo()
+            await judgeIsExistNoPayOrder()
         }
     } catch (error) {
         console.error('Error during login:', error);

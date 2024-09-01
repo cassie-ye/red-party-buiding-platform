@@ -1,4 +1,6 @@
 <script setup>
+import { useUserStore } from '../store/user.js'
+
 definePageMeta({
     layout: 'with-tabbar'
 })
@@ -16,6 +18,15 @@ const gotoEditUserInfo = () => {
  */
 const gotoMyOrder = () => {
     router.push('/myOrder')
+}
+
+
+const userStore = useUserStore()
+const logOut = () => {
+    userStore.userInfo = {}
+    // 清除localStorage
+    localStorage.removeItem('userInfo')
+    router.push('/')
 }
 </script>
 <template>
@@ -103,6 +114,10 @@ const gotoMyOrder = () => {
                 <i class="iconfont icon-tongji font-size-1.5rem mr0.3rem color-red-6"></i>
                 <span class="font-size-0.9rem mr0.2rem">个人报告</span>
             </div>
+        </div>
+        <div @click="logOut()"
+            class="w90% ml5% mb2rem mt3rem bg-red-600 h2.5rem rounded-1.5rem color-#fff flex justify-center items-center font-size-0.9rem">
+            退出登录
         </div>
     </div>
 </template>

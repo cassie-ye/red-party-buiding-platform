@@ -1,10 +1,33 @@
+<script setup>
+import { useUserStore } from "../store/user.js"
+const router = useRouter()
+const userStore = useUserStore()
+const isShowPayNotice = userStore.userInfo.isNoPayOrder
+const gotoPayOrders = () => {
+    router.push({
+        path: '/myOrder',
+        query: { active: 1 }
+    });
+}
+</script>
 <template>
     <main>
         <!-- <NuxtPage /> -->
+        <div @click="gotoPayOrders()" v-if="isShowPayNotice" class="fixed right-0 bottom-4rem bg-yellow-400 p0.3rem z-99999999999 flex items-center rounded-1.3rem">
+            <div class="flex items-center mr0.3rem">
+                <img class="w2.1rem h2.1rem rounded-50% mr0.5rem" src="/public/red-base/top-bg.jpg" alt="">
+                <div class="font-size-0.8rem">
+                    <p>等待支付</p>
+                    <p>您有一笔订单<span class="color-red-5">未支付</span></p>
+                </div>
+            </div>
+            <div class="flex items-center">
+                <!-- <p class="font-size-0.8rem font-bold mr0.2rem">去支付</p> -->
+                <i class="iconfont icon-youjiantou font-size-0.8rem"></i>
+            </div>
+        </div>
         <slot class="pb10rem"></slot>
-        <Footer/>
+        <Footer />
     </main>
 </template>
-<style>
-
-</style>
+<style></style>

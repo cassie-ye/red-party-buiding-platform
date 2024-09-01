@@ -4,6 +4,7 @@ import * as echarts from 'echarts'
 useHead({
     title: appName,
 })
+
 </script>
 
 <template>
