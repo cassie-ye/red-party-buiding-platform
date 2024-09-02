@@ -1,5 +1,8 @@
 <script setup>
 import { registerAPI } from "../utils/apis/commen.ts"
+definePageMeta({
+    layout: 'register-login'
+})
 const tel = ref('')
 const password = ref('')
 const secondPassword = ref('')
@@ -27,7 +30,7 @@ const register = async (data) => {
     if (res) {
         showSuccessToast('注册成功');
         setTimeout(() => {
-            router.push('/')
+            router.push('/studyParticipantsLogin')
         }, 3000)
     }
 }

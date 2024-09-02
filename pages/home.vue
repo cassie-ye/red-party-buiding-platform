@@ -230,6 +230,12 @@ onMounted(async () => {
     getLocation()
 })
 
+/**
+ * 进入ChatGPT
+ */
+const gotoChatGPT = () => {
+    router.push("/chatGPT")
+}
 </script>
 <template>
     <div class="pb3rem">
@@ -249,7 +255,7 @@ onMounted(async () => {
                     </van-swipe>
                 </div>
                 <!-- chatgpt -->
-                <Icon name="arcticons:openai-chatgpt" style="color: black" size="25" />
+                <Icon @click="gotoChatGPT()" name="arcticons:openai-chatgpt" style="color: black" size="25" />
                 <!-- 更多 -->
                 <Icon name="material-symbols:more-horiz" style="color: black" size="25" />
             </div>
