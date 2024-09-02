@@ -1,8 +1,19 @@
 <script setup>
-import { useUserStore } from "../store/user.js"
+import { useOrderStore } from "../store/order.js"
 const router = useRouter()
-const userStore = useUserStore()
-const isShowPayNotice = userStore.userInfo.isNoPayOrder
+const orderStore = useOrderStore()
+let isExistNoPayOrder = ref()
+isExistNoPayOrder.value = orderStore.isExistNoPayOrder
+
+/**
+ * 监听isExistNoPayOrder的值的变化
+ * 当未付款的订单被删除的时候，isExistNoPayOrder的值会变为false，同时隐藏
+ */
+watch(() => orderStore.isExistNoPayOrder, (newValue, oldValue) => {
+    isExistNoPayOrder.value = newValue
+    console.log(isExistNoPayOrder.value)
+})
+
 const gotoPayOrders = () => {
     router.push({
         path: '/myOrder',
@@ -13,7 +24,7 @@ const gotoPayOrders = () => {
 <template>
     <main>
         <!-- <NuxtPage /> -->
-        <div @click="gotoPayOrders()" v-if="isShowPayNotice" class="fixed right-0 bottom-4rem bg-yellow-400 p0.3rem z-99999999999 flex items-center rounded-1.3rem">
+        <div @click="gotoPayOrders()" v-if="isExistNoPayOrder" class="fixed right-0 bottom-4rem bg-yellow-400 p0.3rem z-99999999999 flex items-center rounded-1.3rem">
             <div class="flex items-center mr0.3rem">
                 <img class="w2.1rem h2.1rem rounded-50% mr0.5rem" src="/public/red-base/top-bg.jpg" alt="">
                 <div class="font-size-0.8rem">

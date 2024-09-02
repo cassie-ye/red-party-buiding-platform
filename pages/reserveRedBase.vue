@@ -1,13 +1,12 @@
 <script setup>
 import { reserveRedBaseAPI, getRedBaseCanBeReservedDatesAPI, getRedBaseDetailsByIdAPI, getRedBaseDayActivityContentByBaseIdAndSelectedDateAPI, getReserveRedBaseOrderIdAPI } from "../utils/apis/redBase.ts"
 import { getUserInfoAPI } from "../utils/apis/user.ts";
-import { judgeIsExistNoPayOrderAPI, deleteNoPayOrdersAPI } from "../utils/apis/pay.ts"
-import { useUserStore } from "../store/user.js"
+import { useOrderStore } from "../store/order.js"
 import dayjs from 'dayjs';
 const route = useRoute()
 const router = useRouter()
 const onClickLeft = () => history.back();
-const userStore = useUserStore()
+const orderStore = useOrderStore()
 
 // 发起预约基地请求 所需要的参数对象
 const reserveDataObj = {
@@ -33,6 +32,14 @@ const reserveDataObj = {
 }
 
 const currentRedBaseInfo = ref({})
+
+/**
+ * 一进页面就立刻判断是否存在未支付订单
+ */
+onMounted(async () => {
+    await orderStore.judgeIsExistNoPayOrder()
+})
+
 /**
  * 调接口获取基地详情资料
  */
@@ -282,48 +289,34 @@ const placeAnOrder = async () => {
     }
 }
 
-const isExistNoPayOrderFlag = ref(false)
-/**
- * 调接口判断是否存在未支付的订单
- */
-const judgeIsExistNoPayOrder = async () => {
-    const res = await judgeIsExistNoPayOrderAPI()
-    isExistNoPayOrderFlag.value = res
-    userStore.userInfo.isNoPayOrder = res
-    console.log(userStore.isNoPayOrder)
-}
-
-/**
- * 调接口删除未支付的订单
- */
-const deleteNoPayOrders = async () => {
-    await deleteNoPayOrdersAPI()
-    userStore.updateUserInfoHasNoPayOrder(false)
-    console.log(userStore.userInfo.isExistNoPayOrderFlag)
-}
-
 /**
  * 点击确认并提交按钮
  * 调用预约基地接口
  * 跳转到支付链接
  */
 const condirmAndSubmitOrder = async () => {
-    await judgeIsExistNoPayOrder()
-    console.log(isExistNoPayOrderFlag.value)
-    if (isExistNoPayOrderFlag.value) {
+    // 判断是否存在未支付的订单
+    await orderStore.judgeIsExistNoPayOrder()
+    // 存在未支付的订单
+    if (orderStore.isExistNoPayOrder) {
+        // 跳出弹框询问是否取消
         showConfirmDialog({
             title: '标题',
             message:
-                '是否取消之前未支付订单，前往支付?',
+                '您存在未支付的订单，是否取消后再进行本次付款?',
         })
+            // 确认取消
             .then(async () => {
-                await deleteNoPayOrders()
                 // 取消未支付的订单
-                // await getMyNoPayOrder()
+                await orderStore.deleteNoPayOrders()
+                // 重新调接口判断是否存在未支付的订单
+                await orderStore.judgeIsExistNoPayOrder()
             })
+            // 不取消
             .catch(() => {
                 showFailToast('抱歉，您必须先支付未支付的订单才能继续预约');
             });
+    // 不存在
     } else {
         await getReserveRedBaseOrderId()
         reserveDataObj.id = reserveOrderId.value

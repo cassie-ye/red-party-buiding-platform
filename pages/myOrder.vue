@@ -1,5 +1,5 @@
 <script setup>
-import { getMyNoPayOrderAPI, getMyAllOrdersAPI } from "../utils/apis/pay.ts"
+import { useOrderStore } from "../store/order.js";
 const route = useRoute()
 const router = useRouter()
 const onClickLeft = () => history.back();
@@ -8,6 +8,7 @@ const tabTitleList = ref([
     "待付款",
 ])
 const isPay = ref(true)
+const orderStore = useOrderStore()
 
 /**
  * 进入页面后首先展示全部订单还是待付款订单
@@ -15,34 +16,25 @@ const isPay = ref(true)
  * 否则就展示全部订单
  */
 const activeTab = ref(0);
-onMounted(() => {
+const noPayOrderInfoObj = ref({})
+const myAllOrdersList = ref([])
+onMounted(async () => {
     const active = route.query.active;
     if (active) {
         activeTab.value = Number(active); // 0-based index
     } else {
         activeTab.value = 0; // Default to the first tab
     }
+    // 一进页面就获取全部订单和未支付的订单
+    await orderStore.getMyNoPayOrder();
+    await orderStore.getMyAllOrders();
+    noPayOrderInfoObj.value = orderStore.noPayOrderObj
+    myAllOrdersList.value = orderStore.myAllOrderList
+    console.log(noPayOrderInfoObj.value)
+    console.log(myAllOrdersList.value)
+    await orderStore.judgeIsExistNoPayOrder()
 });
 
-const noPayOrderInfoObj = ref({})
-/**
- * 获取未支付的订单信息 一般只有一个
- */
-const getMyNoPayOrder = async () => {
-    const res = await getMyNoPayOrderAPI()
-    noPayOrderInfoObj.value = res
-}
-getMyNoPayOrder()
-
-const myAllOrdersList = ref([])
-/**
- * 获取全部订单
- */
-const getMyAllOrders = async () => {
-    const res = await getMyAllOrdersAPI()
-    myAllOrdersList.value = res
-}
-getMyAllOrders()
 
 /**
  * 点击全部订单的查看订单详情跳转到订单详情页面
@@ -51,7 +43,7 @@ const gotoOrderDetails = (item) => {
     // console.log(item)
     router.push({
         path: '/orderDetails',
-        query: { orderInfo:  JSON.stringify(item)  }
+        query: { orderInfo: JSON.stringify(item) }
     });
 }
 
@@ -59,10 +51,10 @@ const gotoOrderDetails = (item) => {
  * 点击跳转到支付宝沙箱
  */
 const gotoAliPay = () => {
-    const subject = noPayOrderInfoObj.value.basename+noPayOrderInfoObj.value.tripname+""
+    const subject = noPayOrderInfoObj.value.basename + noPayOrderInfoObj.value.tripname + ""
     const totalAmount = noPayOrderInfoObj.value.price
     const traceNo = noPayOrderInfoObj.value.id
-    const url = `http://192.168.0.111:10087/alipay/pay?subject=${subject}&totalAmount=${totalAmount}&traceNo=${traceNo}`
+    const url = `http://192.168.43.108:10087/alipay/pay?subject=${subject}&totalAmount=${totalAmount}&traceNo=${traceNo}`
     router.push({
         path: '/aliPay',
         query: { url }
@@ -126,11 +118,8 @@ const gotoAliPay = () => {
                 </div>
                 <!-- 未支付订单 -->
                 <div v-if="index == 1" class="w-full pl0.5rem pr0.5rem mt0.5rem flex justify-between flex-wrap">
-                    <div v-if="noPayOrderInfoObj = {}" class="w-full flex justify-center">
-                        <van-empty description="暂无未支付订单" />
-                    </div>
-                    <div @click="gotoAliPay()" v-else class="w-full h9rem bg-#fff rounded-0.5rem p0.5rem"
-                        :class="isPay ? 'h8.5rem' : 'h9rem'">
+                    <div v-if="noPayOrderInfoObj" @click="gotoAliPay()"
+                        class="w-full h9rem bg-#fff rounded-0.5rem p0.5rem" :class="isPay ? 'h8.5rem' : 'h9rem'">
                         <div class="w-full">
                             <div class="font-size-0.9rem flex justify-between">
                                 <p>订单编号： {{ noPayOrderInfoObj.id }}</p>
@@ -165,6 +154,9 @@ const gotoAliPay = () => {
                                 </div>
                             </div>
                         </div>
+                    </div>
+                    <div v-else class="w-full flex justify-center">
+                        <van-empty description="暂无未支付订单" />
                     </div>
                 </div>
             </van-tab>
