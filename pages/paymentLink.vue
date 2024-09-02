@@ -28,7 +28,7 @@ const confirmPayment = () => {
     // }
     if (currentSelectedPayMethodIndex.value == 0) {
         // TODO：支付链接
-        const url = `http://192.168.43.108:10087/alipay/pay?subject=${route.query.subject}&totalAmount=${route.query.totalAmount}&traceNo=${route.query.traceNo}`
+        const url = `http://192.168.0.111:10087/alipay/pay?subject=${route.query.subject}&totalAmount=${route.query.totalAmount}&traceNo=${route.query.traceNo}`
         router.push({
             path: '/aliPay',
             query: { url }

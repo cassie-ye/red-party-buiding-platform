@@ -15,6 +15,7 @@ const gotoBaseManagerLogin = () => {
     router.push('/baseManagerLogin')
 }
 </script>
+
 <template>
     <div>
         <van-nav-bar :fixed="true" :placeholder="true" title="角色选择" left-text="返回" left-arrow
