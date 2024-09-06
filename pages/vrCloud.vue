@@ -136,7 +136,7 @@ const gotoSearchItem = (index) => {
 </script>
 <template>
     <div class="w-full  h-full">
-        <van-nav-bar :fixed="true" :placeholder="true" title="红色基地" left-text="返回" left-arrow
+        <van-nav-bar :fixed="true" :placeholder="true" title="VR云游红色基地" left-text="返回" left-arrow
             @click-left="onClickLeft" />
         <!-- <div class="w-full pt1rem h17.5rem top-red-linear-bg ">
             <div
@@ -144,14 +144,14 @@ const gotoSearchItem = (index) => {
                 <Icon name="ic:outline-search" style="color: #9F9F9F" size="25" />
                 <p class="color-#9F9F9F font-size-0.9rem">搜索VR场馆</p>
             </div>
-            <div class="w-full flex justify-center">
-                <video class="mt0.8rem w96% rounded-0.5rem top-red-linear-bg"
-                    src="https://boot-video.xuexi.cn/video/1005/p/59453997e1342bcadc6ca1df48d37397-b6067f7596224c518260653e5df6574e-2.mp4"
-                    controls></video>
-            </div>
         </div> -->
         <van-search v-model="searchValue" show-action placeholder="请输入搜索关键词"
             @update:model-value="debouncedInputContent" />
+            <div class="w-full flex justify-center pb0.5rem bg-#fff">
+                <video class="mt0.5rem w96% rounded-0.5rem top-red-linear-bg"
+                    src="https://boot-video.xuexi.cn/video/1005/p/59453997e1342bcadc6ca1df48d37397-b6067f7596224c518260653e5df6574e-2.mp4"
+                    controls></video>
+            </div>
         <div v-show="isShowSearchPannel"
             class="w93% bg-#fff fixed z-999 left-0.8rem top-5.8rem rounded-0.2rem shadow-xl">
             <div @click="gotoSearchItem(index)" v-for="(item, index) in searchResultList" :key="index"
@@ -198,7 +198,6 @@ const gotoSearchItem = (index) => {
                                         <p class="font-size-0.8rem color-#9F9F9F ml0.2rem">{{ item.category }}</p>
                                     </div>
                                 </div>
-
                             </div>
                         </div>
                     </div>

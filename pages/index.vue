@@ -37,7 +37,7 @@ const gotoBaseManagerLogin = () => {
                     <div class="w2.5rem h2.8rem mr1.5rem flex justify-center items-center bg-blue-5 rounded-0.3rem">
                         <i class="iconfont icon-guanliyuan font-size-2rem color-#fff"></i>
                     </div>
-                    <p class="font-bold">我是基地管理员</p>
+                    <p class="font-bold">我是入驻申请人员</p>
                     <p
                         class="font-size-0.6rem absolute right-0.5rem top-0.5rem bg-blue-5 px0.5rem py0.1rem rounded-0.3rem color-#fff">
                         基地入驻</p>

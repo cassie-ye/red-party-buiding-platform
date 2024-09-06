@@ -61,9 +61,9 @@ const moudleList = ref([
 
     },
     {
-        name: "角色体验",
+        name: "廉政教育",
         img: "/home/character-experience.png",
-        link: ""
+        link: "/integrityEducation"
 
     }
 ])
@@ -236,6 +236,13 @@ onMounted(async () => {
 const gotoChatGPT = () => {
     router.push("/chatGPT")
 }
+
+/**
+ * 进入廉政答题
+ */
+const gotoIntegrityQuiz = () => {
+    router.push("/integrityQuiz")
+}
 </script>
 <template>
     <div class="pb3rem">
@@ -326,8 +333,9 @@ const gotoChatGPT = () => {
                         <img class="w2rem color-#717171 mr0.2rem" src="/home/timeline.png" alt="">
                     </div>
                 </div>
-                <div class="relative p0.2rem items-center mr2% w32% bg-#fff rounded-0.3rem h-full justify-between">
-                    <p class="font-bold">答题得积分</p>
+                <div @click="gotoIntegrityQuiz()"
+                    class="relative p0.2rem items-center mr2% w32% bg-#fff rounded-0.3rem h-full justify-between">
+                    <p class="font-bold">廉政答题</p>
                     <div class="flex">
                         <p class="font-size-0.7rem">1122w人正在参与</p>
                         <img class="w2rem color-#717171 mr0.2rem" src="/home/answer-questions.png" alt="">

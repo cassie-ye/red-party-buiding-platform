@@ -65,7 +65,7 @@ export default defineNuxtConfig({
                 { rel: 'icon', href: '/favicon.ico', sizes: 'any' },
                 { rel: 'icon', type: 'image/svg+xml', href: '/nuxt.svg' },
                 { rel: 'apple-touch-icon', href: '/apple-touch-icon.png' },
-                { rel: "stylesheet", href: "//at.alicdn.com/t/c/font_4641437_yq7u03n7p1.css" },
+                { rel: "stylesheet", href: "//at.alicdn.com/t/c/font_4641437_gjrwsodfjpk.css" },
                 { rel: "stylesheet", href: "https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" },
                 // { rel: "text/javascript", href: "https://api.map.baidu.com/api?v=1.0&&type=webgl&ak=xNceWXpU5pTmlF8IE21JknGmWURGLcdY" },
             ],

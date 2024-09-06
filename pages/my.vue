@@ -28,6 +28,10 @@ const logOut = () => {
     localStorage.removeItem('userInfo')
     router.push('/')
 }
+
+const gotoPersonalReport = () => {
+    router.push('/personalReport')
+}
 </script>
 <template>
     <div class="bg-#EFEEF3 w-vw h-vh pl1rem pr1rem">
@@ -110,7 +114,7 @@ const logOut = () => {
                 <span class="font-size-0.9rem mr0.2rem">地址管理</span>
             </div>
             <div class="w0.05rem h1rem bg-#A5A5A5"></div>
-            <div class="flex flex-col items-center">
+            <div @click="gotoPersonalReport()" class="flex flex-col items-center">
                 <i class="iconfont icon-tongji font-size-1.5rem mr0.3rem color-red-6"></i>
                 <span class="font-size-0.9rem mr0.2rem">个人报告</span>
             </div>
