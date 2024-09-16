@@ -57,7 +57,7 @@ const moudleList = ref([
     {
         name: "住宿餐饮",
         img: "/home/accommodation-catering.png",
-        link: ""
+        link: "/baseService"
 
     },
     {
@@ -203,8 +203,6 @@ const LoadBaiduMapScript = () => {
 }
 // 地图对象
 const mapObj = ref(null)
-// 当前位置经纬度
-const currentPosition = ref({})
 /**
  * 获取当前位置
  */
@@ -214,11 +212,31 @@ function getLocation() {
     // 开启SDK辅助定位
     geolocation.enableSDKLocation();
     geolocation.getCurrentPosition((res) => {
+        console.log(res)
         // latitude纬度 longitude经度
-        currentPosition.value.lat = res.latitude
-        currentPosition.value.lng = res.longitude
-        // userStore.userInfo.currentPosition = currentPosition.value
-        userStore.updateUserInfoCurrentPosition(res)
+        userStore.userInfo.lng = res.longitude
+        userStore.userInfo.lat = res.latitude
+
+        userStore.userInfo.currentPosition = {}
+        // 用户所在国家
+        userStore.userInfo.currentPosition.country = res.address.country
+        // 用户所在省份
+        userStore.userInfo.currentPosition.province = res.address.province
+        // 用户所在城市
+        userStore.userInfo.currentPosition.city = res.address.city
+        // 用户所在区县
+        userStore.userInfo.currentPosition.district = res.address.district
+        // 用户所在街道
+        userStore.userInfo.currentPosition.street = res.address.street
+        // 用户所在街道号码
+        userStore.userInfo.currentPosition.street_number = res.address.street_number
+
+        // 用户当前定位信息合起来
+        if (userStore.userInfo.currentPosition.street_number == "") {
+            userStore.userInfo.currentPosition.fullPosition = res.address.province + res.address.city + res.address.district + res.address.street
+        } else {
+            userStore.userInfo.currentPosition.fullPosition = res.address.province + res.address.city + res.address.district + res.address.street + res.address.street_number + "号"
+        }
     })
 }
 

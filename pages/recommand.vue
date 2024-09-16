@@ -1,12 +1,14 @@
 <script setup>
+import { getNotesListByTimeAPI } from "../utils/apis/notes.ts"
 definePageMeta({
     layout: 'with-tabbar'
 })
+// notes List
+const notesList = ref([])
 const tabTitleList = ref([
     "关注", "发现", "附近"
 ])
 const activeTabIndex = ref(1)
-const isEmpty = ref(true)
 const router = useRouter()
 const gotoNotesDetails = () => {
     router.push('/notesDetails')
@@ -19,6 +21,24 @@ const state = reactive({
 const gotoPublishNotes = () => {
     router.push('/publishNotes')
 }
+
+const isNotesByTimeListEmpty = ref(true)
+
+/**
+ * 根据发布时间远近 获取笔记列表
+ * 那个
+ */
+const getNotesListByTime = async () => {
+    const res = await getNotesListByTimeAPI()
+    notesList.value = res
+    if (notesList.value.length == 0) {
+        isNotesByTimeListEmpty.value = true
+    } else {
+        isNotesByTimeListEmpty.value = false
+    }
+    console.log(notesList.value.length)
+}
+getNotesListByTime()
 </script>
 <template>
     <div>
@@ -36,11 +56,11 @@ const gotoPublishNotes = () => {
         </div>
         <div v-if="activeTabIndex === 1"
             class="w-full pl0.5rem pr0.5rem mt3.5rem mb5rem flex justify-between flex-wrap">
-            <div @click="gotoNotesDetails" v-if="isEmpty" class="w49% bg-#fff rounded-0.3rem mb0.5rem"
-                v-for="(item, index) in 8" :key="index">
+            <div @click="gotoNotesDetails" v-if="!isNotesByTimeListEmpty" class="w49% bg-#fff rounded-0.3rem mb0.5rem"
+                v-for="(item, index) in notesList" :key="index">
                 <img src="/public/red-base/top-bg.jpg" alt="" class="w-full h10rem rounded-t-0.3rem">
                 <div class="flex flex-col pt0.5rem pb1rem">
-                    <p class="pt0.2rem font-size-0.9rem pl0.5rem shenglue2">浙江各地市公务员待遇解密，还值得报考吗ssssssssssssssss</p>
+                    <p class="pt0.2rem font-size-0.9rem pl0.5rem shenglue2">{{ item.title }}</p>
                     <div class="flex justify-between font-size-0.7rem mt0.5rem">
                         <div class="flex items-center w6.5rem ml0.5rem ">
                             <img src="/public/red-base/top-bg.jpg" class="w1.2rem mr0.3rem h1.2rem rounded-50%" alt="">
@@ -58,8 +78,7 @@ const gotoPublishNotes = () => {
             </div>
         </div>
         <van-floating-bubble v-model:offset="state.offset" axis="xy" icon="records-o" magnetic="x"
-            @click="gotoPublishNotes()"
-             />
+            @click="gotoPublishNotes()" />
     </div>
 </template>
 <style scoped>

@@ -1,6 +1,8 @@
 <script setup>
 import Cluster from '@bmapgl-plugin/cluster';
+import { useUserStore } from "../store/user.js"
 const onClickLeft = () => history.back();
+const userStore = useUserStore()
 
 /**
  * 加载百度地图
@@ -65,18 +67,11 @@ var cluster = null;
  * 获取当前位置
  */
 function getLocation() {
-    //当前位置
-    var geolocation = new BMapGL.Geolocation();
-    // 开启SDK辅助定位
-    geolocation.enableSDKLocation();
-    geolocation.getCurrentPosition((res) => {
-        // latitude纬度 longitude经度
-        currentPosition.value.lat = res.latitude
-        currentPosition.value.lng = res.longitude
-        initMap(res.longitude, res.latitude)
-        // console.log(res)
-    })
-
+    const lat = userStore.userInfo.lat
+    const lng = userStore.userInfo.lng
+    currentPosition.value.lat = lat
+    currentPosition.value.lng = lng
+    initMap(lng, lat)
 }
 
 /**

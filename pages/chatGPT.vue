@@ -14,7 +14,7 @@ console.log(userStore.userInfo.token)
 // chatGpt(paramsObj.value)
 
 async function chatGpt() {
-    await $fetch('http://10.10.12.170:8080/ai/chat', {
+    await $fetch('http://192.168.0.111:10083/ai/chat', {
         method: 'GET',
         params: {
             // My todo data

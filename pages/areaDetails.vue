@@ -114,7 +114,7 @@ getRedBaseDetailsById(areaId)
             </div>
         </div>
         <van-action-bar>
-            <van-action-bar-icon icon="like-o" text="客服" @click="onClickIcon" />
+            <van-action-bar-icon icon="like-o" text="收藏" @click="onClickIcon" />
             <van-action-bar-icon icon="chat-o" text="客服" @click="onClickIcon" />
             <van-action-bar-button type="danger" text="立即预约" @click="gotoReserveRedBase()" />
         </van-action-bar>

@@ -28,16 +28,13 @@ function updateTime() {
 // 使用setInterval来每秒钟调用一次updateTime函数
 setInterval(updateTime, 1000); // 1000毫秒 = 1秒
 
+/**
+ * 从Pinia中拿到当前位置
+ */
 const userStore = useUserStore()
-// console.log(userStore.userInfo.currentPosition)
 const currentPosition = ref({})
-currentPosition.value
-    = userStore.userInfo.currentPosition.address.province
-    + userStore.userInfo.currentPosition.address.city
-    + userStore.userInfo.currentPosition.address.district
-    + userStore.userInfo.currentPosition.address.street
-    + userStore.userInfo.currentPosition.address.street_number
-    + "号"
+currentPosition.value = userStore.userInfo.currentPosition.fullPosition
+
 </script>
 <template>
     <div>
