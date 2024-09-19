@@ -35,58 +35,58 @@ const onConfirm = ({ selectedOptions }) => {
         </div>
         <div class=" w96% ml2% p1rem h32rem overflow-y-scroll bg-color mt0.5rem rounded-0.5rem">
             <el-timeline style="max-width: 600px;margin-top: 1rem;" class="">
-                <el-timeline-item timestamp="2018/4/12" placement="top" color="#FF4848">
+                <el-timeline-item timestamp="1921/07/23" placement="top" color="#FF4848">
                     <el-card>
                         <p class="font-bold">中共一大召开</p>
-                        <p class="font-size-0.8rem">确定共产党是无产阶级政党，任务是工人阶级运动目标是实现共产主义</p>
+                        <p class="font-size-0.8rem">中国共产党第一次全国代表大会在上海召开（最后一天转移到浙江嘉兴南湖），标志着中国共产党的正式成立。</p>
                     </el-card>
                 </el-timeline-item>
-                <el-timeline-item timestamp="2018/4/3" placement="top" color="#FF4848">
+                <el-timeline-item timestamp="1922/07" placement="top" color="#FF4848">
                     <el-card>
-                        <h4>Update Github template</h4>
-                        <p>Tom committed 2018/4/3 20:46</p>
+                        <p class="font-bold">中共二大召开</p>
+                        <p>中共二大在上海召开，制定了党的最低纲领和最高纲领，为中国革命指明了方向。</p>
                     </el-card>
                 </el-timeline-item>
-                <el-timeline-item timestamp="2018/4/2" placement="top">
+                <el-timeline-item timestamp="1923/06" placement="top">
                     <el-card>
-                        <h4>Update Github template</h4>
-                        <p>Tom committed 2018/4/2 20:46</p>
+                        <p class="font-bold">中共三大召开</p>
+                        <p>中共三大在广州召开，确定了国共合作的策略，促进了第一次国共合作的实现。</p>
                     </el-card>
                 </el-timeline-item>
-                <el-timeline-item timestamp="2018/4/12" placement="top">
+                <el-timeline-item timestamp="1926/07/09" placement="top">
                     <el-card>
-                        <h4>Update Github template</h4>
-                        <p>Tom committed 2018/4/12 20:46</p>
+                        <p class="font-bold">国民革命军在广州誓师北伐</p>
+                        <p>国民革命军在广州誓师北伐，推动了中国革命的进程。</p>
                     </el-card>
                 </el-timeline-item>
-                <el-timeline-item timestamp="2018/4/3" placement="top">
+                <el-timeline-item timestamp="1927/08/01" placement="top">
                     <el-card>
-                        <h4>Update Github template</h4>
-                        <p>Tom committed 2018/4/3 20:46</p>
-                    </el-card>
-                </el-timeline-item>
-                <el-timeline-item timestamp="2018/4/2" placement="top">
-                    <el-card>
-                        <h4>Update Github template</h4>
-                        <p>Tom committed 2018/4/2 20:46</p>
-                    </el-card>
-                </el-timeline-item>
-                <el-timeline-item timestamp="2018/4/12" placement="top">
-                    <el-card>
-                        <h4>Update Github template</h4>
-                        <p>Tom committed 2018/4/12 20:46</p>
-                    </el-card>
-                </el-timeline-item>
-                <el-timeline-item timestamp="2018/4/3" placement="top">
-                    <el-card>
-                        <h4>Update Github template</h4>
-                        <p>Tom committed 2018/4/3 20:46</p>
+                        <p class="font-bold">南昌起义</p>
+                        <p>南昌起义爆发，标志着中国共产党独立领导革命战争、创建人民军队和武装夺取政权的开始。</p>
                     </el-card>
                 </el-timeline-item>
                 <el-timeline-item timestamp="2018/4/2" placement="top">
                     <el-card>
-                        <h4>Update Github template</h4>
+                        <p class="font-bold">中共二大召开</p>
                         <p>Tom committed 2018/4/2 20:46</p>
+                    </el-card>
+                </el-timeline-item>
+                <el-timeline-item timestamp="1927/09" placement="top">
+                    <el-card>
+                        <p class="font-bold">秋收起义</p>
+                        <p>秋收起义爆发，毛泽东率领起义军到达井冈山，创建了井冈山革命根据地。</p>
+                    </el-card>
+                </el-timeline-item>
+                <el-timeline-item timestamp="1935/01" placement="top">
+                    <el-card>
+                        <p class="font-bold">遵义会议</p>
+                        <p>遵义会议召开，确立了毛泽东在党中央和红军的领导地位，挽救了党和红军。</p>
+                    </el-card>
+                </el-timeline-item>
+                <el-timeline-item timestamp="1937/07/07" placement="top">
+                    <el-card>
+                        <p class="font-bold">卢沟桥事变爆发</p>
+                        <p>卢沟桥事变爆发，日本全面侵华战争开始，中国进入全面抗战阶段。</p>
                     </el-card>
                 </el-timeline-item>
             </el-timeline>

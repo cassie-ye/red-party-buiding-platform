@@ -71,7 +71,7 @@ export default {
                 backgroundColor: "rgba(0,0,0,0)",
                 title: {
                     text: 'Cassie燁的足迹地图',
-                    subtext: '共打卡5个红色基地',
+                    subtext: '共打卡33个红色基地',
                     sublink: 'http://www.census.gov/popest/data/datasets.html',
                     left: 'right',
                     textStyle: {

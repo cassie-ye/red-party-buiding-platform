@@ -167,7 +167,7 @@ const gotoPastRecommand = () => {
         </di>
         <van-action-sheet v-model:show="show" title="评论">
             <div class="content">
-                <div class="pb0.8rem" v-for="i in 8" :key="i">
+                <div class="pb0.8rem">
                     <div class="flex h-2.5rem w-full">
                         <img src="/todayRecommand/bg.jpg" alt="" class="w-2.5rem h-2.5rem rounded-50% ">
                         <div class="ml1rem w80% h-full ">

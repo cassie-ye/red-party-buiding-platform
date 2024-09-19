@@ -273,10 +273,10 @@ const gotoIntegrityQuiz = () => {
                     <Icon name="ic:outline-search" style="color: #EF4444" size="25" />
                     <van-swipe class=" h2.3rem flex pt0.5rem font-size-0.9rem ml0.3rem color-red-5" vertical
                         :autoplay="3000" indicator-color="white" :show-indicators="false">
-                        <van-swipe-item>南京博物馆</van-swipe-item>
-                        <van-swipe-item>北京博物馆</van-swipe-item>
-                        <van-swipe-item>东京博物馆</van-swipe-item>
-                        <van-swipe-item>xi'jing</van-swipe-item>
+                        <van-swipe-item>何叔衡故居</van-swipe-item>
+                        <van-swipe-item>北京天安门</van-swipe-item>
+                        <van-swipe-item>答得学校故居</van-swipe-item>
+                        <van-swipe-item>街子古镇</van-swipe-item>
                     </van-swipe>
                 </div>
                 <!-- chatgpt -->
@@ -331,12 +331,12 @@ const gotoIntegrityQuiz = () => {
                     </div>
                     <div class=" flex pl0.3rem pr0.3rem justify-between">
                         <div class="w48.5% flex justify-center items-center flex-col">
-                            <img class="w100% h3.3rem rounded-0.2rem" src="/home/hot-recommand.jpg" alt="">
-                            <p class="mt0.3rem font-size-0.5rem">北京·【天安门】</p>
+                            <img class="w100% h3.3rem rounded-0.2rem" src="https://midpf-material.cdn.bcebos.com/6566bb46c8e19392b8a51e6a87490059.jpeg" alt="">
+                            <p class="mt0.3rem font-size-0.5rem">红色革命教育</p>
                         </div>
                         <div class="w48.5%  flex justify-center items-center flex-col">
-                            <img class="w100% h3.3rem rounded-0.2rem" src="/home/hot-recommand.jpg" alt="">
-                            <p class="mt0.3rem font-size-0.5rem">北京·【天安门】</p>
+                            <img class="w100% h3.3rem rounded-0.2rem" src="https://img1.baidu.com/it/u=4269357798,1912422770&fm=253&fmt=auto&app=138&f=JPEG?w=750&h=500" alt="">
+                            <p class="mt0.3rem font-size-0.5rem">红旗渠培训</p>
                         </div>
                     </div>
                 </div>

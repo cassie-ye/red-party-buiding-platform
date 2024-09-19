@@ -100,6 +100,8 @@ const gotoAddPassengers = () => {
  */
 const checked = ref([]);
 const checkboxRefs = ref([]);
+
+const peopleName = ref('请选择乘机人以获取低价推荐')
 const toggle = (index) => {
     checkboxRefs.value[index].toggle();
 };
@@ -146,6 +148,19 @@ const gotoSearchForAirlineTickets = () => {
 //     }
 // }
 // addTodo('2024-08-21', 'Beijing', 'Shanghai');
+
+
+const peopleList = ref([
+    {
+        name: "王一",
+        idCard: "330658330205867484"
+    },
+])
+
+function sure() {
+    showSelectPassengerPannelFlag.value = false
+    peopleName.value = "王一"
+}
 </script>
 <template>
     <div>
@@ -187,7 +202,7 @@ const gotoSearchForAirlineTickets = () => {
                         <div class="mt2rem flex justify-between" @click="showSelectPassengerPannelFlag = true">
                             <span>乘机人</span>
                             <p>
-                                <span class="color-blue">请选择乘机人以获取低价推荐</span>
+                                <span class="color-blue">{{ peopleName }}</span>
                                 <van-icon name="arrow" />
                             </p>
                         </div>
@@ -264,21 +279,21 @@ const gotoSearchForAirlineTickets = () => {
                     <van-cell-group inset>
                         <van-cell v-for="(item, index) in list" clickable :key="item" @click="toggle(index)">
                             <template #right-icon>
-                                <div class="flex items-center w18rem mr3rem">
+                                <div v-for="(item, index) in peopleList" :key="index"
+                                    class="flex items-center w18rem mr3rem">
                                     <van-icon name="edit" class="mr2rem" />
                                     <div class="flex flex-col justify-end">
-                                        <p>金佳烨</p>
-                                        <p>身份证 330681200307876545</p>
+                                        <p>{{ item.name }}</p>
+                                        <p>身份证 {{ item.idCard }}</p>
                                     </div>
                                 </div>
                                 <van-checkbox :name="item" :ref="el => checkboxRefs[index] = el" @click.stop />
                             </template>
-
                         </van-cell>
                     </van-cell-group>
                 </van-checkbox-group>
                 <div class="mt2rem mb2rem w90%  rounded-1.5rem flex justify-center items-center font-size-1.2rem color-#fff h2.5rem bg-blue"
-                    @click="showSelectPassengerPannelFlag = false">
+                    @click="sure()">
                     确定</div>
             </div>
         </van-action-sheet>

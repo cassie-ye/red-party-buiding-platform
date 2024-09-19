@@ -18,13 +18,13 @@ const gotoFillingSheet = () => {
         <div class="p1rem">
             <div class="flex justify-between">
                 <div>
-                    <p class="font-size-1.5rem font-bold ">22:30</p>
+                    <p class="font-size-1.5rem font-bold ">12:30</p>
                     <p class="font-size-0.9rem">北京大兴机场</p>
                 </div>
                 <img class="w4rem" src="/public/traffic/plane.png" alt="">
                 <div>
-                    <p class="font-size-1.5rem font-bold ">22:30</p>
-                    <p class="font-size-0.9rem">北京大兴机场</p>
+                    <p class="font-size-1.5rem font-bold ">14:30</p>
+                    <p class="font-size-0.9rem">上海虹桥机场</p>
                 </div>
             </div>
             <div class="flex mt1rem font-size-0.9rem items-center">

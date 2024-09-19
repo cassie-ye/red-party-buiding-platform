@@ -22,7 +22,7 @@ const gotoFootprintMap = () => {
             <img class="w3.9rem h3.9rem rounded-50% absolute left-1.5rem top-[-1.8rem] border-0.1rem border-solid border-#fff"
                 src="https://img.cjyun.org/a/10194/202108/3a888c968c54a23b7d831629b724c39b.jpeg" alt="">
             <div class="flex justify-between items-center pt2.5rem">
-                <p class="font-size-1.1rem font-bold">{{ "用户jhgkjdfilsdijf" }}</p>
+                <p class="font-size-1.1rem font-bold">{{ "Cassie燁" }}</p>
                 <div
                     class="w-5rem h1.4rem font-size-0.8rem flex justify-center items-center rounded-1rem color-#fff bg-gradient-to-r from-sky-500 to-indigo-500">
                     初学行者 v1</div>

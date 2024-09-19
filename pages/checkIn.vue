@@ -46,7 +46,7 @@ currentPosition.value = userStore.userInfo.currentPosition.fullPosition
                     <img class="w3.2rem h3.2rem rounded-0.5rem" src="/public/red-base/top-bg.jpg" alt="">
                     <div class="ml1rem">
                         <p class="font-size-1rem">Cassie燁</p>
-                        <p class="color-#B9BABC font-size-0.9rem">宁波XX企事业</p>
+                        <p class="color-#B9BABC font-size-0.9rem">宁波市阿拉阿拉事业单位</p>
                     </div>
                 </div>
                 <div class="flex flex-col items-center">
@@ -69,7 +69,7 @@ currentPosition.value = userStore.userInfo.currentPosition.fullPosition
                 {{ currentPosition }}
             </div>
         </div>
-        <svg v-if="isCheckIn">
+        <svg v-if="isCheckIn" class="mt3.58rem">
             <circle class="clock" cx="200" cy="200" r="45" :class="isCheckIn ? 'circle' : ''" />
         </svg>
     </div>

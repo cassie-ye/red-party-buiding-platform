@@ -58,27 +58,27 @@ onMounted(() => {
 
 const tableData = ref([
     {
-        date: '2016-05-03',
+        date: '2024-08-03',
         name: '完善资料',
         address: '200'
     },
     {
-        date: '2016-05-02',
+        date: '2024-08-02',
         name: '签到',
         address: '100'
     },
     {
-        date: '2016-05-04',
-        name: 'C',
+        date: '2024-08-04',
+        name: '基地打卡',
         address: '300'
     },
     {
-        date: '2016-05-01',
+        date: '2024-08-01',
         name: '答题',
         address: '400'
     },
     {
-        date: '2016-05-08',
+        date: '2024-08-08',
         name: '抽奖',
         address: '500'
     }

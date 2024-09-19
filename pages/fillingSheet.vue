@@ -47,9 +47,9 @@ const gotoChooseService = () => {
                             <i class="iconfont icon-daoda mr0.3rem"></i>
                         </span>
                         <span class="mr0.6rem">上海</span>
-                        <span class="mr0.6rem">08-13</span>
+                        <span class="mr0.6rem">09-19</span>
                         <span class="mr0.6rem">周二</span>
-                        <span>22:30</span>
+                        <span>14:30</span>
                     </div>
                 </div>
                 <div class="mt0.3rem font-size-0.9rem">
@@ -128,8 +128,8 @@ const gotoChooseService = () => {
                                 <div class="flex items-center w12rem mr3rem">
                                     <van-icon name="edit" class="mr2rem" />
                                     <div class="flex flex-col justify-end">
-                                        <p>金佳烨</p>
-                                        <p>330681200307876545</p>
+                                        <p>王一</p>
+                                        <p>330658330205867484</p>
                                     </div>
                                 </div>
                                 <van-checkbox :name="item" :ref="el => checkboxRefs[index] = el" @click.stop />

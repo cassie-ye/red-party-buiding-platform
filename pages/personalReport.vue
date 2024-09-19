@@ -88,7 +88,7 @@ const gotoMyAccount = () => {
                     您一共研学了<van-rolling-text class="normal-number" :start-num="0" :target-num="88" />个红色基地，
                     打卡了<van-rolling-text class="normal-number" :start-num="0" :target-num="88" />座城市，
                     收藏了<van-rolling-text class="normal-number" :start-num="0" :target-num="88" />个红色研学基地，
-                    获得了<van-rolling-text class="normal-number" :start-num="0" :target-num="288" />个积分，
+                    获得了<van-rolling-text class="normal-number" :start-num="0" :target-num="1000" />个积分，
                     获得了<van-tag color="#facc15" size="medium">初学行者</van-tag>的研学徽章。
                 </div>
             </div>

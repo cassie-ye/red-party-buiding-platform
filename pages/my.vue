@@ -49,7 +49,7 @@ const gotoPersonalReport = () => {
                 </div>
             </div>
             <div class="color-#A5A5A5 flex items-center mt2rem">
-                <p>宁波市XX企事业单位</p>
+                <p>宁波市阿拉阿拉事业单位</p>
                 <van-icon name="arrow" color="#A5A5A5" />
             </div>
             <div class="flex items-center mt0.2rem">
@@ -95,7 +95,7 @@ const gotoPersonalReport = () => {
             <div class="flex items-center">
                 <i class="iconfont icon-jifen font-size-1.5rem mr0.3rem"></i>
                 <span class="font-size-0.9rem mr0.2rem">积分</span>
-                <span class="font-bold">0</span>
+                <span class="font-bold">1000</span>
             </div>
         </div>
         <div class=" bg-#FCFCFC flex items-center justify-between w-full p0.8rem pr1rem pl1rem mt0.8rem rounded-0.5rem">

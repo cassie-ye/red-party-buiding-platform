@@ -6,6 +6,8 @@ const activeIndex = ref(0)
 const gotoFlightSubscription = () => {
     router.push('/flightSubscription')
 }
+
+
 </script>
 <template>
     <div>
@@ -17,9 +19,9 @@ const gotoFlightSubscription = () => {
                     class="rounded-0.5rem  mr0.4rem flex flex-col justify-center items-center font-size-0.8rem"
                     :class="activeIndex === index ? 'bg-#01C8D7 color-#fff' : 'color-#01C8D7'"
                     @click="activeIndex = index">
-                    <p>08.13</p>
-                    <p>今天</p>
-                    <p>￥569</p>
+                    <p>09.{{ index + 19 }}</p>
+                    <!-- <p>今天</p> -->
+                    <p>￥{{ 569+index*10 }}</p>
                 </van-swipe-item>
             </van-swipe>
             <div
@@ -28,22 +30,23 @@ const gotoFlightSubscription = () => {
                 <p class="font-size-0.8rem">日历</p>
             </div>
         </div>
-        <div v-for="(item, index) in 5" @click="gotoFlightSubscription" class="m0.5rem bg-#fff rounded-0.5rem p1rem pt0rem pb1rem">
+        <div v-for="(item, index) in 5" @click="gotoFlightSubscription"
+            class="m0.5rem bg-#fff rounded-0.5rem p1rem pt0rem pb1rem">
             <div class=" flex justify-between items-center h5.5rem">
                 <div class="flex items-center">
                     <div>
-                        <p class="font-size-1.5rem font-bold">22:30</p>
+                        <p class="font-size-1.5rem font-bold">{{ 12+index }}:30</p>
                         <p class="font-size-0.9rem color-orange-5">北京大兴</p>
                     </div>
                     <i class="iconfont icon-daoda color-#01C8D7 font-size-3rem mb1.5rem ml1.8rem mr1.8rem"></i>
                     <div>
-                        <p class="font-size-1.5rem font-bold ">22:30</p>
-                        <p class="font-size-0.9rem color-orange-5">北京大兴</p>
+                        <p class="font-size-1.5rem font-bold ">{{ 14+index*2 }}:30</p>
+                        <p class="font-size-0.9rem color-orange-5">上海虹桥</p>
                     </div>
                 </div>
                 <p class="flex items-center color-red-5 font-bold">
                     <span class="">￥</span>
-                    <span class="font-size-1.5rem ">1486</span>
+                    <span class="font-size-1.5rem ">{{ 1486+index*12 }}</span>
                 </p>
             </div>
             <div class="flex font-size-0.9rem items-center">
