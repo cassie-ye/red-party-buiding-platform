@@ -75,7 +75,7 @@ const createFoodOrder = async (data) => {
                     <img class="w1.2rem" src="/public/baseService/baozhang.png" alt="">
                 </div>
             </div>
-            <div v-for="(item, index) in foodFlavorsList" :key="index" class="w-full mt1.5rem pl0.5rem pr0.5rem">
+            <div v-for="(item, index) in foodFlavorsList" :key="index" class="w-full mt1rem pl0.5rem pr0.5rem pb0.5rem">
                 <div class="flex flex-wrap">
                     <div class="font-size-0.9rem mr1rem w3rem">{{ item.name }}</div>
                     <div class="flex-1 flex flex-wrap">
@@ -88,7 +88,15 @@ const createFoodOrder = async (data) => {
                     </div>
                 </div>
             </div>
+        <img src="/public/hotelFood/details.jpg" alt="">
+
         </div>
+        <van-action-bar>
+            <van-action-bar-icon icon="chat-o" text="客服" />
+            <van-action-bar-icon icon="shop-o" text="店铺" />
+            <van-action-bar-button color="#be99ff" type="warning" text="加入购物车" @click="addCart()" />
+            <van-action-bar-button color="#7232dd" type="danger" text="立即购买" />
+        </van-action-bar>
     </div>
 </template>
 <style scoped>
