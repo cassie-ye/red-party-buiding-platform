@@ -48,7 +48,7 @@ const gotoTrafficQuery = () => {
             <div class="pl2rem pr2rem mt1rem mb2rem">
                 <p class="mb0.5rem">
                     <span class="mr2rem">姓名</span>
-                    <span class="font-bold">金佳烨</span>
+                    <span class="font-bold">Cassie</span>
                 </p>
                 <p>
                     <span class="mr1rem">身份证</span>

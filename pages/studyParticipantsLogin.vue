@@ -88,8 +88,8 @@ const performLogin = async () => {
         //     body: body
         // });
 
+
         const result = JSON.parse(res)
-        // console.log(result)
 
         if (result.status === 'success') {
             userStore.userInfo.token = result.token

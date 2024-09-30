@@ -87,11 +87,11 @@ const successToast = () => {
                     <div class="pr1.5rem">
                         <div class="font-bold">
                             <van-icon name="location-o" />
-                            浙江省宁波市海曙区高桥镇学院路899号宁波财经学院
+                            浙江省阿拉路099号阿拉阿拉单位
                         </div>
                         <div>
                             <van-icon name="manager-o" />
-                            金佳烨 <span class="color-#9F9F9F">13567529804</span>
+                            Cassie燁 <span class="color-#9F9F9F">13985631485</span>
                         </div>
                     </div>
                     <van-icon name="arrow" />

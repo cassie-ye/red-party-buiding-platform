@@ -40,7 +40,7 @@ phoneNumber.value = userInfo.username
 idCardNumber.value = userInfo.idcard
 email.value = userInfo.email
 
-const show = ref(false)
+const show = ref(true)
 
 /**
  * 调接口修改用户信息
@@ -110,22 +110,7 @@ const saveEditContent = () => {
                 class="w95% mt1rem bg-red-600 h2.5rem rounded-1.5rem color-#fff flex justify-center items-center font-size-0.9rem">
                 保存
             </div>
-            <van-notify v-model:show="show">
-                <div class="w-full h-full p-0.5rem flex">
-                    <div class="w10% h-full  flex justify-center items-center">
-                        <div class="w2rem h2rem rounded-50% bg-red-500 flex justify-center items-center">
-                            <van-icon name="bell" color="#fff" size="18" />
-                        </div>
-                    </div>
-                    <div class="w80% h-full flex flex-col justify-center items-start pl0.5rem">
-                        <div>系统消息</div>
-                        <div class="color-#717171 font-size-0.8rem">您提交的修改资料内容已通过审核并更新</div>
-                    </div>
-                    <div class="w10% h-full flex justify-center items-center color-#717171 font-size-0.7rem">
-                        <p>刚刚</p>
-                    </div>
-                </div>
-            </van-notify>
+
         </div>
     </div>
 </template>

@@ -55,7 +55,7 @@ currentPosition.value = userStore.userInfo.currentPosition.fullPosition
                 </div>
             </div>
             <div class="font-bold mt2rem">
-                打卡基地：四明山
+                打卡基地：嘉兴南湖红色基地
             </div>
             <!-- <p>红色基地打卡：四明山</p> -->
             <div @click="startCheckIn"

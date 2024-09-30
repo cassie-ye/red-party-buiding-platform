@@ -34,9 +34,9 @@ const gotoGoodsDetails = () => {
 
 const goodsList = ref([
     {
-        name:"环球文旅集章护照本",
-        img:'/culturalTravelClockIn/1.jpg',
-        price:"28.8"
+        name: "环球文旅集章护照本",
+        img: '/culturalTravelClockIn/1.jpg',
+        price: "28.8"
     },
     {
         name: "数字立体书",
@@ -77,40 +77,44 @@ const goodsList = ref([
             </van-dropdown-menu>
         </div>
         <div class="ml2% mr2% w96% h-full flex flex-wrap justify-between">
-            <div v-if="method" v-for="(item,index) in goodsList" :key="index" class="mt0.8rem mr1% w48.5% bg-#fff shadow-md rounded-0.5rem"
-                @click="gotoGoodsDetails()">
-                <img class="rounded-t-0.5rem w-full h12rem" :src="item.img" alt="">
-                <div class="p0.5rem">
-                    <div class="shenglue font-size-0.9rem ">
-                        {{ item.name }}
-                    </div>
-                    <p class="font-size-0.8rem color-coolgray">红色文化</p>
-                    <div class=" color-red-5 flex justify-between items-start">
-                        <div class="flex items-center">
-                            <span class="font-size-0.8rem color-red-4">￥</span>
-                            <p class="font-bold">{{ item.price }}</p>
+            <template v-if="method">
+                <div v-for="(item, index) in goodsList" :key="index"
+                    class="mt0.8rem mr1% w48.5% bg-#fff shadow-md rounded-0.5rem" @click="gotoGoodsDetails()">
+                    <img class="rounded-t-0.5rem w-full h12rem" :src="item.img" alt="">
+                    <div class="p0.5rem">
+                        <div class="shenglue font-size-0.9rem ">
+                            {{ item.name }}
                         </div>
-                        <p class="font-size-0.8rem color-coolgray">13543人付款</p>
+                        <p class="font-size-0.8rem color-coolgray">红色文化</p>
+                        <div class=" color-red-5 flex justify-between items-start">
+                            <div class="flex items-center">
+                                <span class="font-size-0.8rem color-red-4">￥</span>
+                                <p class="font-bold">{{ item.price }}</p>
+                            </div>
+                            <p class="font-size-0.8rem color-coolgray">13543人付款</p>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div v-else v-for="i in 20"
-                class="flex justify-between items-center mt0.8rem w100% bg-#fff shadow-md rounded-0.5rem">
-                <img class="rounded w12rem h7rem" src="/public/red-base/top-bg.jpg" alt="">
-                <div class="flex-1 p0.5rem">
-                    <div class="shenglue font-size-0.9rem ">
-                        红军色革命文化卡通家具办公会议
-                    </div>
-                    <p class="font-size-0.8rem color-coolgray">大|新中式</p>
-                    <div class=" color-red-5 flex justify-between items-start">
-                        <div class="flex items-center">
-                            <span class="font-size-0.8rem color-red-4">￥</span>
-                            <p class="font-bold">11.58</p>
+            </template>
+            <template v-else>
+                <div v-for="(item, index) in goodsList" :key="index"
+                    class="flex justify-between items-center mt0.8rem w100% bg-#fff shadow-md rounded-0.5rem">
+                    <img class="rounded w12rem h7rem" :src="item.img" alt="">
+                    <div class="flex-1 p0.5rem">
+                        <div class="shenglue font-size-0.9rem ">
+                            {{ item.name }}
                         </div>
-                        <p class="font-size-0.8rem color-coolgray">13人付款</p>
+                        <p class="font-size-0.8rem color-coolgray">红色文化</p>
+                        <div class=" color-red-5 flex justify-between items-start">
+                            <div class="flex items-center">
+                                <span class="font-size-0.8rem color-red-4">￥</span>
+                                <p class="font-bold">{{ item.price }}</p>
+                            </div>
+                            <p class="font-size-0.8rem color-coolgray">13543人付款</p>
+                        </div>
                     </div>
                 </div>
-            </div>
+            </template>
         </div>
     </div>
 </template>

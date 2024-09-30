@@ -17,7 +17,7 @@ const gotoCheckIn = () => {
         ">
             <div>
                 <p>打卡时间：<span class="font-bold">2024-09-10</span></p>
-                <p class="mt0.1rem">基地地址：<span class="font-bold">嘉兴南湖</span></p>
+                <p class="mt0.1rem">基地地址：<span class="font-bold">嘉兴南湖红色基地</span></p>
                 <p class="mt0.1rem">打卡人：<span class="font-bold">Cassie燁</span></p>
             </div>
             <van-button @click="gotoCheckIn()" size="small" color="linear-gradient(to right, #ff6034, #ee0a24)">

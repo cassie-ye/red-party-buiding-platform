@@ -32,6 +32,13 @@ const logOut = () => {
 const gotoPersonalReport = () => {
     router.push('/personalReport')
 }
+
+const show = ref(false)
+onMounted(() => {
+    setTimeout(() => {
+        show.value = true
+    }, 4000);
+})
 </script>
 <template>
     <div class="bg-#EFEEF3 w-vw h-vh pl1rem pr1rem">
@@ -123,5 +130,34 @@ const gotoPersonalReport = () => {
             class="w90% ml5% mb2rem mt3rem bg-red-600 h2.5rem rounded-1.5rem color-#fff flex justify-center items-center font-size-0.9rem">
             退出登录
         </div>
+        <van-notify v-model:show="show">
+            <div class="w-full h-full p-0.5rem flex">
+                <div class="w10% h-full  flex justify-center items-center">
+                    <div class="w2rem h2rem rounded-50% bg-red-500 flex justify-center items-center">
+                        <van-icon name="bell" color="#fff" size="18" />
+                    </div>
+                </div>
+                <div class="w80% h-full flex flex-col justify-center items-start pl0.5rem">
+                    <div>系统消息</div>
+                    <div class="color-#717171 font-size-0.8rem">您提交的修改资料内容已通过审核并更新</div>
+                </div>
+                <div class="w10% h-full flex justify-center items-center color-#717171 font-size-0.7rem">
+                    <p>刚刚</p>
+                </div>
+            </div>
+        </van-notify>
     </div>
 </template>
+<style scoped>
+:deep(.van-notify) {
+    background-color: #fff;
+    color: #000;
+    height: 4rem;
+    border-radius: 0.5rem;
+    margin-left: 3.5%;
+    width: 93%;
+    margin-top: 1.5rem;
+    box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+    padding: 0;
+}
+</style>
