@@ -31,6 +31,11 @@ export default {
                 { name: "广东省", value: 277 },
                 { name: "浙江省", value: 888 },
                 { name: "北京市", value: 87 },
+                { name: "山东省", value: 50 },
+                { name: "河南省", value: 120 },
+                { name: "四川省", value: 35 },
+                { name: "湖北省", value: 62 },
+                { name: "新疆维吾尔自治区", value: 15 }
             ],
             newData: [
                 {
@@ -48,6 +53,26 @@ export default {
                 {
                     name: "北京市",
                     value: [116.41995, 40.18994, 88]
+                },
+                {
+                    name: "山东省",
+                    value: [117.000923, 36.675807, 50],
+                },
+                {
+                    name: "河南省",
+                    value: [113.665412, 34.757975, 120],
+                },
+                {
+                    name: "四川省",
+                    value: [104.065735, 30.659462, 35],
+                },
+                {
+                    name: "湖北省",
+                    value: [114.298572, 30.584355, 62],
+                },
+                {
+                    name: "新疆维吾尔自治区",
+                    value: [87.617733, 43.792818, 15],
                 }
             ]
         }
@@ -299,7 +324,7 @@ export default {
     color: black
 }
 
-:deep(.van-action-bar){
+:deep(.van-action-bar) {
     height: 4rem;
 }
 </style>

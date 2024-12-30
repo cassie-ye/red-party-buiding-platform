@@ -4,6 +4,14 @@
 import httpRequest from "../fetch.js";
 
 /**
+ * 获取所有红色基地的信息
+ * @returns
+ */
+const getAllRedBaseInfoAPI = () => {
+    return httpRequest.get("/tb-place/getAllPlaces");
+}
+
+/**
  * 根据分类id查询红色基地信息
  * @param bcid
  * @returns
@@ -141,6 +149,7 @@ const getReserveRedBaseOrderIdAPI = () => {
 // };
 
 export {
+    getAllRedBaseInfoAPI,
     getBaseListByCategoryAPI, getAllBaseCategoryListAPI,
     getAllProvinceAndAreaListAPI, getRedBaseByProvinceAndCityAPI,
     getRandomRedBaseAPI,

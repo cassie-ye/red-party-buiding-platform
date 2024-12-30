@@ -82,7 +82,7 @@ const gotoAliPay = () => {
                             </div>
                             <div class="flex justify-between">
                                 <div class="flex mt0.5rem w15.5rem">
-                                    <img class="w4rem h4rem rounded-0.5rem mr0.5rem" src="/public/red-base/top-bg.jpg"
+                                    <img class="w4rem h4rem rounded-0.5rem mr0.5rem" src="/public/todayRecommand/bg.jpg"
                                         alt="">
                                     <div class="">
                                         <p v-if="item.tripname" class="font-size-0.9rem font-bold">{{ item.basename }}{{

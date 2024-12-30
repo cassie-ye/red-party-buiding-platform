@@ -1,4 +1,5 @@
 <script setup>
+import { getBaseListByCategoryAPI, getAllBaseCategoryListAPI, getHotRedBaseListAPI } from "../utils/apis/redBase.ts"
 const route = useRouter()
 const onClickLeft = () => history.back();
 const gotoPunchList = () => {
@@ -12,6 +13,18 @@ const gotoTimeLine = () => {
 const gotoFootprintMap = () => {
     route.push('/footprintMap')
 }
+
+const hotRedBaseList = ref([])
+/**
+ * 调接口获取热门红色基地列表
+ */
+ const getHotRedBaseList = async () => {
+    const res = await getHotRedBaseListAPI()
+    // console.log(res)
+    hotRedBaseList.value = res
+    console.log(hotRedBaseList.value)
+}
+getHotRedBaseList()
 </script>
 <template>
     <div>
@@ -95,22 +108,23 @@ const gotoFootprintMap = () => {
             <div class="w-full mt1rem pb-1rem">
                 <p class="font-bold">热门打卡地</p>
                 <p class="font-size-0.8rem color-#9F9F9F mt0.3rem">大家正在打卡</p>
-                <div class=" flex mt0.5rem w-full h5.7rem overflow-hidden mb0.8rem" v-for="item in 3">
+                <div class=" flex mt0.5rem w-full h5.7rem overflow-hidden mb0.8rem" v-for="(item,index) in hotRedBaseList">
                     <div class="relative w10rem rounded-0.3rem h5.7rem">
                         <!-- <div
                                 class="absolute left-40% top-35% font-size-1rem color-#fff font-bold w2rem h2rem rounded-50% border-solid border-0.1rem border-#fff flex justify-center items-center">
                                 VR
                             </div> -->
                         <img class="w10rem rounded-0.3rem h5.7rem"
-                            src="https://pavo.elongstatic.com/i/Hotel870_470/nw_MdYOwAeC8E.jpg" alt="">
+                            :src="item.image" alt="">
                     </div>
                     <div class="pl0.5rem flex-1 flex flex-col justify-between">
-                        <p class="font-size-0.9rem font-bold">红十三军军部旧址</p>
+                        <p class="font-size-0.9rem font-bold">{{ item.name
+                        }}</p>
                         <p class="font-size-0.8rem color-#525252">hong 13th military headquarters site</p>
                         <div class="flex items-center">
                             <!-- <Icon name="iconoir:keyframe-position-solid" color="red-5" size="20" /> -->
                             <i class="iconfont icon-daka1 color-red-5 font-size-1.2rem"></i>
-                            <p class="font-size-0.8rem color-#9F9F9F ml0.2rem">34827人已打卡</p>
+                            <p class="font-size-0.8rem color-#9F9F9F ml0.2rem">{{34827+index*100}}人已打卡</p>
                         </div>
                     </div>
                 </div>

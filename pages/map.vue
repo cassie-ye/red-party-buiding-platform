@@ -1,4 +1,5 @@
 <script setup>
+import { getAllRedBaseInfoAPI } from '../utils/apis/redBase.ts'
 import Cluster from '@bmapgl-plugin/cluster';
 import { useUserStore } from "../store/user.js"
 const onClickLeft = () => history.back();
@@ -40,6 +41,35 @@ const LoadBaiduMapScript = () => {
         document.body.appendChild(scriptNode4);
     })
 }
+
+let redBaseList = []
+const nowImgUrl = ref("")
+/**
+ * 调接口获取所有红色基地的分类
+ */
+const getAllRedBaseInfo = async () => {
+    const res = await getAllRedBaseInfoAPI()
+    redBaseList = res
+    console.log('redBaseList777', redBaseList)
+    redBaseList = redBaseList.map((item) => {
+        return {
+            geometry: {
+                coordinates: [item.longitude, item.latitude],
+                type: "Point"
+            },
+            properties: {
+                address: item.image,
+                area: "",
+                city: "",
+                name: item.name,
+                provice: ""
+            },
+            type: "Feature"
+        }
+    })
+    console.log('redBaseList999', redBaseList)
+}
+
 // 地图对象
 const mapObj = ref(null)
 // 当前位置经纬度
@@ -89,36 +119,46 @@ function initMap(longitude, latitude) {
     let marker = new BMapGL.Marker(point, { icon: myIcon })
     mapObj.value.addOverlay(marker)
     addCluster()
-    addRedBaseListMarkers()
 }
 
+/**
+ * 添加聚合
+ */
 function addCluster() {
-    cluster = new Cluster.View(mapObj.value);
-    console.log(cluster)
-    cluster.on(Cluster.ClusterEvent.CLICK, (e) => {
-        console.log('ClusterEvent.CLICK', e);
-    });
-    cluster.on(Cluster.ClusterEvent.MOUSE_OVER, (e) => {
-        console.log('ClusterEvent.MOUSEOVER', e);
-    });
-    cluster.on(Cluster.ClusterEvent.MOUSE_OUT, (e) => {
-        console.log('ClusterEvent.MOUSEOUT', e);
-    });
-    var points = Cluster.pointTransformer(POIS, function (data) {
-        return {
-            point: [data.location.lng, data.location.lat],
-            properties: {
-                name: data.name,
-                address: data.address,
-                province: data.province,
-                city: data.city,
-                area: data.area
-            }
-        }
-    });
-    redBaseInfoList.value = points
-    // console.log('00', points)
-    cluster.setData(points);
+    getAllRedBaseInfo().then(() => {
+        cluster = new Cluster.View(mapObj.value);
+        console.log(cluster)
+        cluster.on(Cluster.ClusterEvent.CLICK, (e) => {
+            console.log('ClusterEvent.CLICK', e);
+        });
+        cluster.on(Cluster.ClusterEvent.MOUSE_OVER, (e) => {
+            console.log('ClusterEvent.MOUSEOVER', e);
+        });
+        cluster.on(Cluster.ClusterEvent.MOUSE_OUT, (e) => {
+            console.log('ClusterEvent.MOUSEOUT', e);
+        });
+        console.log('redBaseList', redBaseList)
+
+        var points = Cluster.pointTransformer(redBaseList, function (data) {
+            return {
+                point: data.geometry.coordinates,  // 直接使用coordinates数组中的经纬度
+                properties: {
+                    name: data.properties.name,
+                    address: data.properties.address,
+                    area: data.properties.area,
+                    city: data.properties.city,
+                    province: data.properties.province
+                }
+            };
+        });
+        // console.log('points', points)
+        redBaseInfoList.value = points
+        cluster.setData(points);
+        console.log('redBaseInfoList', redBaseInfoList.value)
+        addRedBaseListMarkers()
+    })
+
+
 }
 
 // 移除聚合数据
@@ -133,6 +173,7 @@ function removeCluster() {
 function addRedBaseListMarkers() {
     redBaseInfoList.value.map((item) => {
         var point = new BMapGL.Point(item.geometry.coordinates[0], item.geometry.coordinates[1]);
+        var img = item.properties.address
         var marker = new BMapGL.Marker(point);        // 创建标注
         mapObj.value.addOverlay(marker);
         var infoWindowDom = document.getElementById("infoWindow");
@@ -151,10 +192,10 @@ function addRedBaseListMarkers() {
             }
             // 打开新的信息窗口
             mapObj.value.openInfoWindow(infoWindow, point);
+            console.log('打开新的信息窗口', img)
+            nowImgUrl.value = img
             // 更新当前打开的信息窗口
             currentInfoWindow = infoWindow;
-            // console.log(currentInfoWindow)
-
         });
         // 信息窗口的其他事件，例如点击窗口内部
         infoWindow.addEventListener('click', (event) => {
@@ -182,6 +223,9 @@ function infoWindowClick() {
 onMounted(async () => {
     await LoadBaiduMapScript()
     getLocation()
+    nextTick(() => {
+        getAllRedBaseInfo()
+    })
 })
 
 const searchValue = ref()
@@ -201,10 +245,10 @@ const showPicker = ref(false);
 const onConfirm = ({ selectedOptions }) => {
     showPicker.value = false;
     fieldValue.value = selectedOptions[0].text;
-    if(selectedOptions[0].text == '全国'){
+    if (selectedOptions[0].text == '全国') {
         mapObj.value.setZoom(3.5)
     }
-    if(selectedOptions[0].text == '当前位置'){
+    if (selectedOptions[0].text == '当前位置') {
         initMap(currentPosition.value.lng, currentPosition.value.lat)
     }
 };
@@ -226,7 +270,7 @@ const onConfirm = ({ selectedOptions }) => {
         </van-popup>
         <div id="container" class="w-vw h-vh"></div>
         <div id="infoWindow" class=" h-80% flex justify-between">
-            <img class="h-full w-60%" src="/public/red-base/top-bg.jpg" alt="">
+            <img class="h-full w-60%" :src="nowImgUrl" alt="">
             <div class="h-full w-38% mr2% flex items-center justify-end">
                 <i class="iconfont icon-daozhequ color-#0090ff font-size-1.5rem"></i>
                 <p class="">到这去</p>

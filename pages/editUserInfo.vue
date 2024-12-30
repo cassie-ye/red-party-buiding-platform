@@ -58,8 +58,8 @@ const updateUserInfo = async (obj) => {
 }
 
 // const BASE_URL = "http://192.168.0.111:10087";
-// const BASE_URL = "http://10.10.12.170:10087";
-const BASE_URL = "http://192.168.0.110:10087";
+const BASE_URL = "http://10.10.12.170:10087";
+// const BASE_URL = "http://192.168.0.110:10087";
 // const BASE_URL = "http://192.168.43.108:10087";
 const stompClient = Stomp.over(new SockJS(BASE_URL + '/ws/ep'));
 console.log(stompClient)

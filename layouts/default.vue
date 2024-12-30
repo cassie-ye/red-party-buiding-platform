@@ -20,11 +20,12 @@ const gotoPayOrders = () => {
         query: { active: 1 }
     });
 }
+const test = ref(false)
 </script>
 <template>
     <main>
         <!-- <NuxtPage /> -->
-        <div @click="gotoPayOrders()" v-if="isExistNoPayOrder"
+        <div @click="gotoPayOrders()" v-if="test"
             class="fixed right-0 bottom-4rem bg-yellow-400 p0.3rem z-99999999999 flex items-center rounded-1.3rem">
             <div class="flex items-center mr0.3rem">
                 <img class="w2.1rem h2.1rem rounded-50% mr0.5rem" src="/public/red-base/top-bg.jpg" alt="">

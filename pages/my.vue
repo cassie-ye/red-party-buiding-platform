@@ -35,9 +35,7 @@ const gotoPersonalReport = () => {
 
 const show = ref(false)
 onMounted(() => {
-    setTimeout(() => {
-        show.value = true
-    }, 4000);
+bvnhgpahjsdjf
 })
 </script>
 <template>
